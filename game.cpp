@@ -8,8 +8,7 @@
 
 namespace Tmpl8
 {
-	static KinematicSegment* forearm = nullptr;
-	static KinematicSegment* arm = nullptr;
+	static Bone* arm = nullptr;
 
 	// -----------------------------------------------------------
 	// Initialize the application
@@ -18,8 +17,7 @@ namespace Tmpl8
 	{
 		window = win; 
 		SDL_SetWindowTitle(window, "Test Test Test");
-		forearm = new KinematicSegment(300, 300, 100);
-		arm = new KinematicSegment(200, 200, 200);
+		arm = new Bone(300, 300, 100, new Bone(100, 0, 100));
 	}
 	
 	// -----------------------------------------------------------
@@ -54,19 +52,49 @@ namespace Tmpl8
 		// Try kinematics
 
 		// Start and End positions.
-		float2 effector = float2(mouse_x, mouse_y);
+		float2 c = float2(300, 300);
+		float2 e = float2(mouse_x, mouse_y) - c;
+		float a1 = 100;
+		float a2 = 100;
 
-		forearm->CalculateB();
-		forearm->Follow(effector, false);
+		float q1 = NAN;
+		float q2 = NAN;
 
-		arm->CalculateB();
+		if (e.x > 0) {
+			q2 = acos((e.xx() + e.yy() - a1 * a1 - a2 * a2) / (2.0 * a1 * a2));
+			q1 = atan(e.y / e.x) - atan((a2 * sin(q2)) / (a1 + a2 * cos(q2)));
+		}
+		else if (e.x < 0) {
+			q2 = -acos((e.xx() + e.yy() - a1 * a1 - a2 * a2) / (2.0 * a1 * a2));
+			q1 = atan(e.y / e.x) + atan((a2 * sin(q2)) / (a1 + a2 * cos(q2)));
+		}
 
-		//seg2->SetA(float2(200, 200));
-		//seg2->CalculateB();
-		//seg2->Follow(seg->GetJoint(), false);
-		
-		forearm->Draw(screen);
-		//seg2->Draw(screen);
+		if (e.x != 0 && e.y != 0) {
+			if (!isnan(q1) && !isnan(q2)) {
+				float2 p1 = c;
+				float2 p2;
+				float2 p3;
+
+				if (e.x >= 0) {
+					p2 = float2(p1.x + cos(q1) * a1, p1.y + sin(q1) * a1);
+					p3 = float2(p2.x + cos(q1 + q2) * a2, p2.y + sin(q1 + q2) * a2);
+				}
+				else {
+					p2 = float2(p1.x - cos(q1) * a1, p1.y - sin(q1) * a1);
+					p3 = float2(p2.x - cos(q1 - q2) * a2, p2.y - sin(q1 - q2) * a2);
+				}
+
+				screen->Line(p1.x, p1.y, p2.x, p2.y, 0xffffff);
+				screen->Line(p2.x, p2.y, p3.x, p3.y, 0xffffff);
+			}
+			else {
+				float2 b = e.normalized() * (a1 + a2);
+				screen->Line(c.x, c.y, c.x + b.x, c.y + b.y, 0xffffff);
+			}
+		}
+
+		//arm->Update(effector);
+		//arm->Draw(screen, float2(0, 0));
 
 		// print something to the text window
 		//printf("this goes to the console window.\n");

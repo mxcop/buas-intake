@@ -1,34 +1,50 @@
 #include "arm.h"
+#include <string>
 
-KinematicSegment::KinematicSegment(float x, float y, float len) {
-	KinematicSegment::a = float2(x, y);
-	KinematicSegment::len = len;
-	KinematicSegment::angle = 0;
-
-	KinematicSegment::b = float2(0, 0);
-	CalculateB();
+Bone::Bone(float x, float y, float len, Bone* child)
+{
+	a = float2(x, y);
+	b = float2(0, 0);
+	angle = 0;
+	this->len = len;
+	this->child = child;
 }
 
-void KinematicSegment::CalculateB() {
-	float dx = len * cos(angle);
-	float dy = len * sin(angle);
-	KinematicSegment::b.set(a.x + dx, a.y + dy);
+void Bone::Draw(Tmpl8::Surface* screen, float2 p)
+{
+	screen->Line(a.x + p.x, a.y + p.y, a.x + p.x + cos(angle) * len, a.y + p.y + sin(angle) * len, 0xffffff);
+    if (child != nullptr) child->Draw(screen, float2(a.x + p.x + cos(angle) * len, a.y + p.y + sin(angle) * len));
 }
 
-void KinematicSegment::SetA(float2 a) {
-	KinematicSegment::a = a;
+float2 RotatePoint(float2 p, float angle) {
+    return float2(
+        p.x * cos(angle) - p.y * sin(angle),
+        p.x * sin(angle) + p.y * cos(angle)
+    );
 }
 
-void KinematicSegment::Follow(float2 t, bool move) {
-	float2 dir = (t - a).normalized();
-	angle = atan2(dir.y, dir.x);
-	if (move) a = t - dir * len;
+float2 Bone::Update(float2 target)
+{
+    // Convert from parent to local coordinates.
+    float2 local = RotatePoint(target - a, -angle);
+
+    if (child != nullptr) {
+        b = child->Update(local);
+    }
+    else {
+        // Edge case: The end point is the end of the current bone.
+        b = float2(len, 0);
+    }
+
+    // Point towards the endpoint.
+    float deltaAngle = atan2(local.y, local.x) - atan2(b.y, b.x);
+    angle += deltaAngle;
+
+    // Convert back to parent coordinate space.
+    return a + RotatePoint(b, angle);
 }
 
-void KinematicSegment::Draw(Tmpl8::Surface* screen) {
-	screen->Line(a.x, a.y, b.x, b.y, 0xffffff);
-}
-
-float2 KinematicSegment::GetJoint() {
-	return a;
+Bone::~Bone()
+{
+    delete child;
 }

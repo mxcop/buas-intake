@@ -3,24 +3,41 @@
 #include "types.h"
 #include "../surface.h"
 
-class KinematicArm {
+//class KinematicArm {
+//
+//};
 
-};
+//class KinematicSegment {
+//public:
+//	KinematicSegment(float x, float y, float len);
+//
+//	void Follow(float2 t, bool move = false);
+//	void CalculateB();
+//	void SetA(float2 a);
+//
+//	void Draw(Tmpl8::Surface* screen);
+//	float2 GetJoint();
+//
+//private:
+//	float2 a;
+//	float len;
+//	float angle;
+//	float2 b;
+//};
 
-class KinematicSegment {
+class Bone {
 public:
-	KinematicSegment(float x, float y, float len);
+	Bone(float x, float y, float len, Bone* child = nullptr);
 
-	void Follow(float2 t, bool move = false);
-	void CalculateB();
-	void SetA(float2 a);
+	void Draw(Tmpl8::Surface* screen, float2 p);
+	float2 Update(float2 target);
 
-	void Draw(Tmpl8::Surface* screen);
-	float2 GetJoint();
+	~Bone();
 
 private:
 	float2 a;
-	float len;
-	float angle;
 	float2 b;
+	float len;
+	float angle = 0;
+	Bone* child = nullptr;
 };
