@@ -26,9 +26,4 @@
       <UniqueIdentifier>{bf32dd6e-4be7-4889-8ac6-49e7ee163c40}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="_readme.txt">
-      <Filter>template code</Filter>
-    </Text>
-  </ItemGroup>
 </Project>

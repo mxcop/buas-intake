@@ -234,9 +234,6 @@
     <ClInclude Include="surface.h" />
     <ClInclude Include="template.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="_readme.txt" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
