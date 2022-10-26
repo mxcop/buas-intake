@@ -60,7 +60,7 @@ namespace Tmpl8
 		float q1 = NAN;
 		float q2 = NAN;
 
-		if (e.x > 0) {
+		if (e.x >= 0) {
 			q2 = acos((e.xx() + e.yy() - a1 * a1 - a2 * a2) / (2.0 * a1 * a2));
 			q1 = atan(e.y / e.x) - atan((a2 * sin(q2)) / (a1 + a2 * cos(q2)));
 		}
@@ -69,7 +69,7 @@ namespace Tmpl8
 			q1 = atan(e.y / e.x) + atan((a2 * sin(q2)) / (a1 + a2 * cos(q2)));
 		}
 
-		if (e.x != 0 && e.y != 0) {
+		if (e.x != 0 || e.y != 0) {
 			if (!isnan(q1) && !isnan(q2)) {
 				float2 p1 = c;
 				float2 p2;
