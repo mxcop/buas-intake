@@ -1,8 +1,11 @@
 #pragma once
 
 #include <SDL.h>
+#include "src/types.h"
 
 namespace Tmpl8 {
+
+	constexpr int ScreenScalingFactor = 3;
 
 	class Surface;
 
@@ -21,7 +24,7 @@ namespace Tmpl8 {
 		private:
 			Surface* screen;
 			SDL_Window* window;
-			int mouse_x;
-			int mouse_y;
+			int2 mouse;
+			float2 f_mouse;
 	};
 }; // namespace Tmpl8

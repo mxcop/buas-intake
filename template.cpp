@@ -321,10 +321,12 @@ int main( int argc, char **argv )
 #else
 	window = SDL_CreateWindow(TemplateVersion, 100, 100, ScreenWidth, ScreenHeight, SDL_WINDOW_SHOWN );
 #endif
-	surface = new Surface( ScreenWidth, ScreenHeight );
+	int BufferWidth = ScreenWidth / ScreenScalingFactor;
+	int BufferHeight = ScreenHeight / ScreenScalingFactor;
+	surface = new Surface(BufferWidth, BufferHeight);
 	surface->Clear( 0 );
 	SDL_Renderer* renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
-	SDL_Texture* frameBuffer = SDL_CreateTexture( renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, ScreenWidth, ScreenHeight );
+	SDL_Texture* frameBuffer = SDL_CreateTexture( renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, BufferWidth, BufferHeight);
 #endif
 	int exitapp = 0;
 	game = new Game();
@@ -342,14 +344,14 @@ int main( int argc, char **argv )
 		SDL_LockTexture( frameBuffer, NULL, &target, &pitch );
 		if (pitch == (surface->GetWidth() * 4))
 		{
-			memcpy( target, surface->GetBuffer(), ScreenWidth * ScreenHeight * 4 );
+			memcpy( target, surface->GetBuffer(), BufferWidth * BufferHeight * 4 );
 		}
 		else
 		{
 			unsigned char* t = (unsigned char*)target;
 			for( int i = 0; i < ScreenHeight; i++ )
 			{
-				memcpy( t, surface->GetBuffer() + i * ScreenWidth, ScreenWidth * 4 );
+				memcpy( t, surface->GetBuffer() + i * BufferWidth, BufferHeight * 4 );
 				t += pitch;
 			}
 		}

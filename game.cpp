@@ -15,6 +15,9 @@ namespace Tmpl8
 	// -----------------------------------------------------------
 	void Game::Init(SDL_Window* win)
 	{
+		f_mouse = float2();
+		mouse = int2();
+
 		window = win; 
 		SDL_SetWindowTitle(window, "Test Test Test");
 		arm = new Bone(300, 300, 100, new Bone(100, 0, 100));
@@ -45,17 +48,19 @@ namespace Tmpl8
 		//oss << "Frame : " << frame << " Delta : " << deltaTime;
 		//SDL_SetWindowTitle(window, oss.str().c_str());
 
-		screen->Circle(mouse_x, mouse_y, 5, 0xffffff);
-		screen->Circle(300, 300, 5, 0xffffff);
+		screen->Circle(mouse.x, mouse.y, 5, 0xffffff);
+		//screen->Circle(300, 300, 5, 0xffffff);
 
+		screen->Circle(200, 150, 5, 0xff0000);
+		screen->Circle(300, 150, 5, 0x00ff00);
 
 		// Try kinematics
 
 		// Start and End positions.
-		float2 c = float2(300, 300);
-		float2 e = float2(mouse_x, mouse_y) - c;
-		float a1 = 100;
-		float a2 = 100;
+		float2 c = float2(200, 150);
+		float2 e = float2(mouse.x, mouse.y) - c;
+		float a1 = 50;
+		float a2 = 50;
 
 		float q1 = NAN;
 		float q2 = NAN;
@@ -93,19 +98,23 @@ namespace Tmpl8
 			}
 		}
 
-		//arm->Update(effector);
+		//float2 e = float2(mouse_x, mouse_y);
+		//arm->Update(e);
 		//arm->Draw(screen, float2(0, 0));
 
 		// print something to the text window
 		//printf("this goes to the console window.\n");
 		// draw a sprite
-		rotatingGun.SetFrame(frame);
-		rotatingGun.Draw(screen, 100, 100);
+		//rotatingGun.SetFrame(frame);
+		//rotatingGun.Draw(screen, 100, 100);
 		if (++frame == 36) frame = 0;
 	}
 
 	void Game::MouseMove(int dx, int dy) {
-		mouse_x += dx;
-		mouse_y += dy;
+		f_mouse.x += dx / static_cast<float>(ScreenScalingFactor);
+		f_mouse.y += dy / static_cast<float>(ScreenScalingFactor);
+
+		mouse.x = floor(f_mouse.x);
+		mouse.y = floor(f_mouse.y);
 	}
 };
