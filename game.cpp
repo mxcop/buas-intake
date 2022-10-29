@@ -20,7 +20,7 @@ namespace Tmpl8
 
 		window = win; 
 		SDL_SetWindowTitle(window, "Test Test Test");
-		arm = new Bone(300, 300, 100, new Bone(100, 0, 100));
+		arm = new Bone(200, 150, 50, new Bone(50, 0, 50, new Bone(50, 0, 50, new Bone(50, 0, 50))));
 	}
 	
 	// -----------------------------------------------------------
@@ -57,7 +57,7 @@ namespace Tmpl8
 		// Try kinematics
 
 		// Start and End positions.
-		float2 c = float2(200, 150);
+		/*float2 c = float2(200, 150);
 		float2 e = float2(mouse.x, mouse.y) - c;
 		float a1 = 50;
 		float a2 = 50;
@@ -96,11 +96,11 @@ namespace Tmpl8
 				float2 b = e.normalized() * (a1 + a2);
 				screen->Line(c.x, c.y, c.x + b.x, c.y + b.y, 0xffffff);
 			}
-		}
+		}*/
 
-		//float2 e = float2(mouse_x, mouse_y);
-		//arm->Update(e);
-		//arm->Draw(screen, float2(0, 0));
+		float2 e = f_mouse;
+		arm->Update(e);
+		arm->Draw(screen, float2(0, 0), 0, true);
 
 		// print something to the text window
 		//printf("this goes to the console window.\n");

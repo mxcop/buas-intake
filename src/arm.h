@@ -3,40 +3,29 @@
 #include "types.h"
 #include "../surface.h"
 
-//class KinematicArm {
-//
-//};
-
-//class KinematicSegment {
-//public:
-//	KinematicSegment(float x, float y, float len);
-//
-//	void Follow(float2 t, bool move = false);
-//	void CalculateB();
-//	void SetA(float2 a);
-//
-//	void Draw(Tmpl8::Surface* screen);
-//	float2 GetJoint();
-//
-//private:
-//	float2 a;
-//	float len;
-//	float angle;
-//	float2 b;
-//};
-
 class Bone {
 public:
 	Bone(float x, float y, float len, Bone* child = nullptr);
 
-	void Draw(Tmpl8::Surface* screen, float2 p);
+	/// <summary>
+	/// Draw the sequence of bones.
+	/// </summary>
+	/// <param name="screen">The screen surface.</param>
+	/// <param name="p">The parent position (0,0 if origin)</param>
+	/// <param name="w_angle">The world angle (all previous bone angles summed up)</param>
+	/// <param name="origin">Whether this is the first bone in the sequence.</param>
+	void Draw(Tmpl8::Surface* screen, float2 p, float w_angle = 0, bool origin = false);
+
+	/// <summary>
+	/// Recursively update angle of each bone in the sequence.
+	/// </summary>
+	/// <param name="target">The end effector.</param>
 	float2 Update(float2 target);
 
 	~Bone();
 
 private:
-	float2 a;
-	float2 b;
+	float2 offset;
 	float len;
 	float angle = 0;
 	Bone* child = nullptr;

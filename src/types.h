@@ -8,13 +8,19 @@ struct float2 {
 	float2() : x{ 0 }, y{ 0 } {}
 	float2(float x, float y) : x{ x }, y{ y } {}
 
-	float2 operator-(float2& o) const {
+	/*float2 operator-(float2& o) const {
 		return float2(x - o.x, y - o.y);
-	}
+	}*/
 
-	float2 operator+(float2& o) const {
+	/*float2 operator+(float2& o) const {
 		return float2(x + o.x, y + o.y);
-	}
+	}*/
+
+	float2 const operator- (float2 const& rhs) const { float2 result(*this); return result -= rhs; }
+	float2& operator-=(float2 const& rhs) { x -= rhs.x; y -= rhs.y; return *this; }
+
+	float2 const operator+ (float2 const& rhs) const { float2 result(*this); return result += rhs; }
+	float2& operator+=(float2 const& rhs) { x += rhs.x; y += rhs.y; return *this; }
 
 	float2 operator*(float m) const {
 		return float2(x * m, y * m);
