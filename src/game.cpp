@@ -8,7 +8,8 @@
 
 namespace Tmpl8
 {
-	static Bone* arm = nullptr;
+	static Bone* arm_left = nullptr;
+	static Bone* arm_right = nullptr;
 
 	// -----------------------------------------------------------
 	// Initialize the application
@@ -20,7 +21,8 @@ namespace Tmpl8
 
 		window = win; 
 		SDL_SetWindowTitle(window, "Test Test Test");
-		arm = new Bone(200, 150, 50, new Bone(50, 0, 50));
+		arm_right = new Bone(screen->GetWidth() / 2 + 20, 30, 0, 50, new Bone(50, 0, 0, 50));
+		arm_left = new Bone(screen->GetWidth() / 2 - 20, 30, 180, 50, new Bone(50, 0, 0, 50));
 	}
 	
 	// -----------------------------------------------------------
@@ -44,18 +46,22 @@ namespace Tmpl8
 		screen->Print("hello world", 2, 2, 0xffffff);
 
 		// Update the window title with the frame count:
-		//std::ostringstream oss;
-		//oss << "Frame : " << frame << " Delta : " << deltaTime;
-		//SDL_SetWindowTitle(window, oss.str().c_str());
+		std::ostringstream oss;
+		oss << "Frame : " << frame << " Delta : " << deltaTime << " Mouse : " << mouse.x << ", " << mouse.y;
+		SDL_SetWindowTitle(window, oss.str().c_str());
 
 		screen->Circle(mouse.x, mouse.y, 5, 0xffffff);
 
-		screen->Circle(200, 150, 5, 0xff0000);
-		screen->Circle(300, 150, 5, 0x00ff00);
+		screen->Circle(screen->GetWidth() / 2, screen->GetHeight() / 2, 100, 0xff0000);
+		//screen->Circle(300, 150, 5, 0x00ff00);
 
-		float2 e = f_mouse;
-		arm->Update(e);
-		arm->Draw(screen, float2(0, 0), 0, true);
+		screen->Circle(screen->GetWidth() / 2, 30, 20, 0xffffff);
+
+		//float2 e = f_mouse;
+		arm_right->Update(float2(screen->GetWidth() / 2 + 42, 80));
+		arm_right->Draw(screen, float2(0, 0), 0, true);
+		arm_left->Update(float2(screen->GetWidth() / 2 - 42, 80));
+		arm_left->Draw(screen, float2(0, 0), 0, true);
 
 		// print something to the text window
 		//printf("this goes to the console window.\n");

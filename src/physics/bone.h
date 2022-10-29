@@ -5,7 +5,7 @@
 
 class Bone {
 public:
-	Bone(float x, float y, float len, Bone* child = nullptr);
+	Bone(float x, float y, float angle, float len, Bone* child = nullptr);
 
 	/// <summary>
 	/// Draw the sequence of bones.

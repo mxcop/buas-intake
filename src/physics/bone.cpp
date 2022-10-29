@@ -1,10 +1,10 @@
 #include "bone.h"
 #include <string>
 
-Bone::Bone(float x, float y, float len, Bone* child)
+Bone::Bone(float x, float y, float angle, float len, Bone* child)
 {
 	offset = float2(x, y);
-	angle = 0;
+	this->angle = angle;
 	this->len = len;
 	this->child = child;
 }
