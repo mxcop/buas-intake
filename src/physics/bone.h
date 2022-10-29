@@ -1,7 +1,7 @@
 #pragma once
 
-#include "types.h"
-#include "../surface.h"
+#include "../utils.h"
+#include "../engine/surface.h"
 
 class Bone {
 public:

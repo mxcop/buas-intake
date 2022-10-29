@@ -1,4 +1,4 @@
-#include "arm.h"
+#include "bone.h"
 #include <string>
 
 Bone::Bone(float x, float y, float len, Bone* child)

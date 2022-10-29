@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SDL.h>
-#include "src/types.h"
+#include "utils.h"
 
 namespace Tmpl8 {
 

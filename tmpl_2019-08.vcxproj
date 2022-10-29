@@ -222,17 +222,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="game.cpp" />
-    <ClCompile Include="src\arm.cpp" />
-    <ClCompile Include="surface.cpp" />
-    <ClCompile Include="template.cpp" />
+    <ClCompile Include="src\game.cpp" />
+    <ClCompile Include="src\physics\bone.cpp" />
+    <ClCompile Include="src\engine\surface.cpp" />
+    <ClCompile Include="src\engine\template.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="game.h" />
-    <ClInclude Include="src\arm.h" />
-    <ClInclude Include="src\types.h" />
-    <ClInclude Include="surface.h" />
-    <ClInclude Include="template.h" />
+    <ClInclude Include="src\game.h" />
+    <ClInclude Include="src\physics\bone.h" />
+    <ClInclude Include="src\utils\float2.hpp" />
+    <ClInclude Include="src\utils.h" />
+    <ClInclude Include="src\utils\int2.hpp" />
+    <ClInclude Include="src\engine\surface.h" />
+    <ClInclude Include="src\engine\template.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
