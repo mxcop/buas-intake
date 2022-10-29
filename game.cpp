@@ -20,7 +20,7 @@ namespace Tmpl8
 
 		window = win; 
 		SDL_SetWindowTitle(window, "Test Test Test");
-		arm = new Bone(200, 150, 50, new Bone(50, 0, 50, new Bone(50, 0, 50, new Bone(50, 0, 50))));
+		arm = new Bone(200, 150, 50, new Bone(50, 0, 50));
 	}
 	
 	// -----------------------------------------------------------

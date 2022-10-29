@@ -40,7 +40,7 @@ float2 Bone::Update(float2 target)
         end = child->Update(local);
     }
     else {
-        // Edge case: The end point is the end of the current bone.
+        // Default endpoint for the last bone in the sequence.
         end = float2(len, 0);
     }
 
