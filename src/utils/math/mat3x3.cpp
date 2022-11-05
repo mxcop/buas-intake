@@ -1,4 +1,5 @@
 #include "mat3x3.h"
+#include <algorithm>
 
 float mat3x3::get(int x, int y) const {
 	return m[y * 3 + x];
@@ -86,6 +87,17 @@ mat3x3 mat3x3::inverted()
 	result.set(2, 2, (get(0, 0) * get(1, 1) - get(0, 1) * get(1, 0)) * idet);
 
 	return result;
+}
+
+void mat3x3::bounds(float w, float h, float2& min, float2& max)
+{
+	float2 tl = transform(float2(0, 0));
+	float2 tr = transform(float2(w, 0));
+	float2 br = transform(float2(w, h));
+	float2 bl = transform(float2(0, h));
+
+	min = float2(std::min(std::min(std::min(tl.x, tr.x), br.x), bl.x), std::min(std::min(std::min(tl.y, tr.y), br.y), bl.y));
+	max = float2(std::max(std::max(std::max(tl.x, tr.x), br.x), bl.x), std::max(std::max(std::max(tl.y, tr.y), br.y), bl.y));
 }
 
 float2 mat3x3::transform(const float2& sp) const {

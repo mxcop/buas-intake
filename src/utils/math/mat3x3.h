@@ -66,6 +66,15 @@ public:
 	mat3x3 inverted();
 
 	/// <summary>
+	/// Determine the bounds of quad transformed by this matrix.
+	/// </summary>
+	/// <param name="w">Width of the quad.</param>
+	/// <param name="h">Height of the quad.</param>
+	/// <param name="min">Outputs top left position of the bounding box.</param>
+	/// <param name="max">Outputs bottom right position of the bounding box.</param>
+	void bounds(float w, float h, float2 &min, float2 &max);
+
+	/// <summary>
 	/// Transform the given sprite space coordinates into screen space coordinates.
 	/// </summary>
 	float2 transform(const float2 &sp) const;
