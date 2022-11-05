@@ -21,7 +21,7 @@
 <br>
 
 <h2>Inverse Kinematics <sub><i>impl</i></sub></h2>
-<code>~src/physics/bone.cpp</code><br><br>
+<a href="https://github.com/mxcop/buas-intake/blob/main/src/physics/bone.cpp"><code>~src/physics/bone.cpp</code></a><br><br>
 
 I implemented inverse kinematics by researching multiple existing implementations *(usually written in other languages)*<br>
 My current implementation uses recursion to simulate the bones, this is not the most optimal way of doing this.<br>
@@ -76,8 +76,8 @@ void Bone::Draw(Tmpl8::Surface* screen, float2 p, float w_angle, bool origin)
 <br>
 
 <h2>Matrix Affine Transformations <sub><i>impl</i></sub></h2>
-<code>~src/utils/math/mat3x3.cpp</code><br>
-<code>~src/engine/surface.cpp</code><br><br>
+<a href="https://github.com/mxcop/buas-intake/blob/main/src/utils/math/mat3x3.cpp"><code>~src/utils/math/mat3x3.cpp</code></a><br>
+<a href="https://github.com/mxcop/buas-intake/blob/main/src/engine/surface.cpp"><code>~src/engine/surface.cpp</code></a><br><br>
 
 I updated the engine template to be able to draw sprites using matrices.<br>
 Using my own matrix class implementation ``(mat3x3)``
