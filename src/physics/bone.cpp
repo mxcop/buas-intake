@@ -23,17 +23,10 @@ void Bone::Draw(Tmpl8::Surface* screen, float2 p, float w_angle, bool origin)
     }
 }
 
-float2 RotatePoint(float2 p, float angle) {
-    return float2(
-        p.x * cos(angle) - p.y * sin(angle),
-        p.x * sin(angle) + p.y * cos(angle)
-    );
-}
-
 float2 Bone::Update(float2 target)
 {
     // Convert from parent to local coordinates.
-    float2 local = RotatePoint(target - offset, -angle);
+    float2 local = (target - offset).rotate(-angle);
 
     float2 end;
     if (child != nullptr) {
@@ -49,7 +42,7 @@ float2 Bone::Update(float2 target)
     angle += deltaAngle;
 
     // Convert back to parent coordinate space.
-    return offset + RotatePoint(end, angle);
+    return offset + end.rotate(angle);
 }
 
 Bone::~Bone()

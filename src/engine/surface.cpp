@@ -5,6 +5,7 @@
 #include "template.h"
 #include <cassert>
 #include <cstring>
+#include <algorithm>
 #include "FreeImage.h"
 
 namespace Tmpl8 {
@@ -488,6 +489,62 @@ void Sprite::DrawScaled( int a_X, int a_Y, int a_Width, int a_Height, Surface* a
 		int v = (int)((float)y * ((float)m_Height / (float)a_Height));
 		Pixel color = GetBuffer()[u + v * m_Pitch];
 		if (color & 0xffffff) a_Target->GetBuffer()[a_X + x + ((a_Y + y) * a_Target->GetPitch())] = color;
+	}
+}
+
+void Sprite::DrawWithMatrix(Surface* a_Target, mat3x3 matrix)
+{
+	// Load the correct part of the texture.
+	Pixel* src = GetBuffer(); // + m_CurrentFrame * m_Width;
+
+	// Load the destination texture. (Usually the screen)
+	Pixel* des = a_Target->GetBuffer();
+
+	int target_w = a_Target->GetWidth();
+	int target_h = a_Target->GetHeight();
+
+	// Get the inverted matrix.
+	mat3x3 inverted = matrix.inverted();
+
+	// Get the minX, minY and maxX, maxY of the transformed sprite:
+	float2 tl = matrix.transform(float2(0, 0));
+	float2 tr = matrix.transform(float2(m_Width, 0));
+	float2 br = matrix.transform(float2(m_Width, m_Height));
+	float2 bl = matrix.transform(float2(0, m_Height));
+
+	float2 start = float2(std::min(std::min(std::min(tl.x, tr.x), br.x), bl.x), std::min(std::min(std::min(tl.y, tr.y), br.y), bl.y));
+	float2 end   = float2(std::max(std::max(std::max(tl.x, tr.x), br.x), bl.x), std::max(std::max(std::max(tl.y, tr.y), br.y), bl.y));
+
+	// Loop through each pixel within the transformed bounding box:
+	for (size_t x = start.x; x < end.x; x++)
+	{
+		// Check if this X axis is onscreen.
+		if (x < 0 || x >= target_w) continue;
+
+		for (size_t y = start.y; y < end.y; y++)
+		{
+			// Check if this Y axis is onscreen.
+			if (y < 0 || y >= target_h) continue;
+
+			// Convert the screen position into texture space.
+			float2 pixel_pos = inverted.transform(float2(x, y)) + float2(0.5, 0.5);
+
+			// Check if the pixel position is within bounds of the texture. (for rotations)
+			if (pixel_pos.x < 0 || pixel_pos.y < 0 || pixel_pos.x >= m_Width || pixel_pos.y >= m_Height) continue;
+
+			// Sample the texture.
+			const Pixel pixel = *(src + static_cast<int>(pixel_pos.y) * m_Width + static_cast<int>(pixel_pos.x));
+		
+			if (m_Flags & FLARE) // Alpha blending :
+			{
+				// Get the pixel in the position we're writing too.
+				const Pixel active_pixel = *(des + y * target_w + x);
+
+				// Blend the two pixels together.
+				*(des + y * target_w + x) = AddBlend(pixel, active_pixel);
+			}
+			else *(des + y * target_w + x) = pixel;
+		}
 	}
 }
 

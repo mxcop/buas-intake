@@ -32,7 +32,7 @@ namespace Tmpl8
 	{
 	}
 
-	static Sprite rotatingGun(new Surface("assets/aagun.tga"), 36);
+	static Sprite sprite(new Surface("assets/boss.png"), 1);
 	static int frame = 0;
 	
 	// -----------------------------------------------------------
@@ -52,7 +52,7 @@ namespace Tmpl8
 
 		screen->Circle(mouse.x, mouse.y, 5, 0xffffff);
 
-		screen->Circle(screen->GetWidth() / 2, screen->GetHeight() / 2, 100, 0xff0000);
+		screen->Circle(screen->GetWidth() / 2, screen->GetHeight() / 2 + 20, 80, 0xff0000);
 		//screen->Circle(300, 150, 5, 0x00ff00);
 
 		screen->Circle(screen->GetWidth() / 2, 30, 20, 0xffffff);
@@ -62,6 +62,15 @@ namespace Tmpl8
 		arm_right->Draw(screen, float2(0, 0), 0, true);
 		arm_left->Update(float2(screen->GetWidth() / 2 - 42, 80));
 		arm_left->Draw(screen, float2(0, 0), 0, true);
+
+		mat3x3 final_matrix = mat3x3();
+		mat3x3 trans_matrix = mat3x3();
+		trans_matrix.rotate(0.3);
+		final_matrix.translate(100, 100);
+		final_matrix.multiply(trans_matrix);
+
+		sprite.SetFlags(Sprite::FLARE);
+		sprite.DrawWithMatrix(screen, final_matrix);
 
 		// print something to the text window
 		//printf("this goes to the console window.\n");

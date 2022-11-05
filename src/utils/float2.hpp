@@ -23,6 +23,13 @@ struct float2 {
 		this->y = y;
 	}
 
+	float2 rotate(float angle) const {
+		return float2(
+			x * cos(angle) - y * sin(angle),
+			x * sin(angle) + y * cos(angle)
+		);
+	}
+
 	float xx() const {
 		return x * x;
 	}

@@ -9,6 +9,7 @@
       <Filter>template code</Filter>
     </ClCompile>
     <ClCompile Include="src\physics\bone.cpp" />
+    <ClCompile Include="src\utils\math\mat3x3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game.h" />
@@ -22,10 +23,14 @@
     <ClInclude Include="src\utils\int2.hpp" />
     <ClInclude Include="src\utils\float2.hpp" />
     <ClInclude Include="src\utils.h" />
+    <ClInclude Include="src\utils\math\mat3x3.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="template code">
       <UniqueIdentifier>{bf32dd6e-4be7-4889-8ac6-49e7ee163c40}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\boss.png" />
   </ItemGroup>
 </Project>
