@@ -32,7 +32,7 @@ namespace Tmpl8
 	{
 	}
 
-	static Sprite sprite(new Surface("assets/boss.png"), 1);
+	static Sprite sprite(new Surface("assets/aagun.tga"), 36);
 	static int frame = 0;
 	
 	// -----------------------------------------------------------
@@ -65,10 +65,12 @@ namespace Tmpl8
 
 		mat3x3 final_matrix = mat3x3();
 		mat3x3 trans_matrix = mat3x3();
-		trans_matrix.rotate(0.3);
+		trans_matrix.rotate(0.4);
+		//trans_matrix.scale(4, 4);
 		final_matrix.translate(100, 100);
 		final_matrix.multiply(trans_matrix);
 
+		sprite.SetFrame(frame);
 		sprite.SetFlags(Sprite::FLARE);
 		sprite.DrawWithMatrix(screen, final_matrix);
 

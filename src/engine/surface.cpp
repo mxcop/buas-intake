@@ -497,7 +497,7 @@ void Sprite::DrawWithMatrix(Surface* a_Target, mat3x3 matrix)
 	// TODO: Add support for sprite animations !
 	
 	// Load the correct part of the texture.
-	Pixel* src = GetBuffer(); // + m_CurrentFrame * m_Width;
+	Pixel* src = GetBuffer() + m_CurrentFrame * m_Width;
 
 	// Load the destination texture. (Usually the screen)
 	Pixel* des = a_Target->GetBuffer();
@@ -531,7 +531,7 @@ void Sprite::DrawWithMatrix(Surface* a_Target, mat3x3 matrix)
 			if (pixel_pos.x < 0 || pixel_pos.y < 0 || pixel_pos.x >= m_Width || pixel_pos.y >= m_Height) continue;
 
 			// Sample the texture.
-			const Pixel pixel = *(src + static_cast<int>(pixel_pos.y) * m_Width + static_cast<int>(pixel_pos.x));
+			const Pixel pixel = *(src + static_cast<int>(pixel_pos.y) * m_Pitch + static_cast<int>(pixel_pos.x));
 		
 			if (m_Flags & FLARE) // Alpha blending :
 			{
