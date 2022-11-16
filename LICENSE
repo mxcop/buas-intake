@@ -1,6 +1,3 @@
-NOTE: This license only applies to any files that did not originate from the 3dgep.com template.
-(https://www.3dgep.com/cpp-fast-track-2-template/)
-
 MIT License
 
 Copyright (c) 2022 Max Coppen
@@ -22,3 +19,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+NOTE: This license only applies to any files that did not originate from the 3dgep.com template.
+(https://www.3dgep.com/cpp-fast-track-2-template/)
