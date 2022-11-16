@@ -1,3 +1,5 @@
+/* Inspired by Dave Pagurek's JS IK implementation : https://codepen.io/davepvm/pen/gmgGdQ */
+
 #include "bone.h"
 #include <string>
 

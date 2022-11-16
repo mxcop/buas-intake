@@ -1,5 +1,7 @@
 #pragma once
 
+/* Inspired by Dave Pagurek's JS IK implementation : https://codepen.io/davepvm/pen/gmgGdQ */
+
 #include "../utils.h"
 #include "../engine/surface.h"
 

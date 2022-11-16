@@ -5,7 +5,7 @@ struct float2 {
 	float x;
 	float y;
 
-	float2() : x{ 0 }, y{ 0 } {}
+	explicit float2() : x{ 0 }, y{ 0 } {}
 	float2(float x, float y) : x{ x }, y{ y } {}
 
 	float2 const operator-(float2 const& o) const { float2 r(*this); return r -= o; }

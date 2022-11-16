@@ -21,6 +21,7 @@
 <br>
 
 <h2>Inverse Kinematics <sub><i>impl</i></sub></h2>
+<a href="https://codepen.io/davepvm/pen/gmgGdQ"><code>Inspired by Dave Pagurek's IK Demo</code></a><br>
 <a href="https://github.com/mxcop/buas-intake/blob/main/src/physics/bone.cpp"><code>~src/physics/bone.cpp</code></a><br><br>
 
 I implemented inverse kinematics by researching multiple existing implementations *(usually written in other languages)*<br>
@@ -76,6 +77,7 @@ void Bone::Draw(Tmpl8::Surface* screen, float2 p, float w_angle, bool origin)
 <br>
 
 <h2>Matrix Affine Transformations <sub><i>impl</i></sub></h2>
+<a href="https://www.youtube.com/watch?v=zxwLN2blwbQ"><code>Inspired by javidx9's 2D Sprite Affine Transformations</code></a><br>
 <a href="https://github.com/mxcop/buas-intake/blob/main/src/utils/math/mat3x3.cpp"><code>~src/utils/math/mat3x3.cpp</code></a><br>
 <a href="https://github.com/mxcop/buas-intake/blob/main/src/engine/surface.cpp"><code>~src/engine/surface.cpp</code></a><br><br>
 

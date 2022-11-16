@@ -1,3 +1,5 @@
+/* Inspired by javidx9 video : https://www.youtube.com/watch?v=zxwLN2blwbQ */
+
 #include "mat3x3.h"
 #include <algorithm>
 

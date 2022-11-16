@@ -1,15 +1,17 @@
 #pragma once
 
+/* Inspired by javidx9 video : https://www.youtube.com/watch?v=zxwLN2blwbQ */
+
 #include "../float2.hpp"
 
-class mat3x3 {
+struct mat3x3 {
 private:
 	float m[9];
 
 public:
 	// Constructors.
-	mat3x3() { identity(); }
-	mat3x3(float values[9]) : m{ *values } {}
+	explicit mat3x3() { identity(); }
+	explicit mat3x3(float values[9]) : m{ *values } {}
 
 	/// <summary>
 	/// Get an element within the matrix.
