@@ -17,8 +17,10 @@ Encouraging you to move quickly and choose your moves carefully.
 
 Old school 8-bit rogue-like art style <sub>(Examples below)</sub>
 
-<img src="./assets/pork.gif" style="width:48%; max-width:240px; border-radius: 12px">
-<img src="./assets/stray.gif" style="width:48%; max-width:240px; border-radius: 12px">
+<div>
+  <img src="./assets/pork.gif" width=240px>
+  <img src="./assets/stray.gif" width=240px>
+</div>
 
 <br>
 
