@@ -2,7 +2,6 @@
     <div align="center">
       BUAS - Intake Project
     </div>
-    <img src="https://img.shields.io/badge/license-MIT*-yellowgreen" height=20 align="right" />
 </h1>
 
 
