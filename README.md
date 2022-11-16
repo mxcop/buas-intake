@@ -2,7 +2,7 @@
     <div align="center">
       BUAS - Intake Project
     </div>
-    <img src="https://img.shields.io/github/license/mxcop/buas-intake" height=20 align="right" />
+    <img src="https://img.shields.io/badge/license-MIT*-yellowgreen" height=20 align="right" />
 </h1>
 
 
