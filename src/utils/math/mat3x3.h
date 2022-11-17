@@ -3,6 +3,7 @@
 /* Inspired by javidx9 video : https://www.youtube.com/watch?v=zxwLN2blwbQ */
 
 #include "../float2.hpp"
+#include <initializer_list>
 
 struct mat3x3 {
 private:
@@ -10,8 +11,8 @@ private:
 
 public:
 	// Constructors.
-	explicit mat3x3() { identity(); }
-	explicit mat3x3(float values[9]) : m{ *values } {}
+	mat3x3();
+	mat3x3(std::initializer_list<float> values);
 
 	/// <summary>
 	/// Get an element within the matrix.

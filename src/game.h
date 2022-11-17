@@ -2,6 +2,7 @@
 
 #include <SDL.h>
 #include "utils.h"
+#include "engine/camera.h"
 
 namespace Tmpl8 {
 
@@ -12,6 +13,7 @@ namespace Tmpl8 {
 	class Game
 	{
 		public:
+			Camera* view;
 			void SetTarget( Surface* surface ) { screen = surface; }
 			void Init( SDL_Window* win );
 			void Shutdown();
@@ -20,7 +22,7 @@ namespace Tmpl8 {
 			void MouseDown( int button ) { /* implement if you want to detect mouse button presses */ }
 			void MouseMove(int dx, int dy);
 			void KeyUp( int key ) { /* implement if you want to handle keys */ }
-			void KeyDown( int key ) { /* implement if you want to handle keys */ }
+			void KeyDown(int key);
 		private:
 			Surface* screen;
 			SDL_Window* window;

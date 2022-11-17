@@ -3,21 +3,42 @@
 #include "mat3x3.h"
 #include <algorithm>
 
-float mat3x3::get(int x, int y) const {
+mat3x3::mat3x3()
+{
+	identity();
+}
+
+mat3x3::mat3x3(std::initializer_list<float> values) {
+	if (values.size() > 9) throw "Attempted to create matrix 3x3 using more then 9 values!";
+	if (values.size() < 9) throw "Attempted to create matrix 3x3 using less then 9 values!";
+
+	int count{ 0 };
+	for (float val : values)
+	{
+		m[count] = val;
+		count++;
+	}
+};
+
+float mat3x3::get(int x, int y) const
+{
 	return m[y * 3 + x];
 }
 
-void mat3x3::set(int x, int y, float val) {
+void mat3x3::set(int x, int y, float val) 
+{
 	m[y * 3 + x] = val;
 }
 
-void mat3x3::identity() {
+void mat3x3::identity() 
+{
 	m[0] = 1; m[1] = 0; m[2] = 0;
 	m[3] = 0; m[4] = 1; m[5] = 0;
 	m[6] = 0; m[7] = 0; m[8] = 1;
 }
 
-void mat3x3::multiply(const mat3x3& matrix) {
+void mat3x3::multiply(const mat3x3& matrix) 
+{
 	for (size_t c = 0; c < 3; c++) {
 		for (size_t r = 0; r < 3; r++) {
 			set(c, r,
@@ -29,13 +50,16 @@ void mat3x3::multiply(const mat3x3& matrix) {
 	}
 }
 
-void mat3x3::translate(float ox, float oy) {
+void mat3x3::translate(float ox, float oy) 
+{
 	// 1 | 0 | ox
 	// 0 | 1 | oy
 	// 0 | 0 | 1
-	m[0] = 1; m[1] = 0; m[2] = ox;
-	m[3] = 0; m[4] = 1; m[5] = oy;
-	m[6] = 0; m[7] = 0; m[8] = 1;
+	multiply(mat3x3({
+		1, 0, ox,
+		0, 1, oy,
+		0, 0, 1
+	}));
 }
 
 void mat3x3::rotate(float theta)
@@ -43,9 +67,11 @@ void mat3x3::rotate(float theta)
 	// cos(t)  | sin(t) | 0
 	// -sin(t) | cos(t) | 0
 	// 0       | 0      | 1
-	m[0] = cosf(theta); m[1] = sinf(theta); m[2] = 0;
-	m[3] = -sinf(theta); m[4] = cosf(theta); m[5] = 0;
-	m[6] = 0; m[7] = 0; m[8] = 1;
+	multiply(mat3x3({
+		cos(theta), sin(theta), 0,
+	   -sin(theta), cos(theta), 0,
+		0         , 0         , 1
+	}));
 }
 
 void mat3x3::scale(float x, float y)
@@ -53,9 +79,11 @@ void mat3x3::scale(float x, float y)
 	// x | 0 | 0
 	// 0 | y | 0
 	// 0 | 0 | 1
-	m[0] = x; m[1] = 0; m[2] = 0;
-	m[3] = 0; m[4] = y; m[5] = 0;
-	m[6] = 0; m[7] = 0; m[8] = 1;
+	multiply(mat3x3({
+		x, 0, 0,
+		0, y, 0,
+		0, 0, 1
+	}));
 }
 
 void mat3x3::shear(float sx, float sy)
@@ -63,11 +91,15 @@ void mat3x3::shear(float sx, float sy)
 	// 1  | sx | 0
 	// sy | 1  | 0
 	// 0  | 0  | 1
-	m[0] = 1;  m[1] = sx; m[2] = 0;
-	m[3] = sy; m[4] = 1;  m[5] = 0;
-	m[6] = 0;  m[7] = 0;  m[8] = 1;
+	multiply(mat3x3({
+		1 , sx, 0,
+		sy, 1 , 0,
+		0 , 0 , 1
+	}));
 }
 
+/* Copied this function 1 to 1 from the video : https://www.youtube.com/watch?v=zxwLN2blwbQ */
+/* He didn't go into any detail about how it works, because apparently it's pretty complex. */
 mat3x3 mat3x3::inverted()
 {
 	mat3x3 result = mat3x3();

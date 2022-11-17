@@ -20,9 +20,11 @@ namespace Tmpl8
 		mouse = int2();
 
 		window = win; 
-		SDL_SetWindowTitle(window, "Test Test Test");
+		//SDL_SetWindowTitle(window, "Test Test Test");
 		arm_right = new Bone(screen->GetWidth() / 2 + 20, 30, 0, 50, new Bone(50, 0, 0, 50));
 		arm_left = new Bone(screen->GetWidth() / 2 - 20, 30, 180, 50, new Bone(50, 0, 0, 50));
+
+		view = new Camera();
 	}
 	
 	// -----------------------------------------------------------
@@ -43,7 +45,7 @@ namespace Tmpl8
 		// clear the graphics window
 		screen->Clear(0);
 		// print something in the graphics window
-		screen->Print("hello world", 2, 2, 0xffffff);
+		//screen->Print("hello world", 2, 2, 0xffffff);
 
 		// Update the window title with the frame count:
 		std::ostringstream oss;
@@ -57,22 +59,14 @@ namespace Tmpl8
 
 		screen->Circle(screen->GetWidth() / 2, 30, 20, 0xffffff);
 
-		//float2 e = f_mouse;
 		arm_right->Update(float2(screen->GetWidth() / 2 + 42, 80));
 		arm_right->Draw(screen, float2(0, 0), 0, true);
 		arm_left->Update(float2(screen->GetWidth() / 2 - 42, 80));
 		arm_left->Draw(screen, float2(0, 0), 0, true);
 
-		mat3x3 final_matrix = mat3x3();
-		mat3x3 trans_matrix = mat3x3();
-		trans_matrix.rotate(0.4);
-		//trans_matrix.scale(4, 4);
-		final_matrix.translate(100, 100);
-		final_matrix.multiply(trans_matrix);
-
 		sprite.SetFrame(frame);
 		sprite.SetFlags(Sprite::FLARE);
-		sprite.DrawWithMatrix(screen, final_matrix);
+		sprite.DrawWithMatrix(screen, view->matrix());
 
 		// print something to the text window
 		//printf("this goes to the console window.\n");
@@ -82,7 +76,27 @@ namespace Tmpl8
 		if (++frame == 36) frame = 0;
 	}
 
-	void Game::MouseMove(int dx, int dy) {
+	void Game::KeyDown(int key) 
+	{
+		printf("key pressed : %d.\n", key);
+
+		/* Camera cardinal movement */
+		if (key == 79) view->move(float2( 1,  0));
+		if (key == 80) view->move(float2(-1,  0));
+		if (key == 81) view->move(float2( 0, -1));
+		if (key == 82) view->move(float2( 0,  1));
+
+		/* Camera rotation */
+		if (key == 20) view->rotate(5);
+		if (key ==  8) view->rotate(-5);
+
+		/* Camera zoom */
+		if (key == 46) view->setZoom(2);
+		if (key == 45) view->setZoom(0.5);
+	}
+
+	void Game::MouseMove(int dx, int dy) 
+	{
 		f_mouse.x += dx / static_cast<float>(ScreenScalingFactor);
 		f_mouse.y += dy / static_cast<float>(ScreenScalingFactor);
 
