@@ -1,0 +1,33 @@
+:root {
+    color: #cebe98;
+}
+
+body {
+    background-color: #202020;
+    padding: 32px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    /* color: #e78a4e; */
+}
+
+code {
+    font-family: 'Cascadia Code', monospace;
+    font-weight: 500;
+    background-color: #131414;
+    color: #928374 !important;
+
+    padding: 3px 5px;
+    border-radius: 6px;
+}
+
+img {
+    border-radius: 12px;
+    margin: 4px;
+}
+
+table, th, td {
+    border: 1px solid #fff1;
+}

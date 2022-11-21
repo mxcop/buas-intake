@@ -8,13 +8,13 @@
 
 ## Concept
 
-You're a miner who goes down levels of a mine.<br>
-As you make your way through these levels you try to collect as much ore as you can.<br>
-However staying on one level for too long can be dangerous due to the monsters that accumulate overtime.<br>
+You're a miner who goes down floors of a mine.<br>
+As you make your way through these floors you try to collect as much ore as you can.<br>
+However staying on one floor for too long can be dangerous due to the monsters that accumulate overtime.<br>
 It's all about balancing risk vs reward to get the most out of your descent.
 
-Each level is randomly generated with an entrance, exit, ores, and monsters.<br>
-The longer you stay in a level the more monsters will spawn.<br>
+Each floor is randomly generated with an entrance, exit, ores, and monsters.<br>
+The longer you stay in a floor the more monsters will spawn.<br>
 Encouraging you to move quickly and choose your moves carefully.
 
 The game is turn-based meaning that every entity moves or attacks at the same time.<br>
@@ -30,17 +30,71 @@ And you cannot just wait for the enemy to move towards you, so now you are motiv
 Old school 8-bit rogue-like art style <sub>(Examples below)</sub>
 
 <div>
-  <img src="./assets/pork.gif" width=240px>
-  <img src="./assets/stray.gif" width=240px>
+  <img src="./assets/pork.png" width=240px>
+  <img src="./assets/stray.png" width=240px>
 </div>
+
+<div class="page"/>
 
 <br>
 
 ## MoSCoW
 
-| Must        | Should      | Could       | Won't       |
-| ----------- | ----------- | ----------- | ----------- |
-| ...         | ...         | ...         | ...         |
+| Must              | Should       | Could       | Won't              |
+| ----------------- | ------------ | ----------- | ------------------ |
+| Player Controller | Shops        | Multiplayer | Online Multiplayer |
+| Tilemap           | More Ores    | More Floors |                    |
+| Collisions        |              |             |                    |
+| Enemies           |              |             |                    |
+| Inventory         |              |             |                    |
+| Mining            |              |             |                    |
+| Floor Generation  |              |             |                    |
+| User Interface    |              |             |                    |
+
+<br>
+
+## Tasks
+
+<sub><code>MUST</code> Player Controller</sub><br>
+Create a player that can move in the four cardinal directions.<br>
+The player can also interact by bumping into obstacles.
+
+<sub><code>MUST</code> Tilemap</sub><br>
+Create a tilemap class for rendering the environment.
+
+<sub><code>MUST</code> Collisions</sub><br>
+Create the collision framework for tilemaps and entities.
+
+<sub><code>MUST</code> Enemies</sub><br>
+Create a generic enemy class with health, damage, and a sprite.
+
+<sub><code>MUST</code> Inventory</sub><br>
+Create an inventory for the player controller along with a GUI.
+
+<sub><code>MUST</code> Mining</sub><br>
+Add ores which the player can mine by bumping into them.<br>
+*(The ore will be added into their inventory)*
+
+<sub><code>MUST</code> Floor Generation</sub><br>
+Create a procedural floor generator that creates interesting caves & dungeons.
+
+<sub><code>MUST</code> User Interface</sub><br>
+Create a main menu & pause menu for the game.
+
+<sub><code>SHOULD</code> Shops</sub><br>
+Create random shops inbetween floors where you can sell your ores for items.
+
+<sub><code>SHOULD</code> More Ores</sub><br>
+Add more unique ores to the game, that can be used in the shops.
+
+<br>
+
+<sub><code>COULD</code> Multiplayer</sub><br>
+Add the option to play together with friends over LAN.<br>
+*(The way turns will work here is still vague)*
+
+<sub><code>COULD</code> More Floors</sub><br>
+Add more floors with different visuals, ores, and enemies.
 
 <br>
 
@@ -65,3 +119,5 @@ Old school 8-bit rogue-like art style <sub>(Examples below)</sub>
 - Visual Studio C++
 - BUAS Template Engine
 - Aseprite
+
+<div class="page"/>
