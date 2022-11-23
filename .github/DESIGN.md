@@ -40,16 +40,62 @@ Old school 8-bit rogue-like art style <sub>(Examples below)</sub>
 
 ## MoSCoW
 
-| Must              | Should       | Could       | Won't              |
-| ----------------- | ------------ | ----------- | ------------------ |
-| Player Controller | Shops        | Multiplayer | Online Multiplayer |
-| Tilemap           | More Ores    | More Floors |                    |
-| Collisions        |              |             |                    |
-| Enemies           |              |             |                    |
-| Inventory         |              |             |                    |
-| Mining            |              |             |                    |
-| Floor Generation  |              |             |                    |
-| User Interface    |              |             |                    |
+| Must              | Should           | Could       | Won't              |
+| ----------------- | ---------------- | ----------- | ------------------ |
+| Player Controller | Shops            | More Floors | Online Multiplayer |
+| Tilemap           | More Ores        |             |                    |
+| Collisions        | Floor Generation |             |                    |
+| Enemies           |                  |             |                    |
+| Inventory         |                  |             |                    |
+| Mining            |                  |             |                    |
+| User Interface    |                  |             |                    |
+
+<br>
+
+## MDA
+
+### Mechanics & Dynamics
+
+<sub>Walking</sub><br>
+The player can walk in the four cardinal directions.
+*(Using WASD)*<br>
+<sup><code>Dynamic</code></sup> Simple movement options within a complex environment.
+
+<sub>Walls</sub><br>
+The player cannot move through walls.<br>
+<sup><code>Dynamic</code></sup> Indicated by bumbing off the wall when attempting to walk into it.
+
+<sub>Fog of War</sub><br>
+The player at first cannot see the whole level, it becomes visible as they explore.<br>
+<sup><code>Dynamic</code></sup> Adds more discovery and risk vs reward to the exploration.
+
+<sub>Attacking</sub><br>
+The player can attack an enemy by walking into them. *(Using WASD)*<br>
+Attacking an enemy will cause them to bounce away from you.<br>
+<sup><code>Dynamic</code></sup> Using the same controls for attacking.
+
+<sub>Mining</sub><br>
+The player can mine ores by walking into them.
+*(Using WASD)*<br>
+<sup><code>Dynamic</code></sup> Using the same controls for mining.
+
+<sub>Enemies</sub><br>
+Once enemies see the player they move towards them and try to attack them.<br>
+*(Enemies attack after being attacked, e.g. killing an enemy in one hit means you don't take damage)*<br>
+<sup><code>Dynamic</code></sup> This attack delay means that timing is key when trying to avoid damage.
+
+<sub>Pickups</sub><br>
+After being mined ores can be picked up by walking on top of them.<br>
+<sup><code>Dynamic</code></sup> Showing a clear indicator that the ore has been picked up.
+
+<sub>Shops</sub><br>
+The player can buys items from shops using the ores they've mined.<br>
+*(Shops appear inbetween floors inside of a safe area)*<br>
+<sup><code>Dynamic</code></sup> The player can decide how to spend their resources or save them.
+
+### Aesthetics
+
+``Challenge`` & ``Discovery``
 
 <br>
 
@@ -75,9 +121,6 @@ Create an inventory for the player controller along with a GUI.
 Add ores which the player can mine by bumping into them.<br>
 *(The ore will be added into their inventory)*
 
-<sub><code>MUST</code> Floor Generation</sub><br>
-Create a procedural floor generator that creates interesting caves & dungeons.
-
 <sub><code>MUST</code> User Interface</sub><br>
 Create a main menu & pause menu for the game.
 
@@ -87,30 +130,11 @@ Create random shops inbetween floors where you can sell your ores for items.
 <sub><code>SHOULD</code> More Ores</sub><br>
 Add more unique ores to the game, that can be used in the shops.
 
-<br>
-
-<sub><code>COULD</code> Multiplayer</sub><br>
-Add the option to play together with friends over LAN.<br>
-*(The way turns will work here is still vague)*
+<sub><code>SHOULD</code> Floor Generation</sub><br>
+Create a procedural floor generator that creates interesting caves & dungeons.
 
 <sub><code>COULD</code> More Floors</sub><br>
 Add more floors with different visuals, ores, and enemies.
-
-<br>
-
-## MDA
-
-### Mechanics
-
-...
-
-### Dynamics
-
-...
-
-### Aesthetics
-
-...
 
 <br>
 
