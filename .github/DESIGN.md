@@ -56,7 +56,14 @@ Old school 8-bit rogue-like art style <sub>(Examples below)</sub>
 
 ### Mechanics & Dynamics
 
-<sub>Walking</sub><br>
+<code>'n = n turn(s)</code>
+
+<sub>Turns</sub><br>
+The game world uses turns, each turn ``ONE`` action can be performed.<br>
+*(Turns are advanced by, walking, attacking, mining, or using an item)*<br>
+<sup><code>Dynamic</code></sup> Adds a strategic element to the game.
+
+<sub>Walking <code>'1</code></sub><br>
 The player can walk in the four cardinal directions.
 *(Using WASD)*<br>
 <sup><code>Dynamic</code></sup> Simple movement options within a complex environment.
@@ -69,12 +76,12 @@ The player cannot move through walls.<br>
 The player at first cannot see the whole level, it becomes visible as they explore.<br>
 <sup><code>Dynamic</code></sup> Adds more discovery and risk vs reward to the exploration.
 
-<sub>Attacking</sub><br>
+<sub>Attacking <code>'1</code></sub><br>
 The player can attack an enemy by walking into them. *(Using WASD)*<br>
 Attacking an enemy will cause them to bounce away from you.<br>
 <sup><code>Dynamic</code></sup> Using the same controls for attacking.
 
-<sub>Mining</sub><br>
+<sub>Mining <code>'1</code></sub><br>
 The player can mine ores by walking into them.
 *(Using WASD)*<br>
 <sup><code>Dynamic</code></sup> Using the same controls for mining.
@@ -82,6 +89,7 @@ The player can mine ores by walking into them.
 <sub>Enemies</sub><br>
 Once enemies see the player they move towards them and try to attack them.<br>
 *(Enemies attack after being attacked, e.g. killing an enemy in one hit means you don't take damage)*<br>
+*(Enemies move after the player, so when moving into the same location the player moves)*<br>
 <sup><code>Dynamic</code></sup> This attack delay means that timing is key when trying to avoid damage.
 
 <sub>Pickups</sub><br>
