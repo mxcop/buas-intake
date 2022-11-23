@@ -56,7 +56,10 @@ Old school 8-bit rogue-like art style <sub>(Examples below)</sub>
 
 ### Mechanics & Dynamics
 
-<code>'n = n turn(s)</code>
+> **Note**:<br>
+> <sub>Mechanic <code>'t</code></sub><br>
+> Description...<br>
+> <sup><code>Dynamic</code></sup> Description...
 
 <sub>Turns</sub><br>
 The game world uses turns, each turn ``ONE`` action can be performed.<br>
