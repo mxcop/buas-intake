@@ -38,14 +38,15 @@ Create a procedural floor generator that creates interesting caves & dungeons.
 Add more floors with different visuals, ores, and enemies.
 
 <br>
+<div class="page"/>
 
 ## Planning
 
-| Week                         | Tasks                                 |
-| ---------------------------- | ------------------------------------- |
-| PoC    <sup>28/11</sup>      | Player Controller, Tilemap            |
-| Week 1 <sup>05/12</sup>      | Collisions                            |
-| Week 2 <sup>12/12</sup>      | Enemies, Inventory                    |
-| Week 3 <sup>19/12</sup>      | Mining, User Interface                |
-| Week 4 <sup>26/12</sup>      | Shops, More Ores                      |
-| Week 5 <sup>02/01</sup>      | Floor Generation, *More Floors        |
+| Week                         | Goals                                 | Time Estimate           |
+| ---------------------------- | ------------------------------------- | ----------------------- |
+| PoC    <sup>28/11</sup>      | Player Controller, Tilemap            | 14 h                    |
+| Week 1 <sup>05/12</sup>      | Collisions                            | 8 h                     |
+| Week 2 <sup>12/12</sup>      | Enemies, Inventory                    | 12 h                    |
+| Week 3 <sup>19/12</sup>      | Mining, User Interface                | 12 h                    |
+| Week 4 <sup>26/12</sup>      | Shops, More Ores                      | 10 h                    |
+| Week 5 <sup>02/01</sup>      | Floor Generation, *More Floors        | 20 h                    |

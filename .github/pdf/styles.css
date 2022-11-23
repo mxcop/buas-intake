@@ -1,23 +1,23 @@
 :root {
-    color: #cebe98;
-}
-
-body {
-    background-color: #202020;
-    padding: 32px;
+    color: #202020;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
-    /* color: #e78a4e; */
+    border-color: #aaa;
+}
+
+h4 {
+    padding: 0;
+    margin: 12px 0 0 0;
 }
 
 code {
     font-family: 'Cascadia Code', monospace;
     font-weight: 500;
-    background-color: #131414;
-    color: #928374 !important;
+    background-color: #ccc;
+    color: #444 !important;
 
     padding: 3px 5px;
     border-radius: 6px;
@@ -29,5 +29,5 @@ img {
 }
 
 table, th, td {
-    border: 1px solid #fff1;
+    border: 1px solid #0003;
 }

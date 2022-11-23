@@ -57,49 +57,51 @@ Old school 8-bit rogue-like art style <sub>(Examples below)</sub>
 ### Mechanics & Dynamics
 
 > **Note**:<br>
-> <sub>\<name\> <code>\<turns\></code></sub><br>
-> \<description\><br>
-> <sup><code>Dynamic</code></sup> \<description\>
+> <h4>{ name } <sup><code>{ turns }</code></sup></h4>
+> { description }<br>
+> <sup><code>Dynamic</code></sup> { description }
 
-<sub>Turns</sub><br>
+<br>
+
+<h4>Turns</h4>
 The game world uses turns, each turn ``ONE`` action can be performed.<br>
 *(Turns are advanced by, walking, attacking, mining, or using an item)*<br>
 <sup><code>Dynamic</code></sup> Adds a strategic element to the game.
 
-<sub>Walking <code>'1</code></sub><br>
+<h4>Walking <sup><code>'1</code></sup></h4>
 The player can walk in the four cardinal directions.
 *(Using WASD)*<br>
 <sup><code>Dynamic</code></sup> Simple movement options within a complex environment.
 
-<sub>Walls</sub><br>
+<h4>Walls</h4>
 The player cannot move through walls.<br>
 <sup><code>Dynamic</code></sup> Indicated by bumbing off the wall when attempting to walk into it.
 
-<sub>Fog of War</sub><br>
+<h4>Fog of War</h4>
 The player at first cannot see the whole level, it becomes visible as they explore.<br>
 <sup><code>Dynamic</code></sup> Adds more discovery and risk vs reward to the exploration.
 
-<sub>Attacking <code>'1</code></sub><br>
+<h4>Attacking <sup><code>'1</code></sup></h4>
 The player can attack an enemy by walking into them. *(Using WASD)*<br>
 Attacking an enemy will cause them to bounce away from you.<br>
 <sup><code>Dynamic</code></sup> Using the same controls for attacking.
 
-<sub>Mining <code>'1</code></sub><br>
+<h4>Mining <sup><code>'1</code></sup></h4>
 The player can mine ores by walking into them.
 *(Using WASD)*<br>
 <sup><code>Dynamic</code></sup> Using the same controls for mining.
 
-<sub>Enemies</sub><br>
+<h4>Enemies</h4>
 Once enemies see the player they move towards them and try to attack them.<br>
 *(Enemies attack after being attacked, e.g. killing an enemy in one hit means you don't take damage)*<br>
 *(Enemies move after the player, so when moving into the same location the player moves)*<br>
 <sup><code>Dynamic</code></sup> This attack delay means that timing is key when trying to avoid damage.
 
-<sub>Pickups</sub><br>
+<h4>Pickups</h4>
 After being mined ores can be picked up by walking on top of them.<br>
 <sup><code>Dynamic</code></sup> Showing a clear indicator that the ore has been picked up.
 
-<sub>Shops</sub><br>
+<h4>Shops</h4>
 The player can buys items from shops using the ores they've mined.<br>
 *(Shops appear inbetween floors inside of a safe area)*<br>
 <sup><code>Dynamic</code></sup> The player can decide how to spend their resources or save them.
