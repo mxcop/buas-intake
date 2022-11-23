@@ -41,10 +41,11 @@ Add more floors with different visuals, ores, and enemies.
 
 ## Planning
 
-| Week              | Tasks                                               |
-| ----------------- | --------------------------------------------------- |
-| Week 1            | Player Controller, Tilemap                          |
-| Week 2            | Collisions                                          |
-| Week 3            | Enemies, Inventory                                  |
-| Week 4            | Mining, User Interface                              |
-| Week 5            | Shops, More Ores                                    |
+| Week                         | Tasks                                 |
+| ---------------------------- | ------------------------------------- |
+| PoC    <sup>28/11</sup>      | Player Controller, Tilemap            |
+| Week 1 <sup>05/12</sup>      | Collisions                            |
+| Week 2 <sup>12/12</sup>      | Enemies, Inventory                    |
+| Week 3 <sup>19/12</sup>      | Mining, User Interface                |
+| Week 4 <sup>26/12</sup>      | Shops, More Ores                      |
+| Week 5 <sup>02/01</sup>      | Floor Generation, *More Floors        |
