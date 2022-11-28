@@ -305,6 +305,7 @@ int main( int argc, char **argv )
         return 1;
 #endif
 	printf( "application started.\n" );
+	//SDL_SetHintWithPriority(SDL_HINT_RENDER_SCALE_QUALITY, "nearest", SDL_HintPriority::SDL_HINT_OVERRIDE);
 	SDL_Init( SDL_INIT_VIDEO );
 #ifdef ADVANCEDGL
 #ifdef FULLSCREEN
@@ -326,6 +327,7 @@ int main( int argc, char **argv )
 	surface = new Surface(BufferWidth, BufferHeight);
 	surface->Clear( 0 );
 	SDL_Renderer* renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
+	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
 	SDL_Texture* frameBuffer = SDL_CreateTexture( renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, BufferWidth, BufferHeight);
 #endif
 	int exitapp = 0;
