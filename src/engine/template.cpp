@@ -319,10 +319,10 @@ int main( int argc, char **argv )
 #ifdef FULLSCREEN
 	window = SDL_CreateWindow(TemplateVersion, 100, 100, ScreenWidth, ScreenHeight, SDL_WINDOW_FULLSCREEN );
 #else
-	window = SDL_CreateWindow(TemplateVersion, 100, 100, ScreenWidth, ScreenHeight, SDL_WINDOW_SHOWN );
+	window = SDL_CreateWindow(TemplateVersion, 100, 100, ScreenWidth * ScreenScalingFactor, ScreenHeight * ScreenScalingFactor, SDL_WINDOW_SHOWN );
 #endif
-	int BufferWidth = ScreenWidth / ScreenScalingFactor;
-	int BufferHeight = ScreenHeight / ScreenScalingFactor;
+	int BufferWidth = ScreenWidth;
+	int BufferHeight = ScreenHeight;
 	surface = new Surface(BufferWidth, BufferHeight);
 	surface->Clear( 0 );
 	SDL_Renderer* renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );

@@ -6,7 +6,12 @@
 
 namespace Tmpl8 {
 
-	constexpr int ScreenScalingFactor = 3;
+	constexpr int ScreenScalingFactor = 4;
+
+	constexpr int TilemapWidth = 16;
+	constexpr int TilemapHeight = 16;
+
+	constexpr int TileSize = 8;
 
 	class Surface;
 

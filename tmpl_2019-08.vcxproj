@@ -226,6 +226,8 @@
   <ItemGroup>
     <ClCompile Include="src\engine\camera.cpp" />
     <ClCompile Include="src\game.cpp" />
+    <ClCompile Include="src\game\player.cpp" />
+    <ClCompile Include="src\graphics\tilemap.cpp" />
     <ClCompile Include="src\physics\bone.cpp" />
     <ClCompile Include="src\engine\surface.cpp" />
     <ClCompile Include="src\engine\template.cpp" />
@@ -234,6 +236,9 @@
   <ItemGroup>
     <ClInclude Include="src\engine\camera.h" />
     <ClInclude Include="src\game.h" />
+    <ClInclude Include="src\game\player.h" />
+    <ClInclude Include="src\graphics\tilemap.h" />
+    <ClInclude Include="src\graphics\map.h" />
     <ClInclude Include="src\physics\bone.h" />
     <ClInclude Include="src\utils\float2.hpp" />
     <ClInclude Include="src\utils.h" />

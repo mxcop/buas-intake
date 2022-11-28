@@ -11,6 +11,8 @@
     <ClCompile Include="src\physics\bone.cpp" />
     <ClCompile Include="src\utils\math\mat3x3.cpp" />
     <ClCompile Include="src\engine\camera.cpp" />
+    <ClCompile Include="src\game\player.cpp" />
+    <ClCompile Include="src\graphics\tilemap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game.h" />
@@ -26,6 +28,9 @@
     <ClInclude Include="src\utils.h" />
     <ClInclude Include="src\utils\math\mat3x3.h" />
     <ClInclude Include="src\engine\camera.h" />
+    <ClInclude Include="src\game\player.h" />
+    <ClInclude Include="src\graphics\tilemap.h" />
+    <ClInclude Include="src\graphics\map.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="template code">
