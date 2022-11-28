@@ -44,9 +44,10 @@ Add more floors with different visuals, ores, and enemies.
 
 | Week                         | Goals                                 | Time Estimate           |
 | ---------------------------- | ------------------------------------- | ----------------------- |
-| PoC    <sup>28/11</sup>      | Player Controller, Tilemap            | 14 h                    |
-| Week 1 <sup>05/12</sup>      | Collisions                            | 8 h                     |
-| Week 2 <sup>12/12</sup>      | Enemies, Inventory                    | 12 h                    |
-| Week 3 <sup>19/12</sup>      | Mining, User Interface                | 12 h                    |
-| Week 4 <sup>26/12</sup>      | Shops, More Ores                      | 10 h                    |
-| Week 5 <sup>02/01</sup>      | Floor Generation, *More Floors        | 20 h                    |
+| PoC      <sup>28/11</sup>    | Player Controller, Tilemap            | 14 h                    |
+| Week 1   <sup>05/12</sup>    | Collisions                            | 8 h                     |
+| Week 2   <sup>12/12</sup>    | Enemies, Inventory                    | 12 h                    |
+| Week 3   <sup>19/12</sup>    | Mining, User Interface                | 12 h                    |
+| Week 4   <sup>26/12</sup>    | Shops, More Ores                      | 10 h                    |
+| Week 5   <sup>02/01</sup>    | Floor Generation, *More Floors        | 20 h                    |
+| Deadline <sup>10/01</sup>    | Submit the Game                       | N/A                     |
