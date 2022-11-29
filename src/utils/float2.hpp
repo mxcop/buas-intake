@@ -1,5 +1,6 @@
 #pragma once
 #include <cmath>
+#include "int2.hpp"
 
 struct float2 {
 	float x;
@@ -16,6 +17,11 @@ struct float2 {
 
 	float2 operator*(float m) const {
 		return float2(x * m, y * m);
+	}
+
+	void operator=(int2& o) {
+		x = o.x;
+		y = o.y;
 	}
 
 	void set(float x, float y) {

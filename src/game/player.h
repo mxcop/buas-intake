@@ -27,10 +27,18 @@ public:
 
 private:
 	Tmpl8::Sprite* sprite = nullptr;
-	int2 tile_pos = int2(0, 0);
-	int2 pixel_offset = int2(0, 0);
-	bool face_left = false;
 
-	/// <summary>More flexible move function.</summary>
+	int2 tile_pos = int2(0, 0);
+	float2 subpixel_offset = float2(0, 0);
+
+	bool face_left = false;
+	/// Animation function pointer.
+	void (Player::*anim)() = &Player::anim_move;
+
+	/// More flexible move function.
 	void mov(const Tilemap& map, const int2 dir);
+
+	// Animation functions :
+	void anim_move();
+	void anim_bump();
 };
