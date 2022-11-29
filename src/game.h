@@ -29,9 +29,10 @@ namespace Tmpl8 {
 			void KeyUp( int key ) { /* implement if you want to handle keys */ }
 			void KeyDown(int key);
 		private:
-			Surface* screen;
-			SDL_Window* window;
-			int2 mouse;
-			float2 f_mouse;
+			Surface* screen = nullptr;
+			SDL_Window* window = nullptr;
+			unsigned long frame = 0u;
+			int2 mouse = int2();
+			float2 f_mouse = float2();
 	};
 }; // namespace Tmpl8

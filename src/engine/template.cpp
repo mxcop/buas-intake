@@ -320,10 +320,8 @@ int main( int argc, char **argv )
 #ifdef FULLSCREEN
 	window = SDL_CreateWindow(TemplateVersion, 100, 100, ScreenWidth, ScreenHeight, SDL_WINDOW_FULLSCREEN );
 #else
-	window = SDL_CreateWindow(TemplateVersion, 100, 100, ScreenWidth * ScreenScalingFactor, ScreenHeight * ScreenScalingFactor, SDL_WINDOW_SHOWN );
+	window = SDL_CreateWindow(TemplateVersion, 100, 100, ScreenWidth, ScreenHeight, SDL_WINDOW_SHOWN );
 #endif
-	int BufferWidth = ScreenWidth;
-	int BufferHeight = ScreenHeight;
 	surface = new Surface(BufferWidth, BufferHeight);
 	surface->Clear( 0 );
 	SDL_Renderer* renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
@@ -341,9 +339,9 @@ int main( int argc, char **argv )
 		swap();
 		surface->SetBuffer( (Pixel*)framedata );
 	#else
-		void* target = 0;
-		int pitch;
-		SDL_LockTexture( frameBuffer, NULL, &target, &pitch );
+		//void* target = 0;
+		//int pitch;
+		/*SDL_LockTexture( frameBuffer, NULL, &target, &pitch );
 		if (pitch == (surface->GetWidth() * 4))
 		{
 			memcpy( target, surface->GetBuffer(), BufferWidth * BufferHeight * 4 );
@@ -357,9 +355,15 @@ int main( int argc, char **argv )
 				t += pitch;
 			}
 		}
-		SDL_UnlockTexture( frameBuffer );
-		SDL_RenderCopy( renderer, frameBuffer, NULL, NULL );
-		SDL_RenderPresent( renderer );
+		SDL_UnlockTexture( frameBuffer );*/
+
+		SDL_UpdateTexture(frameBuffer, NULL, surface->GetBuffer(), BufferWidth * 4);
+		SDL_RenderClear(renderer);
+		SDL_RenderCopy(renderer, frameBuffer, NULL, NULL);
+		SDL_RenderPresent(renderer);
+
+		/*SDL_RenderCopy( renderer, frameBuffer, NULL, NULL );
+		SDL_RenderPresent( renderer );*/
 	#endif
 		if (firstframe)
 		{

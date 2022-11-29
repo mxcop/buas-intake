@@ -2,34 +2,37 @@
 #include "engine/surface.h"
 #include "utils.h"
 #include "physics/bone.h"
+#include <memory>
 #include <cstdio> // printf
 #include <string>
 #include <sstream>
 #include "game/player.h"
 #include "graphics/tilemap.h"
 #include "utils/files/csv.cpp"
+#include "engine/template.h"
+
+// The game is inspired by Pork-like & Deep Rock Galactic
+// https://krystman.itch.io/porklike
+// https://store.steampowered.com/app/548430/Deep_Rock_Galactic/
 
 namespace Tmpl8
 {
 	static Sprite s_tileset(new Surface("assets/tiles.png"), 6);
 	static Sprite s_player(new Surface("assets/player.png"), 1);
 
-	static Player* player;
-	static Tilemap* tilemap;
+	static Player* player = nullptr;
+	static Tilemap* tilemap = nullptr;
 
 	// -----------------------------------------------------------
 	// Initialize the application
 	// -----------------------------------------------------------
 	void Game::Init(SDL_Window* win)
 	{
-		f_mouse = float2();
-		mouse = int2();
-
 		window = win;
-		player = new Player(int2(1, 1), &s_player);
-		tilemap = new Tilemap(16, 16, ldcsv("assets/maps/test.csv"), &s_tileset);
 
-		view = new Camera();
+		// Create the player and the tilemap:
+		player = new Player(int2(1, 1), &s_player);
+		tilemap = new Tilemap(16, 16, ldcsv("assets/maps/test.csv"), s_tileset);
 	}
 	
 	// -----------------------------------------------------------
@@ -59,7 +62,11 @@ namespace Tmpl8
 		tilemap->Draw(screen, int2(0, 0));
 
 		// Draw the player character.
+		player->Update(frame);
 		player->Draw(screen);
+
+		// Increment the frame counter.
+		frame++;
 	}
 
 	void Game::KeyDown(int key) 
@@ -67,16 +74,19 @@ namespace Tmpl8
 		//printf("key pressed : %d.\n", key);
 
 		/* Player cardinal movement */
-		if (key == 79 || key == 7 ) player->Move(tilemap, Direction::RIGHT);
-		if (key == 80 || key == 4 ) player->Move(tilemap, Direction::LEFT);
-		if (key == 81 || key == 22) player->Move(tilemap, Direction::DOWN);
-		if (key == 82 || key == 26) player->Move(tilemap, Direction::UP);
+		if (key == 79 || key == 7 ) player->Move(*tilemap, Direction::RIGHT);
+		if (key == 80 || key == 4 ) player->Move(*tilemap, Direction::LEFT);
+		if (key == 81 || key == 22) player->Move(*tilemap, Direction::DOWN);
+		if (key == 82 || key == 26) player->Move(*tilemap, Direction::UP);
 	}
 
 	void Game::MouseMove(int dx, int dy) 
 	{
-		f_mouse.x += dx / static_cast<float>(ScreenScalingFactor);
-		f_mouse.y += dy / static_cast<float>(ScreenScalingFactor);
+		float sx = static_cast<float>(ScreenWidth) / BufferWidth;
+		float sy = static_cast<float>(ScreenHeight) / BufferHeight;
+
+		f_mouse.x += dx / sx;
+		f_mouse.y += dy / sy;
 
 		mouse.x = floor(f_mouse.x);
 		mouse.y = floor(f_mouse.y);
