@@ -16,6 +16,11 @@ void Tilemap::Draw(Tmpl8::Surface* screen, const int2 pos) const
 	}
 }
 
+bool Tilemap::Bounds(const int2 pos) const
+{
+	return pos.x >= 0 && pos.y >= 0 && pos.x < width && pos.y < height;
+}
+
 Tilemap::~Tilemap()
 {
 	delete[] values;

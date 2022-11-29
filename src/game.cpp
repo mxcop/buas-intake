@@ -85,10 +85,10 @@ namespace Tmpl8
 		//printf("key pressed : %d.\n", key);
 
 		/* Player cardinal movement */
-		if (key == 79 || key == 7 ) player->Move(Direction::RIGHT);
-		if (key == 80 || key == 4 ) player->Move(Direction::LEFT);
-		if (key == 81 || key == 22) player->Move(Direction::DOWN);
-		if (key == 82 || key == 26) player->Move(Direction::UP);
+		if (key == 79 || key == 7 ) player->Move(tilemap, Direction::RIGHT);
+		if (key == 80 || key == 4 ) player->Move(tilemap, Direction::LEFT);
+		if (key == 81 || key == 22) player->Move(tilemap, Direction::DOWN);
+		if (key == 82 || key == 26) player->Move(tilemap, Direction::UP);
 	}
 
 	void Game::MouseMove(int dx, int dy) 

@@ -16,6 +16,9 @@ public:
 	/// </summary>
 	void Draw(Tmpl8::Surface* screen, const int2 pos) const;
 
+	/// <returns>True if the given position is within bounds of the tilemap.</returns>
+	bool Bounds(const int2 pos) const;
+
 	virtual ~Tilemap();
 
 private:
