@@ -27,7 +27,7 @@ namespace Tmpl8
 
 		window = win;
 		player = new Player(int2(1, 1), &s_player);
-		tilemap = new Tilemap(16, 16, ldcsv("test-map.csv"), &s_tileset);
+		tilemap = new Tilemap(16, 16, ldcsv("assets/maps/test.csv"), &s_tileset);
 
 		view = new Camera();
 	}
