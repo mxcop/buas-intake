@@ -8,7 +8,7 @@ void Player::Draw(Tmpl8::Surface* screen)
 
 bool isOpen(const Tilemap* map, const int2 pos) {
 	// Check if the position is walkable & within bounds.
-	return map->Bounds(pos) && map->Get(pos.x, pos.y) == 0;
+	return map->Bounds(pos) && map->Get(pos.x, pos.y) <= 1;
 }
 
 void Player::Move(const Tilemap* map, const Direction dir)
