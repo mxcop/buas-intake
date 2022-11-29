@@ -87,20 +87,6 @@ inline Map<T>::Map(const uint width, const uint height, const std::vector<T> def
 	{
 		*(values + i) = def[i];
 	}
-
-	/*auto first = def.begin();
-	auto last = def.end();
-
-	size_t i = 0;
-	while (first != last) {
-		*values = *first;
-		++values; ++first; ++i;
-	}
-
-	for (i; i > 0; i--)
-	{
-		--values;
-	}*/
 }
 
 template<typename T>

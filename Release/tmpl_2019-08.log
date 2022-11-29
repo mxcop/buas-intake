@@ -1,0 +1,28 @@
+﻿  camera.cpp
+  game.cpp
+D:\VSProjects 2022\buas-intake\src\game.cpp(81,18): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\VSProjects 2022\buas-intake\src\game.cpp(82,18): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  player.cpp
+  tilemap.cpp
+D:\VSProjects 2022\buas-intake\src\graphics\tilemap.cpp(14,51): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\VSProjects 2022\buas-intake\src\graphics\tilemap.cpp(21,43): warning C4018: '<': signed/unsigned mismatch
+D:\VSProjects 2022\buas-intake\src\graphics\tilemap.cpp(21,60): warning C4018: '<': signed/unsigned mismatch
+  bone.cpp
+  surface.cpp
+D:\VSProjects 2022\buas-intake\src\engine\surface.cpp(514,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\VSProjects 2022\buas-intake\src\engine\surface.cpp(514,16): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\VSProjects 2022\buas-intake\src\engine\surface.cpp(517,16): warning C4244: 'initializing': conversion from 'float' to 'size_t', possible loss of data
+D:\VSProjects 2022\buas-intake\src\engine\surface.cpp(522,17): warning C4244: 'initializing': conversion from 'float' to 'size_t', possible loss of data
+D:\VSProjects 2022\buas-intake\src\engine\surface.cpp(528,52): warning C4244: 'argument': conversion from 'size_t' to 'float', possible loss of data
+D:\VSProjects 2022\buas-intake\src\engine\surface.cpp(528,49): warning C4244: 'argument': conversion from 'size_t' to 'float', possible loss of data
+  template.cpp
+  mat3x3.cpp
+D:\VSProjects 2022\buas-intake\src\utils\math\mat3x3.cpp(45,13): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\VSProjects 2022\buas-intake\src\utils\math\mat3x3.cpp(45,32): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\VSProjects 2022\buas-intake\src\utils\math\mat3x3.cpp(46,13): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\VSProjects 2022\buas-intake\src\utils\math\mat3x3.cpp(46,32): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\VSProjects 2022\buas-intake\src\utils\math\mat3x3.cpp(47,13): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\VSProjects 2022\buas-intake\src\utils\math\mat3x3.cpp(47,32): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\VSProjects 2022\buas-intake\src\utils\math\mat3x3.cpp(48,4): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+  tmpl_2019-08.vcxproj -> D:\VSProjects 2022\buas-intake\tmpl_2019-08_x64.exe
