@@ -75,6 +75,7 @@ The player can walk in the four cardinal directions.
 
 <h4>Walls</h4>
 The player cannot move through walls.<br>
+Attacking an enemy pushing them into a wall will deal extra damage.<br>
 <sup><code>Dynamic</code></sup> Indicated by bumbing off the wall when attempting to walk into it.
 
 <h4>Fog of War</h4>
