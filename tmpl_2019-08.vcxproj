@@ -240,6 +240,7 @@
     <ClInclude Include="src\graphics\tilemap.h" />
     <ClInclude Include="src\graphics\map.h" />
     <ClInclude Include="src\physics\bone.h" />
+    <ClInclude Include="src\utils\files\csv.cpp" />
     <ClInclude Include="src\utils\float2.hpp" />
     <ClInclude Include="src\utils.h" />
     <ClInclude Include="src\utils\int2.hpp" />

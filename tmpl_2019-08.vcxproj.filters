@@ -31,6 +31,7 @@
     <ClInclude Include="src\game\player.h" />
     <ClInclude Include="src\graphics\tilemap.h" />
     <ClInclude Include="src\graphics\map.h" />
+    <ClInclude Include="src\utils\files\csv.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="template code">

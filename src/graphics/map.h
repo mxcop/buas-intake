@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdio> // printf
+#include <vector>
 
 typedef unsigned int uint;
 
@@ -10,6 +11,7 @@ public:
 	Map(const uint width, const uint height);
 	Map(const uint width, const uint height, const T def);
 	Map(const uint width, const uint height, const std::initializer_list<T> def);
+	Map(const uint width, const uint height, const std::vector<T> def);
 
 	T& operator() (const uint x, const uint y) const;
 
@@ -72,6 +74,33 @@ inline Map<T>::Map(const uint width, const uint height, const std::initializer_l
 	{
 		--values;
 	}
+}
+
+template<typename T>
+inline Map<T>::Map(const uint width, const uint height, const std::vector<T> def)
+	: width(width), height(height)
+{
+	// Initialize the values of the map.
+	values = new T[width * height];
+
+	for (size_t i = 0; i < def.size(); i++)
+	{
+		*(values + i) = def[i];
+	}
+
+	/*auto first = def.begin();
+	auto last = def.end();
+
+	size_t i = 0;
+	while (first != last) {
+		*values = *first;
+		++values; ++first; ++i;
+	}
+
+	for (i; i > 0; i--)
+	{
+		--values;
+	}*/
 }
 
 template<typename T>
