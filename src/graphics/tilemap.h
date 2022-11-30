@@ -23,6 +23,9 @@ public:
 	bool Bounds(const int2 pos) const;
 	bool Bounds(const u16 x, const u16 y) const;
 
+	/// <returns>True if the given position is within walkable.</returns>
+	bool IsWalkable(const u16 x, const u16 y) const;
+
 	virtual ~Tilemap();
 
 private:

@@ -4,7 +4,7 @@
 
 class Enemy : public Entity {
 public:
-	Enemy(Tmpl8::Sprite* sprite, u16 x, u16 y) 
+	Enemy(Tmpl8::Sprite* sprite, u16 x, u16 y)
 		: Entity(sprite, x, y) { hitpoints = 2; }
 
 	/// <summary>
@@ -12,4 +12,6 @@ public:
 	/// </summary>
 	/// <param name="frame"></param>
 	void Update(unsigned long frame);
+
+	u16 id = NULL;
 };

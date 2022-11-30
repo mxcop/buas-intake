@@ -2,5 +2,5 @@
 
 void Enemy::Update(unsigned long frame)
 {
-	SetFrame(frame % 4);
+	SetFrame(frame % 16 / 4);
 }

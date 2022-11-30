@@ -1,9 +1,10 @@
 #pragma once
 
-#include <cstdint>
+#include <tuple>
 #include "../engine/surface.h"
 #include "../utils/types.h"
 #include "../graphics/tilemap.h"
+#include "../graphics/entitymap.h"
 
 /// <summary>
 /// Base class for all entities in the game.
@@ -11,6 +12,8 @@
 class Entity {
 public:
 	Entity(Tmpl8::Sprite* sprite, u16 x, u16 y);
+
+	std::tuple<u16, u16> GetPosition() const { return std::make_tuple(x, y); }
 
 	/// <summary>
 	/// Draw the entity to the screen.
@@ -27,6 +30,8 @@ public:
 private:
 	/// The sprite is not owned by the entity.
 	Tmpl8::Sprite* spr = nullptr;
+	/// The entity map is not owned by the entity.
+	Entitymap* map = nullptr;
 
 protected:
 	/// Set the animation frame for the entities sprite.

@@ -234,6 +234,7 @@
     <ClCompile Include="src\engine\surface.cpp" />
     <ClCompile Include="src\engine\template.cpp" />
     <ClCompile Include="src\utils\math\mat3x3.cpp" />
+    <ClCompile Include="src\utils\struct\arena.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\engine\camera.h" />
@@ -241,6 +242,7 @@
     <ClInclude Include="src\game\enemy.h" />
     <ClInclude Include="src\game\entity.h" />
     <ClInclude Include="src\game\player.h" />
+    <ClInclude Include="src\graphics\entitymap.h" />
     <ClInclude Include="src\graphics\tilemap.h" />
     <ClInclude Include="src\graphics\map.h" />
     <ClInclude Include="src\physics\bone.h" />
@@ -251,6 +253,7 @@
     <ClInclude Include="src\engine\surface.h" />
     <ClInclude Include="src\engine\template.h" />
     <ClInclude Include="src\utils\math\mat3x3.h" />
+    <ClInclude Include="src\utils\struct\arena.h" />
     <ClInclude Include="src\utils\types.h" />
   </ItemGroup>
   <ItemGroup>

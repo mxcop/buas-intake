@@ -17,20 +17,11 @@ void Entity::Draw(Tmpl8::Surface* screen) const
 	true, flip);
 }
 
-/// <summary>
-/// Check if a position on the tilemap is walkable.
-/// </summary>
-bool isWalkable(const Tilemap& map, const u16 x, const u16 y) {
-	// Check if the position is walkable & within bounds.
-	return map.Bounds(x, y)
-		&& map.Get(x, y) <= 1;
-}
-
 bool Entity::Move(const Tilemap& map, const i16 dx, const i16 dy)
 {
 	bool moved = false;
 
-	if (isWalkable(map, x + dx, y + dy)) {
+	if (map.IsWalkable(x + dx, y + dy)) {
 		x += dx; y += dy;
 		ox = dx * -8;
 		oy = dy * -8;

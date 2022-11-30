@@ -26,6 +26,11 @@ bool Tilemap::Bounds(const u16 x, const u16 y) const
 	return x < width && y < height;
 }
 
+bool Tilemap::IsWalkable(const u16 x, const u16 y) const 
+{
+	return Bounds(x, y) && Get(x, y) <= 1;
+}
+
 Tilemap::~Tilemap()
 {
 	delete[] values;

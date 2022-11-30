@@ -15,6 +15,7 @@
     <ClCompile Include="src\graphics\tilemap.cpp" />
     <ClCompile Include="src\game\enemy.cpp" />
     <ClCompile Include="src\game\entity.cpp" />
+    <ClCompile Include="src\utils\struct\arena.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game.h" />
@@ -37,6 +38,8 @@
     <ClInclude Include="src\game\enemy.h" />
     <ClInclude Include="src\game\entity.h" />
     <ClInclude Include="src\utils\types.h" />
+    <ClInclude Include="src\graphics\entitymap.h" />
+    <ClInclude Include="src\utils\struct\arena.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="template code">

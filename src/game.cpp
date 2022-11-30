@@ -11,6 +11,7 @@
 #include "graphics/tilemap.h"
 #include "utils/files/csv.cpp"
 #include "engine/template.h"
+#include "utils/struct/arena.h"
 
 // The game is inspired by Pork-like & Deep Rock Galactic
 // https://krystman.itch.io/porklike
@@ -25,6 +26,7 @@ namespace Tmpl8
 	static Player* player = nullptr;
 	static Enemy* ghost = nullptr;
 	static Tilemap* tilemap = nullptr;
+	static EnemyArena* enemies = nullptr;
 
 	// -----------------------------------------------------------
 	// Initialize the application
@@ -36,7 +38,10 @@ namespace Tmpl8
 		// Create the player and the tilemap:
 		player = new Player(&s_player, 1, 1);
 		ghost = new Enemy(&s_ghost, 8, 8);
+
 		tilemap = new Tilemap(16, 16, ldcsv("assets/maps/test.csv"), s_tileset);
+		enemies = new EnemyArena();
+		enemies->Add(Enemy(&s_ghost, 8, 8));
 	}
 	
 	// -----------------------------------------------------------
