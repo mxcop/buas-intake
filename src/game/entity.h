@@ -29,6 +29,10 @@ private:
 	Tmpl8::Sprite* spr = nullptr;
 
 protected:
+	/// Set the animation frame for the entities sprite.
+	void SetFrame(u32 frame) { spr->SetFrame(frame); }
+
+	u16 hitpoints = 6;
 	u16 x = 0, y = 0;
 	f32 ox = 0, oy = 0;
 

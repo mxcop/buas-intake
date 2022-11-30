@@ -7,6 +7,7 @@
 #include <string>
 #include <sstream>
 #include "game/player.h"
+#include "game/enemy.h"
 #include "graphics/tilemap.h"
 #include "utils/files/csv.cpp"
 #include "engine/template.h"
@@ -18,9 +19,11 @@
 namespace Tmpl8
 {
 	static Sprite s_tileset(new Surface("assets/tiles.png"), 6);
+	static Sprite s_ghost(new Surface("assets/ghost.png"), 4);
 	static Sprite s_player(new Surface("assets/player.png"), 1);
 
 	static Player* player = nullptr;
+	static Enemy* ghost = nullptr;
 	static Tilemap* tilemap = nullptr;
 
 	// -----------------------------------------------------------
@@ -32,6 +35,7 @@ namespace Tmpl8
 
 		// Create the player and the tilemap:
 		player = new Player(&s_player, 1, 1);
+		ghost = new Enemy(&s_ghost, 8, 8);
 		tilemap = new Tilemap(16, 16, ldcsv("assets/maps/test.csv"), s_tileset);
 	}
 	
@@ -64,6 +68,10 @@ namespace Tmpl8
 		// Draw the player character.
 		player->Update(frame);
 		player->Draw(screen);
+
+		// Draw the ghost.
+		ghost->Update(frame);
+		ghost->Draw(screen);
 
 		// Increment the frame counter.
 		frame++;
