@@ -2,6 +2,7 @@
 #include <memory>
 #include "../engine/surface.h"
 #include "../utils/int2.hpp"
+#include "../utils/types.h"
 #include "map.h"
 
 typedef unsigned char byte;
@@ -20,6 +21,7 @@ public:
 
 	/// <returns>True if the given position is within bounds of the tilemap.</returns>
 	bool Bounds(const int2 pos) const;
+	bool Bounds(const u16 x, const u16 y) const;
 
 	virtual ~Tilemap();
 

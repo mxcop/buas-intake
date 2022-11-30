@@ -13,6 +13,8 @@
     <ClCompile Include="src\engine\camera.cpp" />
     <ClCompile Include="src\game\player.cpp" />
     <ClCompile Include="src\graphics\tilemap.cpp" />
+    <ClCompile Include="src\game\enemy.cpp" />
+    <ClCompile Include="src\game\entity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game.h" />
@@ -32,6 +34,9 @@
     <ClInclude Include="src\graphics\tilemap.h" />
     <ClInclude Include="src\graphics\map.h" />
     <ClInclude Include="src\utils\files\csv.cpp" />
+    <ClInclude Include="src\game\enemy.h" />
+    <ClInclude Include="src\game\entity.h" />
+    <ClInclude Include="src\utils\types.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="template code">

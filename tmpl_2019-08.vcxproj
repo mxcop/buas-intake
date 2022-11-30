@@ -226,6 +226,8 @@
   <ItemGroup>
     <ClCompile Include="src\engine\camera.cpp" />
     <ClCompile Include="src\game.cpp" />
+    <ClCompile Include="src\game\enemy.cpp" />
+    <ClCompile Include="src\game\entity.cpp" />
     <ClCompile Include="src\game\player.cpp" />
     <ClCompile Include="src\graphics\tilemap.cpp" />
     <ClCompile Include="src\physics\bone.cpp" />
@@ -236,6 +238,8 @@
   <ItemGroup>
     <ClInclude Include="src\engine\camera.h" />
     <ClInclude Include="src\game.h" />
+    <ClInclude Include="src\game\enemy.h" />
+    <ClInclude Include="src\game\entity.h" />
     <ClInclude Include="src\game\player.h" />
     <ClInclude Include="src\graphics\tilemap.h" />
     <ClInclude Include="src\graphics\map.h" />
@@ -247,6 +251,7 @@
     <ClInclude Include="src\engine\surface.h" />
     <ClInclude Include="src\engine\template.h" />
     <ClInclude Include="src\utils\math\mat3x3.h" />
+    <ClInclude Include="src\utils\types.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\boss.png" />

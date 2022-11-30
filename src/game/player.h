@@ -2,17 +2,11 @@
 #include "../engine/surface.h"
 #include "../utils/int2.hpp"
 #include "../graphics/tilemap.h"
+#include "entity.h"
 
-enum class Direction { UP, RIGHT, DOWN, LEFT };
-
-class Player {
+class Player : public Entity {
 public:
-	Player(int2 tile_pos, Tmpl8::Sprite* sprite) : tile_pos(tile_pos), sprite(sprite) {}
-
-	/// <summary>
-	/// Draw the player to the screen.
-	/// </summary>
-	void Draw(Tmpl8::Surface* screen) const;
+	Player(Tmpl8::Sprite* sprite, u16 x, u16 y) : Entity(sprite, x, y) {}
 
 	/// <summary>
 	/// Update the player's animation.
@@ -23,20 +17,14 @@ public:
 	/// <summary>
 	/// Move the player one tile into the given direction.
 	/// </summary>
-	void Move(const Tilemap& map, const Direction dir);
+	void Move(const Tilemap& map, const cdir dir);
 
 private:
-	Tmpl8::Sprite* sprite = nullptr;
+	/// Abstraction for moving the player with an animation.
+	void MoveWithAnimation(const Tilemap& map, const i16 dx, const i16 dy);
 
-	int2 tile_pos = int2(0, 0);
-	float2 subpixel_offset = float2(0, 0);
-
-	bool face_left = false;
 	/// Animation function pointer.
 	void (Player::*anim)() = &Player::anim_move;
-
-	/// More flexible move function.
-	void mov(const Tilemap& map, const int2 dir);
 
 	// Animation functions :
 	void anim_move();

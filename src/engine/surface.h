@@ -102,7 +102,7 @@ public:
 	Sprite( Surface* a_Surface, unsigned int a_NumFrames );
 	~Sprite();
 	// Methods
-	void Draw( Surface* a_Target, int a_X, int a_Y, bool flip = false );
+	void Draw( Surface* a_Target, int a_X, int a_Y, bool transparent = true, bool flip = false );
 	void DrawScaled( int a_X, int a_Y, int a_Width, int a_Height, Surface* a_Target );
 	/// <summary>
 	/// Draw onto a target surface using a transformation matrix.

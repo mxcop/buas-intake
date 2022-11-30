@@ -21,6 +21,11 @@ bool Tilemap::Bounds(const int2 pos) const
 	return pos.x >= 0 && pos.y >= 0 && pos.x < width && pos.y < height;
 }
 
+bool Tilemap::Bounds(const u16 x, const u16 y) const
+{
+	return x < width && y < height;
+}
+
 Tilemap::~Tilemap()
 {
 	delete[] values;
