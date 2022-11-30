@@ -140,6 +140,7 @@ for (size_t x = min.x; x < max.x; x++)
 
 ## Sources and Inspiration
 ### Art
+[Midnight Dungeon by PixelArtM & Bibiki](https://pixelartm.itch.io/midnight-dungeon)<br>
 [Pork-like Game by Krystman](https://krystman.itch.io/porklike)<br>
 [1 Bit Top Down Sprites (8x8) by Crystalwarrior](https://img.itch.zone/aW1hZ2UvMTI0NTYwMi83MjgzOTU0LnBuZw==/794x1000/llTZBK.png)
 
