@@ -3,7 +3,7 @@
 #include <memory>
 #include "../engine/surface.h"
 #include "../utils/int2.hpp"
-#include "../utils/types.h"
+#include "types.h"
 #include "map.h"
 #include "../game/entity.h"
 

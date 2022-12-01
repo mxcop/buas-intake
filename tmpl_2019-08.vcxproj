@@ -123,7 +123,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>lib;lib\OpenGL;lib\SDL2-2.0.3\include;lib\freeimage\inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src\utils;lib;lib\OpenGL;lib\SDL2-2.0.3\include;lib\freeimage\inc</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -193,7 +193,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>lib;lib\OpenGL;lib\SDL2-2.0.3\include;lib\freeimage\inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src\utils;lib;lib\OpenGL;lib\SDL2-2.0.3\include;lib\freeimage\inc</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN64;NDEBUG;_WINDOWS;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>Sync</ExceptionHandling>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
@@ -234,7 +234,7 @@
     <ClCompile Include="src\engine\surface.cpp" />
     <ClCompile Include="src\engine\template.cpp" />
     <ClCompile Include="src\utils\math\mat3x3.cpp" />
-    <ClCompile Include="src\utils\struct\arena.cpp" />
+    <ClCompile Include="src\game\arena\arena.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\engine\camera.h" />
@@ -252,7 +252,7 @@
     <ClInclude Include="src\engine\surface.h" />
     <ClInclude Include="src\engine\template.h" />
     <ClInclude Include="src\utils\math\mat3x3.h" />
-    <ClInclude Include="src\utils\struct\arena.h" />
+    <ClInclude Include="src\game\arena\arena.h" />
     <ClInclude Include="src\utils\types.h" />
   </ItemGroup>
   <ItemGroup>

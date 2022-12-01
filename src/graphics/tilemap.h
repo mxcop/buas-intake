@@ -1,8 +1,8 @@
 #pragma once
 #include <memory>
 #include "../engine/surface.h"
-#include "../utils/int2.hpp"
-#include "../utils/types.h"
+#include "int2.hpp"
+#include "types.h"
 #include "map.h"
 
 typedef unsigned char byte;

@@ -10,7 +10,7 @@
 #include "graphics/tilemap.h"
 #include "utils/files/csv.cpp"
 #include "engine/template.h"
-#include "utils/struct/arena.h"
+#include "game/arena/arena.h"
 
 // The game is inspired by Pork-like & Deep Rock Galactic
 // https://krystman.itch.io/porklike
