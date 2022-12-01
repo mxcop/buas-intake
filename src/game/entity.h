@@ -32,7 +32,7 @@ public:
 	/// <summary>
 	/// Move the entity using a vector. (returns true if moved)
 	/// </summary>
-	virtual bool Move(const std::shared_ptr<Tilemap> map, const i16 dx, const i16 dy);
+	virtual bool Move(const i16 dx, const i16 dy);
 
 	virtual ~Entity() {}
 

@@ -2,13 +2,13 @@
 #include <tuple>
 
 void EnemyArena::UpdateAll(u64 frame) {
-    for (Enemy e : arena) {
+    for (Enemy& e : arena) {
         e.Update(frame);
     }
 }
 
 void EnemyArena::DrawAll(Tmpl8::Surface* screen) {
-    for (Enemy e : arena) {
+    for (Enemy& e : arena) {
         e.Draw(screen);
     }
 }

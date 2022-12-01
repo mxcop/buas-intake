@@ -12,16 +12,16 @@ public:
 	/// Update the player's animation.
 	/// </summary>
 	/// <param name="frame"></param>
-	void Update(unsigned long frame);
+	void Update(const unsigned long frame);
 
 	/// <summary>
 	/// Move the player one tile into the given direction.
 	/// </summary>
-	void Move(const std::shared_ptr<Tilemap> map, const cdir dir);
+	void Move(const cdir dir);
 
 private:
 	/// Abstraction for moving the player with an animation.
-	void MoveWithAnimation(const std::shared_ptr<Tilemap> map, const i16 dx, const i16 dy);
+	void MoveWithAnimation(const i16 dx, const i16 dy);
 
 	/// Animation function pointer.
 	void (Player::*anim)() = &Player::anim_move;

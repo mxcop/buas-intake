@@ -14,7 +14,7 @@ public:
 	/// Update the enemies animation.
 	/// </summary>
 	/// <param name="frame"></param>
-	void Update(unsigned long frame);
+	void Update(const unsigned long frame);
 
 	u16 id = NULL;
 };

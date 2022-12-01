@@ -1,12 +1,12 @@
 #include "player.h"
 #include "../game.h"
 
-void Player::Update(unsigned long frame) {
+void Player::Update(const unsigned long frame) {
 	(this->*anim)();
 }
 
-void Player::MoveWithAnimation(const std::shared_ptr<Tilemap> map, const i16 dx, const i16 dy) {
-	if (Entity::Move(map, dx, dy)) {
+void Player::MoveWithAnimation(const i16 dx, const i16 dy) {
+	if (Entity::Move(dx, dy)) {
 		anim = &Player::anim_move;
 	} else {
 		ox = dx * 2;
@@ -15,16 +15,16 @@ void Player::MoveWithAnimation(const std::shared_ptr<Tilemap> map, const i16 dx,
 	}
 }
 
-void Player::Move(const std::shared_ptr<Tilemap> map, const cdir dir) {
+void Player::Move(const cdir dir) {
 	// Don't move if we're still animating.
 	if (ox != 0 || oy != 0) return;
 
 	switch (dir)
 	{
-	case cdir::up: MoveWithAnimation(map,  0, -1); break;
-	case cdir::right: MoveWithAnimation(map,  1,  0); break;
-	case cdir::down: MoveWithAnimation(map,  0,  1); break;
-	case cdir::left: MoveWithAnimation(map, -1,  0); break;
+	case cdir::up: MoveWithAnimation   ( 0, -1); break;
+	case cdir::right: MoveWithAnimation( 1,  0); break;
+	case cdir::down: MoveWithAnimation ( 0,  1); break;
+	case cdir::left: MoveWithAnimation (-1,  0); break;
 	}
 }
 
