@@ -3,16 +3,14 @@
 #include "../engine/surface.h"
 #include "int2.hpp"
 #include "types.h"
-#include "map.h"
+#include "map/map.h"
 
-typedef unsigned char byte;
-
-class Tilemap: public Map<byte> {
+class Tilemap: public Map<u8> {
 public:
-	Tilemap(const uint width, const uint height, Tmpl8::Sprite& tileset) : Map(width, height), tileset(tileset) {}
-	Tilemap(const uint width, const uint height, const byte def, Tmpl8::Sprite& tileset) : Map(width, height, def), tileset(tileset) {}
-	Tilemap(const uint width, const uint height, const std::initializer_list<byte> def, Tmpl8::Sprite& tileset) : Map(width, height, def), tileset(tileset) {}
-	Tilemap(const uint width, const uint height, const std::vector<byte> def, Tmpl8::Sprite& tileset) : Map(width, height, def), tileset(tileset) {}
+	Tilemap(const u32 width, const u32 height, Tmpl8::Sprite& tileset) : Map(width, height), tileset(tileset) {}
+	Tilemap(const u32 width, const u32 height, const u8 def, Tmpl8::Sprite& tileset) : Map(width, height, def), tileset(tileset) {}
+	Tilemap(const u32 width, const u32 height, const std::initializer_list<u8> def, Tmpl8::Sprite& tileset) : Map(width, height, def), tileset(tileset) {}
+	Tilemap(const u32 width, const u32 height, const std::vector<u8> def, Tmpl8::Sprite& tileset) : Map(width, height, def), tileset(tileset) {}
 
 	/// <summary>
 	/// Draw the tilemap to the screen.

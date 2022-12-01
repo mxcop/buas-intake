@@ -1,9 +1,20 @@
 #include "arena.h"
 #include <tuple>
 
-void EnemyArena::Add(Enemy val) {
-    val.id = idn;
-    arena.push_back(val);
+void EnemyArena::UpdateAll(u64 frame) {
+    for (Enemy e : arena) {
+        e.Update(frame);
+    }
+}
+
+void EnemyArena::DrawAll(Tmpl8::Surface* screen) {
+    for (Enemy e : arena) {
+        e.Draw(screen);
+    }
+}
+
+void EnemyArena::Add(Tmpl8::Sprite* sprite, u16 x, u16 y) {
+    arena.push_back(Enemy(sprite, x, y));
     idn++;
 }
 
@@ -13,7 +24,7 @@ void EnemyArena::Delete(const u16 id) {
 
 Enemy* EnemyArena::Get(const u16 id) {
     auto itr = std::find_if(
-        arena.begin(), arena.end(), 
+        arena.begin(), arena.end(),
         [&](const Enemy& e) {
             return e.id == id;
         }

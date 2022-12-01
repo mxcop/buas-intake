@@ -229,6 +229,7 @@
     <ClCompile Include="src\game\enemy.cpp" />
     <ClCompile Include="src\game\entity.cpp" />
     <ClCompile Include="src\game\player.cpp" />
+    <ClCompile Include="src\graphics\map\map.cpp" />
     <ClCompile Include="src\graphics\tilemap.cpp" />
     <ClCompile Include="src\physics\bone.cpp" />
     <ClCompile Include="src\engine\surface.cpp" />
@@ -242,9 +243,8 @@
     <ClInclude Include="src\game\enemy.h" />
     <ClInclude Include="src\game\entity.h" />
     <ClInclude Include="src\game\player.h" />
-    <ClInclude Include="src\graphics\entitymap.h" />
     <ClInclude Include="src\graphics\tilemap.h" />
-    <ClInclude Include="src\graphics\map.h" />
+    <ClInclude Include="src\graphics\map\map.h" />
     <ClInclude Include="src\physics\bone.h" />
     <ClInclude Include="src\utils\files\csv.cpp" />
     <ClInclude Include="src\utils\float2.hpp" />

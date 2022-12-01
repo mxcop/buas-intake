@@ -16,6 +16,7 @@
     <ClCompile Include="src\game\enemy.cpp" />
     <ClCompile Include="src\game\entity.cpp" />
     <ClCompile Include="src\game\arena\arena.cpp" />
+    <ClCompile Include="src\graphics\map\map.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game.h" />
@@ -32,12 +33,11 @@
     <ClInclude Include="src\engine\camera.h" />
     <ClInclude Include="src\game\player.h" />
     <ClInclude Include="src\graphics\tilemap.h" />
-    <ClInclude Include="src\graphics\map.h" />
+    <ClInclude Include="src\graphics\map\map.h" />
     <ClInclude Include="src\utils\files\csv.cpp" />
     <ClInclude Include="src\game\enemy.h" />
     <ClInclude Include="src\game\entity.h" />
     <ClInclude Include="src\utils\types.h" />
-    <ClInclude Include="src\graphics\entitymap.h" />
     <ClInclude Include="src\game\arena\arena.h" />
   </ItemGroup>
   <ItemGroup>

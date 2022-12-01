@@ -4,7 +4,6 @@
 #include "../engine/surface.h"
 #include "../utils/types.h"
 #include "../graphics/tilemap.h"
-#include "../graphics/entitymap.h"
 
 /// <summary>
 /// Base class for all entities in the game.
@@ -30,8 +29,6 @@ public:
 private:
 	/// The sprite is not owned by the entity.
 	Tmpl8::Sprite* spr = nullptr;
-	/// The entity map is not owned by the entity.
-	Entitymap* map = nullptr;
 
 protected:
 	/// Set the animation frame for the entities sprite.

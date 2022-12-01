@@ -23,7 +23,6 @@ namespace Tmpl8
 	static Sprite s_player(new Surface("assets/player.png"), 1);
 
 	static Player* player = nullptr;
-	static Enemy* ghost = nullptr;
 	static Tilemap* tilemap = nullptr;
 	static EnemyArena* enemies = nullptr;
 
@@ -36,11 +35,10 @@ namespace Tmpl8
 
 		// Create the player and the tilemap:
 		player = new Player(&s_player, 1, 1);
-		ghost = new Enemy(&s_ghost, 8, 8);
 
 		tilemap = new Tilemap(16, 16, ldcsv("assets/maps/test.csv"), s_tileset);
 		enemies = new EnemyArena();
-		enemies->Add(Enemy(&s_ghost, 8, 8));
+		enemies->Add(&s_ghost, 8, 8);
 	}
 	
 	// -----------------------------------------------------------
@@ -73,9 +71,9 @@ namespace Tmpl8
 		player->Update(frame);
 		player->Draw(screen);
 
-		// Draw the ghost.
-		ghost->Update(frame);
-		ghost->Draw(screen);
+		// Draw the enemies.
+		enemies->UpdateAll(frame);
+		enemies->DrawAll(screen);
 
 		// Increment the frame counter.
 		frame++;
