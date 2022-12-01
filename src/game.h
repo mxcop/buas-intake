@@ -1,7 +1,8 @@
 #pragma once
 
 #include <SDL.h>
-#include "utils.h"
+#include "utils/int2.hpp"
+#include "utils/float2.hpp"
 #include "engine/camera.h"
 
 namespace Tmpl8 {

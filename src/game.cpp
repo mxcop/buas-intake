@@ -1,6 +1,5 @@
 #include "game.h"
 #include "engine/surface.h"
-#include "utils.h"
 #include "physics/bone.h"
 #include <memory>
 #include <cstdio> // printf

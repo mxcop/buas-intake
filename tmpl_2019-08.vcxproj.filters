@@ -28,7 +28,6 @@
     <ClInclude Include="src\physics\bone.h" />
     <ClInclude Include="src\utils\int2.hpp" />
     <ClInclude Include="src\utils\float2.hpp" />
-    <ClInclude Include="src\utils.h" />
     <ClInclude Include="src\utils\math\mat3x3.h" />
     <ClInclude Include="src\engine\camera.h" />
     <ClInclude Include="src\game\player.h" />
