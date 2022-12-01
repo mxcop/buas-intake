@@ -18,8 +18,8 @@ public:
 	/// Call the Draw function on all enemies in the arena.
 	void DrawAll(Tmpl8::Surface* screen);
 
-	/// Add an enemy to the arena.
-	void Add(std::shared_ptr<Tmpl8::Sprite> sprite, u16 x, u16 y);
+	/// Add an enemy to an arena.
+	static void Add(std::shared_ptr<EnemyArena> arena, std::shared_ptr<Tmpl8::Sprite> sprite, u16 x, u16 y);
 	/// Delete an enemy from the arena.
 	void Delete(const u16 id);
 
