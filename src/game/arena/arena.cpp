@@ -14,7 +14,7 @@ void EnemyArena::DrawAll(Tmpl8::Surface* screen) {
 }
 
 void EnemyArena::Add(Tmpl8::Sprite* sprite, u16 x, u16 y) {
-    arena.push_back(Enemy(sprite, x, y, idn));
+    arena.push_back(Enemy(this, sprite, x, y, idn));
     idn++;
 }
 

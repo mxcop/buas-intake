@@ -6,7 +6,7 @@
 
 class Player : public Entity {
 public:
-	Player(Tmpl8::Sprite* sprite, u16 x, u16 y) : Entity(sprite, x, y) {}
+	Player(EnemyArena* enemies, Tmpl8::Sprite* sprite, u16 x, u16 y) : Entity(enemies, sprite, x, y) { }
 
 	/// <summary>
 	/// Update the player's animation.

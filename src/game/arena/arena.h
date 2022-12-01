@@ -2,7 +2,9 @@
 
 #include <vector>
 #include "types.h"
-#include "../../game/enemy.h"
+#include "../../engine/surface.h"
+#include "../../graphics/tilemap.h"
+#include "../enemy.h"
 
 /// <summary>
 /// An efficient way of storing a large amount of enemies.

@@ -5,12 +5,14 @@
 #include "../utils/types.h"
 #include "../graphics/tilemap.h"
 
+class EnemyArena;
+
 /// <summary>
 /// Base class for all entities in the game.
 /// </summary>
 class Entity {
 public:
-	Entity(Tmpl8::Sprite* sprite, u16 x, u16 y);
+	Entity(EnemyArena* enemies, Tmpl8::Sprite* sprite, u16 x, u16 y);
 
 	std::tuple<u16, u16> GetPosition() const { return std::make_tuple(x, y); }
 
@@ -27,8 +29,8 @@ public:
 	virtual ~Entity() { /* base entity has no pointers to owned memory */ }
 
 private:
-	/// The sprite is not owned by the entity.
-	Tmpl8::Sprite* spr = nullptr;
+	Tmpl8::Sprite* spr = nullptr; // Not owned pointer.
+	EnemyArena* enemies = nullptr; // Not owned pointer.
 
 protected:
 	/// Set the animation frame for the entities sprite.

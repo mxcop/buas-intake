@@ -33,11 +33,12 @@ namespace Tmpl8
 	{
 		window = win;
 
+		enemies = new EnemyArena();
+
 		// Create the player and the tilemap:
-		player = new Player(&s_player, 1, 1);
+		player = new Player(enemies, &s_player, 1, 1);
 
 		tilemap = new Tilemap(16, 16, ldcsv("assets/maps/test.csv"), s_tileset);
-		enemies = new EnemyArena();
 		enemies->Add(&s_ghost, 8, 8);
 	}
 	

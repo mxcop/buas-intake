@@ -4,8 +4,8 @@
 
 class Enemy : public Entity {
 public:
-	Enemy(Tmpl8::Sprite* sprite, u16 x, u16 y, u16 id)
-		: Entity(sprite, x, y) {
+	Enemy(EnemyArena* enemies, Tmpl8::Sprite* sprite, u16 x, u16 y, u16 id)
+		: Entity(enemies, sprite, x, y) {
 		hitpoints = 2; this->id = id;
 	}
 
