@@ -20,7 +20,16 @@ void EnemyArena::Add(Enemy enemy) {
 }
 
 void EnemyArena::Delete(const u16 id) {
-    //arena.erase(idx);
+    auto itr = std::find_if(
+        arena.begin(), arena.end(),
+        [&](const Enemy& e) {
+            return e.id == id;
+        }
+    );
+    if (itr != arena.end()) {
+        int idx = itr - arena.begin();
+        arena.erase(arena.begin() + idx);
+    }
 }
 
 Enemy* EnemyArena::Get(const u16 id) {

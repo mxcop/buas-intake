@@ -22,6 +22,9 @@ public:
 	/// </summary>
 	void Draw(Tmpl8::Surface* screen) const;
 
+	/// Hit the entity.
+	virtual void Hit(const u8 dmg);
+
 	/// <summary>
 	/// Move the entity using a vector. (returns true if moved)
 	/// </summary>
@@ -31,9 +34,10 @@ public:
 
 private:
 	std::shared_ptr<Tmpl8::Sprite> spr = nullptr;
-	std::shared_ptr<EnemyArena> enemies = nullptr;
 
 protected:
+	std::shared_ptr<EnemyArena> enemies = nullptr;
+
 	/// Set the animation frame for the entities sprite.
 	void SetFrame(u32 frame) { spr->SetFrame(frame); }
 

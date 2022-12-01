@@ -14,6 +14,15 @@ Enemy& Enemy::New(std::shared_ptr<EnemyArena> enemies, std::shared_ptr<Tmpl8::Sp
 	return enemy;
 }
 
+void Enemy::Hit(const u8 dmg)
+{
+	Entity::Hit(dmg);
+
+	if (hitpoints <= 0) {
+		enemies->Delete(id);
+	}
+}
+
 void Enemy::Update(unsigned long frame)
 {
 	SetFrame(frame % 16 / 4);
