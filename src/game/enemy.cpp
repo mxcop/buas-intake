@@ -1,5 +1,18 @@
 #include "enemy.h"
+#include "arena/arena.h"
 
+Enemy::Enemy(std::shared_ptr<EnemyArena> enemies, std::shared_ptr<Tmpl8::Sprite> sprite, u16 x, u16 y)
+	: Entity(enemies, sprite, x, y) 
+{
+	hitpoints = 2;
+}
+
+Enemy& Enemy::New(std::shared_ptr<EnemyArena> enemies, std::shared_ptr<Tmpl8::Sprite> sprite, u16 x, u16 y)
+{
+	Enemy enemy = Enemy(enemies, sprite, x, y);
+	enemies->Add(enemy);
+	return enemy;
+}
 
 void Enemy::Update(unsigned long frame)
 {

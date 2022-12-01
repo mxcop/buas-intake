@@ -34,7 +34,7 @@ namespace Tmpl8
 		tilemap.reset(new Tilemap(16, 16, ldcsv("assets/maps/test.csv"), s_tileset));
 
 		// Temp: add an enemy.
-		EnemyArena::Add(enemies, s_ghost, 8, 8);
+		Enemy::New(enemies, s_ghost, 8, 8);
 	}
 	
 	// -----------------------------------------------------------
