@@ -22,13 +22,17 @@ public:
 	/// </summary>
 	void Draw(Tmpl8::Surface* screen) const;
 
+	/// <summary>
 	/// Hit the entity.
-	virtual void Hit(const u8 dmg);
+	/// </summary>
+	/// <param name="dx">Direction X axis</param>
+	/// <param name="dy">Direction Y axis</param>
+	virtual void Hit(const u8 dmg, const u16 dx, const u16 dy);
 
 	/// <summary>
 	/// Move the entity using a vector. (returns true if moved)
 	/// </summary>
-	virtual bool Move(const Tilemap& map, const i16 dx, const i16 dy);
+	virtual bool Move(const std::shared_ptr<Tilemap> map, const i16 dx, const i16 dy);
 
 	virtual ~Entity() {}
 

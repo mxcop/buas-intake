@@ -31,7 +31,7 @@ namespace Tmpl8
 		enemies = shared_ptr<EnemyArena>(new EnemyArena());
 
 		player.reset(new Player(enemies, s_player, 1, 1));
-		tilemap.reset(new Tilemap(16, 16, ldcsv("assets/maps/test.csv"), s_tileset));
+		tilemap = shared_ptr<Tilemap>(new Tilemap(16, 16, ldcsv("assets/maps/test.csv"), s_tileset));
 
 		// Temp: add an enemy.
 		Enemy::New(enemies, s_ghost, 8, 8);
@@ -42,6 +42,7 @@ namespace Tmpl8
 	// -----------------------------------------------------------
 	void Game::Shutdown()
 	{
+
 	}
 
 	// -----------------------------------------------------------
@@ -80,10 +81,10 @@ namespace Tmpl8
 		//printf("key pressed : %d.\n", key);
 
 		/* Player cardinal movement */
-		if (key == 79 || key == 7 ) player->Move(*tilemap, cdir::right);
-		if (key == 80 || key == 4 ) player->Move(*tilemap, cdir::left);
-		if (key == 81 || key == 22) player->Move(*tilemap, cdir::down);
-		if (key == 82 || key == 26) player->Move(*tilemap, cdir::up);
+		if (key == 79 || key == 7 ) player->Move(tilemap, cdir::right);
+		if (key == 80 || key == 4 ) player->Move(tilemap, cdir::left);
+		if (key == 81 || key == 22) player->Move(tilemap, cdir::down);
+		if (key == 82 || key == 26) player->Move(tilemap, cdir::up);
 	}
 
 	void Game::MouseMove(int dx, int dy) 

@@ -8,7 +8,7 @@ public:
 
 	static Enemy& New(std::shared_ptr<EnemyArena> enemies, std::shared_ptr<Tmpl8::Sprite> sprite, u16 x, u16 y);
 	
-	void Hit(const u8 dmg) override;
+	void Hit(const u8 dmg, const u16 dx, const u16 dy) override;
 
 	/// <summary>
 	/// Update the enemies animation.

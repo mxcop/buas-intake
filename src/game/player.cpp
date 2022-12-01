@@ -5,7 +5,7 @@ void Player::Update(unsigned long frame) {
 	(this->*anim)();
 }
 
-void Player::MoveWithAnimation(const Tilemap& map, const i16 dx, const i16 dy) {
+void Player::MoveWithAnimation(const std::shared_ptr<Tilemap> map, const i16 dx, const i16 dy) {
 	if (Entity::Move(map, dx, dy)) {
 		anim = &Player::anim_move;
 	} else {
@@ -15,7 +15,7 @@ void Player::MoveWithAnimation(const Tilemap& map, const i16 dx, const i16 dy) {
 	}
 }
 
-void Player::Move(const Tilemap& map, const cdir dir) {
+void Player::Move(const std::shared_ptr<Tilemap> map, const cdir dir) {
 	// Don't move if we're still animating.
 	if (ox != 0 || oy != 0) return;
 

@@ -175,7 +175,7 @@ int ACTWIDTH, ACTHEIGHT;
 static bool firstframe = true;
 
 Surface* surface = 0;
-Game* game = 0;
+std::shared_ptr<Game> game = 0;
 SDL_Window* window = 0;
 
 #ifdef _MSC_VER
@@ -329,7 +329,7 @@ int main( int argc, char **argv )
 	SDL_Texture* frameBuffer = SDL_CreateTexture( renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, BufferWidth, BufferHeight);
 #endif
 	int exitapp = 0;
-	game = new Game();
+	game = Game::instance();
 	game->SetTarget( surface );
 	timer t;
 	t.reset();

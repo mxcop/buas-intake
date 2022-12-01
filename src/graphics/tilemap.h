@@ -24,8 +24,6 @@ public:
 	/// <returns>True if the given position is within walkable.</returns>
 	bool IsWalkable(const u16 x, const u16 y) const;
 
-	virtual ~Tilemap();
-
 private:
 	std::shared_ptr<Tmpl8::Sprite> tileset;
 };
