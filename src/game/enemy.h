@@ -4,8 +4,10 @@
 
 class Enemy : public Entity {
 public:
-	Enemy(Tmpl8::Sprite* sprite, u16 x, u16 y)
-		: Entity(sprite, x, y) { hitpoints = 2; }
+	Enemy(Tmpl8::Sprite* sprite, u16 x, u16 y, u16 id)
+		: Entity(sprite, x, y) {
+		hitpoints = 2; this->id = id;
+	}
 
 	/// <summary>
 	/// Update the enemies animation.
