@@ -16,6 +16,11 @@ struct int2 {
 		return int2(x + o.x, y + o.y);
 	}
 
+	void operator+=(int2& o) {
+		x += o.x;
+		y += o.y;
+	}
+
 	int2 operator*(int m) const {
 		return int2(x * m, y * m);
 	}

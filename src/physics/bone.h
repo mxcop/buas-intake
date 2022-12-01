@@ -2,7 +2,7 @@
 
 /* Inspired by Dave Pagurek's JS IK implementation : https://codepen.io/davepvm/pen/gmgGdQ */
 
-#include "../utils.h"
+#include "../utils/float2.hpp"
 #include "../engine/surface.h"
 
 class Bone {

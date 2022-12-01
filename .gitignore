@@ -33,5 +33,6 @@
 *.app
 
 /Debug
+/Release
 .vs
 *.vcxproj.user

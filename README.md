@@ -6,7 +6,7 @@
 
 
 <div align="center">
-  <b>Title</b> - Description of the <a href="https://github.com/emberry-org/emberry">Project</a> !<br>
+  <b>Mining Rogue-like</b> - My project for the BUAS intake!<br>
 </div>
 
 <br>
@@ -15,6 +15,8 @@
     <a href="#inverse-kinematics-impl">Inverse Kinematics</a>
     ·
     <a href="#matrix-affine-transformations-impl">Matrix Affine Transformations</a>
+    ·
+    <a href="#sources-and-inspiration">Sources & Inspiration</a>
 </div>
     
 <br>
@@ -133,3 +135,19 @@ for (size_t x = min.x; x < max.x; x++)
   }
 }
 ```
+
+<br>
+
+## Sources and Inspiration
+### Art
+[Midnight Dungeon by PixelArtM & Bibiki](https://pixelartm.itch.io/midnight-dungeon)<br>
+[Pork-like Game by Krystman](https://krystman.itch.io/porklike)<br>
+[1 Bit Top Down Sprites (8x8) by Crystalwarrior](https://img.itch.zone/aW1hZ2UvMTI0NTYwMi83MjgzOTU0LnBuZw==/794x1000/llTZBK.png)
+
+### Design
+[Pork-like Game by Krystman](https://krystman.itch.io/porklike)<br>
+[Deep Rock Galactic](https://www.deeprockgalactic.com/)
+
+### Code
+[Lazy Devs](https://www.youtube.com/@LazyDevs)<br>
+[Javidx9](https://www.youtube.com/watch?v=zxwLN2blwbQ)

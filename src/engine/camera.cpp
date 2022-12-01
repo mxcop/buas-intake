@@ -35,7 +35,10 @@ mat3x3 Camera::matrix() const {
 	mat3x3 mat = mat3x3();
 
 	mat.scale(zoom, zoom);
-	mat.translate(static_cast<float>(ScreenWidth / Tmpl8::ScreenScalingFactor) / (2 * zoom), static_cast<float>(ScreenHeight / Tmpl8::ScreenScalingFactor) / (2 * zoom));
+	mat.translate(
+		static_cast<float>(ScreenWidth / Tmpl8::ScreenScalingFactor) / (2 * zoom), 
+		static_cast<float>(ScreenHeight / Tmpl8::ScreenScalingFactor) / (2 * zoom)
+	);
 	mat.rotate(angle);
 	mat.translate(-position.x, position.y);
 	

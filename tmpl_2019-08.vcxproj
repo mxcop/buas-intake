@@ -123,7 +123,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>lib;lib\OpenGL;lib\SDL2-2.0.3\include;lib\freeimage\inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src\utils;lib;lib\OpenGL;lib\SDL2-2.0.3\include;lib\freeimage\inc</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -193,7 +193,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>lib;lib\OpenGL;lib\SDL2-2.0.3\include;lib\freeimage\inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src\utils;lib;lib\OpenGL;lib\SDL2-2.0.3\include;lib\freeimage\inc</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN64;NDEBUG;_WINDOWS;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>Sync</ExceptionHandling>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
@@ -226,21 +226,34 @@
   <ItemGroup>
     <ClCompile Include="src\engine\camera.cpp" />
     <ClCompile Include="src\game.cpp" />
+    <ClCompile Include="src\game\enemy.cpp" />
+    <ClCompile Include="src\game\entity.cpp" />
+    <ClCompile Include="src\game\player.cpp" />
+    <ClCompile Include="src\graphics\map\map.cpp" />
+    <ClCompile Include="src\graphics\tilemap.cpp" />
     <ClCompile Include="src\physics\bone.cpp" />
     <ClCompile Include="src\engine\surface.cpp" />
     <ClCompile Include="src\engine\template.cpp" />
     <ClCompile Include="src\utils\math\mat3x3.cpp" />
+    <ClCompile Include="src\game\arena\arena.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\engine\camera.h" />
     <ClInclude Include="src\game.h" />
+    <ClInclude Include="src\game\enemy.h" />
+    <ClInclude Include="src\game\entity.h" />
+    <ClInclude Include="src\game\player.h" />
+    <ClInclude Include="src\graphics\tilemap.h" />
+    <ClInclude Include="src\graphics\map\map.h" />
     <ClInclude Include="src\physics\bone.h" />
+    <ClInclude Include="src\utils\files\csv.cpp" />
     <ClInclude Include="src\utils\float2.hpp" />
-    <ClInclude Include="src\utils.h" />
     <ClInclude Include="src\utils\int2.hpp" />
     <ClInclude Include="src\engine\surface.h" />
     <ClInclude Include="src\engine\template.h" />
     <ClInclude Include="src\utils\math\mat3x3.h" />
+    <ClInclude Include="src\game\arena\arena.h" />
+    <ClInclude Include="src\utils\types.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\boss.png" />
