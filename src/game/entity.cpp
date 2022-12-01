@@ -2,7 +2,7 @@
 #include "arena/arena.h"
 #include "../game.h"
 
-Entity::Entity(EnemyArena* enemies, Tmpl8::Sprite* sprite, u16 x, u16 y)
+Entity::Entity(std::shared_ptr<EnemyArena> enemies, std::shared_ptr<Tmpl8::Sprite> sprite, u16 x, u16 y)
 {
 	spr = sprite;
 	this->enemies = enemies;

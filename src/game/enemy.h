@@ -4,7 +4,7 @@
 
 class Enemy : public Entity {
 public:
-	Enemy(EnemyArena* enemies, Tmpl8::Sprite* sprite, u16 x, u16 y, u16 id)
+	Enemy(std::shared_ptr<EnemyArena> enemies, std::shared_ptr<Tmpl8::Sprite> sprite, u16 x, u16 y, u16 id)
 		: Entity(enemies, sprite, x, y) {
 		hitpoints = 2; this->id = id;
 	}

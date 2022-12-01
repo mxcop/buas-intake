@@ -2,16 +2,16 @@
 
 void Tilemap::Draw(Tmpl8::Surface* screen, const int2 pos) const
 {
-	u32 s_width = tileset.GetWidth();
-	u32 s_height = tileset.GetHeight();
+	u32 s_width = tileset->GetWidth();
+	u32 s_height = tileset->GetHeight();
 
 	// Using static cast to long long here to avoid overflowing.
 	for (size_t y = pos.y; y < static_cast<long long>(pos.y) + height; y++)
 	{
 		for (size_t x = pos.x; x < static_cast<long long>(pos.x) + width; x++)
 		{
-			tileset.SetFrame(*(values + x + y * width));
-			tileset.Draw(screen, x * s_width, y * s_height);
+			tileset->SetFrame(*(values + x + y * width));
+			tileset->Draw(screen, x * s_width, y * s_height);
 		}
 	}
 }

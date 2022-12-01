@@ -13,8 +13,8 @@ void EnemyArena::DrawAll(Tmpl8::Surface* screen) {
     }
 }
 
-void EnemyArena::Add(Tmpl8::Sprite* sprite, u16 x, u16 y) {
-    arena.push_back(Enemy(this, sprite, x, y, idn));
+void EnemyArena::Add(std::shared_ptr<Tmpl8::Sprite> sprite, u16 x, u16 y) {
+    arena.push_back(Enemy(std::shared_ptr<EnemyArena>(this), sprite, x, y, idn));
     idn++;
 }
 

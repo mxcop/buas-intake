@@ -7,10 +7,10 @@
 
 class Tilemap: public Map<u8> {
 public:
-	Tilemap(const u32 width, const u32 height, Tmpl8::Sprite& tileset) : Map(width, height), tileset(tileset) {}
-	Tilemap(const u32 width, const u32 height, const u8 def, Tmpl8::Sprite& tileset) : Map(width, height, def), tileset(tileset) {}
-	Tilemap(const u32 width, const u32 height, const std::initializer_list<u8> def, Tmpl8::Sprite& tileset) : Map(width, height, def), tileset(tileset) {}
-	Tilemap(const u32 width, const u32 height, const std::vector<u8> def, Tmpl8::Sprite& tileset) : Map(width, height, def), tileset(tileset) {}
+	Tilemap(const u32 width, const u32 height, std::shared_ptr<Tmpl8::Sprite> tileset) : Map(width, height), tileset(tileset) {}
+	Tilemap(const u32 width, const u32 height, const u8 def, std::shared_ptr<Tmpl8::Sprite> tileset) : Map(width, height, def), tileset(tileset) {}
+	Tilemap(const u32 width, const u32 height, const std::initializer_list<u8> def, std::shared_ptr<Tmpl8::Sprite> tileset) : Map(width, height, def), tileset(tileset) {}
+	Tilemap(const u32 width, const u32 height, const std::vector<u8> def, std::shared_ptr<Tmpl8::Sprite> tileset) : Map(width, height, def), tileset(tileset) {}
 
 	/// <summary>
 	/// Draw the tilemap to the screen.
@@ -27,5 +27,5 @@ public:
 	virtual ~Tilemap();
 
 private:
-	Tmpl8::Sprite& tileset;
+	std::shared_ptr<Tmpl8::Sprite> tileset;
 };

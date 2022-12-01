@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <tuple>
 #include "../engine/surface.h"
 #include "../utils/types.h"
@@ -12,7 +13,7 @@ class EnemyArena;
 /// </summary>
 class Entity {
 public:
-	Entity(EnemyArena* enemies, Tmpl8::Sprite* sprite, u16 x, u16 y);
+	Entity(std::shared_ptr<EnemyArena> enemies, std::shared_ptr<Tmpl8::Sprite> sprite, u16 x, u16 y);
 
 	std::tuple<u16, u16> GetPosition() const { return std::make_tuple(x, y); }
 
@@ -26,11 +27,11 @@ public:
 	/// </summary>
 	virtual bool Move(const Tilemap& map, const i16 dx, const i16 dy);
 
-	virtual ~Entity() { /* base entity has no pointers to owned memory */ }
+	virtual ~Entity() {}
 
 private:
-	Tmpl8::Sprite* spr = nullptr; // Not owned pointer.
-	EnemyArena* enemies = nullptr; // Not owned pointer.
+	std::shared_ptr<Tmpl8::Sprite> spr = nullptr;
+	std::shared_ptr<EnemyArena> enemies = nullptr;
 
 protected:
 	/// Set the animation frame for the entities sprite.

@@ -19,7 +19,7 @@ public:
 	void DrawAll(Tmpl8::Surface* screen);
 
 	/// Add an enemy to the arena.
-	void Add(Tmpl8::Sprite* sprite, u16 x, u16 y);
+	void Add(std::shared_ptr<Tmpl8::Sprite> sprite, u16 x, u16 y);
 	/// Delete an enemy from the arena.
 	void Delete(const u16 id);
 

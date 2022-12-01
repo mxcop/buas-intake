@@ -5,12 +5,9 @@
 #include <cstdio> // printf
 #include <string>
 #include <sstream>
-#include "game/player.h"
 #include "game/enemy.h"
-#include "graphics/tilemap.h"
 #include "utils/files/csv.cpp"
 #include "engine/template.h"
-#include "game/arena/arena.h"
 
 // The game is inspired by Pork-like & Deep Rock Galactic
 // https://krystman.itch.io/porklike
@@ -18,13 +15,10 @@
 
 namespace Tmpl8
 {
-	static Sprite s_tileset(new Surface("assets/tiles.png"), 6);
-	static Sprite s_ghost(new Surface("assets/ghost.png"), 4);
-	static Sprite s_player(new Surface("assets/player.png"), 1);
-
-	static Player* player = nullptr;
-	static Tilemap* tilemap = nullptr;
-	static EnemyArena* enemies = nullptr;
+	/* sprites */
+	shared_ptr<Sprite> s_tileset(new Sprite(new Surface("assets/tiles.png"), 6));
+	shared_ptr<Sprite> s_ghost(new Sprite(new Surface("assets/ghost.png"), 4));
+	shared_ptr<Sprite> s_player(new Sprite(new Surface("assets/player.png"), 1));
 
 	// -----------------------------------------------------------
 	// Initialize the application
@@ -33,13 +27,14 @@ namespace Tmpl8
 	{
 		window = win;
 
-		enemies = new EnemyArena();
+		// Initialize the enemies, player, & tilemap:
+		enemies = shared_ptr<EnemyArena>(new EnemyArena());
 
-		// Create the player and the tilemap:
-		player = new Player(enemies, &s_player, 1, 1);
+		player.reset(new Player(enemies, s_player, 1, 1));
+		tilemap.reset(new Tilemap(16, 16, ldcsv("assets/maps/test.csv"), s_tileset));
 
-		tilemap = new Tilemap(16, 16, ldcsv("assets/maps/test.csv"), s_tileset);
-		enemies->Add(&s_ghost, 8, 8);
+		// Temp: add an enemy.
+		enemies->Add(s_ghost, 8, 8);
 	}
 	
 	// -----------------------------------------------------------
