@@ -35,13 +35,11 @@ bool Entity::Move(const i16 dx, const i16 dy)
 	if (dx > 0) flip = false;
 
 	if (enemy != nullptr) {
-		printf("attacked!\n");
 		enemy->Hit(1, dx, dy);
 		return false;
 	}
 
 	if (Tmpl8::Game::instance()->tilemap->IsWalkable(x + dx, y + dy)) {
-		printf("moved!\n");
 		x += dx; y += dy;
 		ox = dx * -8;
 		oy = dy * -8;
