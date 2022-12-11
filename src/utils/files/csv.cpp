@@ -7,6 +7,7 @@
 
 typedef unsigned char byte;
 
+/// Load a .csv file from the given path.
 /// Source : https://www.folkstalk.com/tech/how-to-read-a-comma-delimited-file-into-an-array-c-with-code-examples/
 std::vector<byte> ldcsv(const std::string path, const unsigned int capacity = 256)
 {
@@ -33,7 +34,7 @@ std::vector<byte> ldcsv(const std::string path, const unsigned int capacity = 25
 		}
 	}
 	else {
-		throw std::invalid_argument("tilemap csv file not found...");
+		throw std::invalid_argument("csv file not found...");
 	}
 
 	return bytes;

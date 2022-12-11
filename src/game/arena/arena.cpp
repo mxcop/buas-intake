@@ -40,7 +40,7 @@ Enemy* EnemyArena::Get(const u16 id) {
         }
     );
     if (itr != arena.end()) {
-        return &(*itr);
+        return &*itr;
     }
     return nullptr;
 }
@@ -54,7 +54,7 @@ Enemy* EnemyArena::Get(const u8 x, const u8 y) {
         }
     );
     if (itr != arena.end()) {
-        return &(*itr);
+        return &*itr;
     }
     return nullptr;
 }

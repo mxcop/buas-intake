@@ -29,8 +29,8 @@ namespace Tmpl8 {
 		void operator=(Game const&) = delete;
 
 		// C++ singleton pattern : <https://stackoverflow.com/questions/1008019/c-singleton-design-pattern>
-		static std::shared_ptr<Game> instance() {
-			static std::shared_ptr<Game> s{ new Game };
+		static shared_ptr<Game> instance() {
+			static shared_ptr<Game> s{ new Game };
 			return s;
 		}
 
@@ -46,7 +46,7 @@ namespace Tmpl8 {
 		void KeyDown(int key);
 
 		/* objects */
-		shared_ptr<Tilemap> tilemap = nullptr;
+		unique_ptr<Tilemap> tilemap = nullptr;
 
 	private:
 		Game() {}

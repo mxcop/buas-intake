@@ -6,6 +6,10 @@
 #include "../../graphics/tilemap.h"
 #include "../enemy.h"
 
+// If I knew for sure that maps will only ever be 16x16 tiles.
+// Then I would've simply malloc(256 * sizeof(Enemy)).
+// For faster Get methods.
+
 /// <summary>
 /// An efficient way of storing a large amount of enemies.
 /// </summary>
