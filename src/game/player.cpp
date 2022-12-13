@@ -1,6 +1,8 @@
 #include "player.h"
 #include "../game.h"
 
+using Tmpl8::Game;
+
 void Player::Update(const unsigned long frame) {
 	(this->*anim)();
 }
@@ -18,6 +20,8 @@ void Player::MoveWithAnimation(const i16 dx, const i16 dy) {
 void Player::Move(const cdir dir) {
 	// Don't move if we're still animating.
 	if (ox != 0 || oy != 0) return;
+
+	Game::instance()->enemies->StepAll();
 
 	switch (dir)
 	{

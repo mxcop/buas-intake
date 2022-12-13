@@ -13,6 +13,12 @@ void EnemyArena::DrawAll(Tmpl8::Surface* screen) {
     }
 }
 
+void EnemyArena::StepAll() {
+    for (Enemy& e : arena) {
+        e.Step();
+    }
+}
+
 void EnemyArena::Add(Enemy enemy) {
     enemy.id = idn;
     arena.push_back(enemy);
@@ -46,15 +52,11 @@ Enemy* EnemyArena::Get(const u16 id) {
 }
 
 Enemy* EnemyArena::Get(const u8 x, const u8 y) {
-    auto itr = std::find_if(
-        arena.begin(), arena.end(),
-        [&](const Enemy& e) {
-            auto pos = e.GetPosition();
-            return std::get<0>(pos) == x && std::get<1>(pos) == y;
+    for (Enemy& e : arena) {
+        auto pos = e.GetPosition();
+        if (std::get<0>(pos) == x && std::get<1>(pos) == y) {
+            return &e;
         }
-    );
-    if (itr != arena.end()) {
-        return &*itr;
     }
     return nullptr;
 }

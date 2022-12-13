@@ -21,6 +21,8 @@ public:
 	void UpdateAll(u64 frame);
 	/// Call the Draw function on all enemies in the arena.
 	void DrawAll(Tmpl8::Surface* screen);
+	/// Call the Step function on all enemies in the arena.
+	void StepAll();
 
 	/// Add an enemy to an arena.
 	void Add(Enemy enemy);

@@ -13,7 +13,7 @@ class EnemyArena;
 /// </summary>
 class Entity {
 public:
-	Entity(std::shared_ptr<EnemyArena> enemies, std::shared_ptr<Tmpl8::Sprite> sprite, u16 x, u16 y);
+	Entity(std::shared_ptr<Tmpl8::Sprite> sprite, u16 x, u16 y);
 
 	std::tuple<u16, u16> GetPosition() const { return std::make_tuple(x, y); }
 
@@ -38,6 +38,7 @@ public:
 
 private:
 	std::shared_ptr<Tmpl8::Sprite> spr = nullptr;
+	bool wasHit = false;
 
 protected:
 	std::shared_ptr<EnemyArena> enemies = nullptr;

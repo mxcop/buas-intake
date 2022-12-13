@@ -30,12 +30,12 @@ namespace Tmpl8
 		// Initialize the enemies, player, & tilemap:
 		enemies = std::make_shared<EnemyArena>();
 
-		player.reset(new Player(enemies, s_player, 1, 1));
+		player.reset(new Player(s_player, 1, 1));
 		tilemap = std::make_unique<Tilemap>(16, 16, ldcsv("assets/maps/test.csv"), s_tileset);
 
 		// Temp: add an enemy.
-		Enemy::New(enemies, s_ghost, 6, 8);
-		Enemy::New(enemies, s_ghost, 7, 8);
+		Enemy::New(s_ghost, 6, 8);
+		Enemy::New(s_ghost, 7, 8);
 	}
 	
 	// -----------------------------------------------------------

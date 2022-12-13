@@ -47,6 +47,7 @@ namespace Tmpl8 {
 
 		/* objects */
 		unique_ptr<Tilemap> tilemap = nullptr;
+		shared_ptr<EnemyArena> enemies = nullptr;
 
 	private:
 		Game() {}
@@ -62,6 +63,5 @@ namespace Tmpl8 {
 
 		/* objects */
 		unique_ptr<Player> player = nullptr;
-		shared_ptr<EnemyArena> enemies = nullptr;
 	};
 }; // namespace Tmpl8
