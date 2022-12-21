@@ -234,6 +234,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\engine\camera.h" />
+    <ClInclude Include="src\engine\keys.h" />
     <ClInclude Include="src\game.h" />
     <ClInclude Include="src\game\player.h" />
     <ClInclude Include="src\utils\float2.hpp" />

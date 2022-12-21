@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include "engine/template.h"
+#include "engine/keys.h"
 
 namespace Tmpl8
 {
@@ -33,6 +34,8 @@ namespace Tmpl8
 
 	}
 
+	bool w, a, s, d;
+
 	// -----------------------------------------------------------
 	// Main application tick function
 	// -----------------------------------------------------------
@@ -46,13 +49,19 @@ namespace Tmpl8
 		oss << " Delta : " << deltaTime << " Mouse : " << mouse.x << ", " << mouse.y;
 		SDL_SetWindowTitle(window, oss.str().c_str());
 
-		// Draw the cursor.
-		screen->Circle(mouse.x, mouse.y, 2, 0xffffff);
+		// Player:
+		if (w == true) player->Move( 0, -1);
+		if (a == true) player->Move(-1,  0);
+		if (s == true) player->Move( 0,  1);
+		if (d == true) player->Move( 1,  0);
 		player->Draw(screen);
 
 		// Draw the enemies.
 		//enemies->UpdateAll(frame);
 		//enemies->DrawAll(screen);
+
+		// Draw the cursor.
+		screen->Circle(mouse.x, mouse.y, 2, 0xffffff);
 
 		// Increment the frame counter.
 		frame++;
@@ -60,13 +69,22 @@ namespace Tmpl8
 
 	void Game::KeyDown(int key) 
 	{
-		//printf("key pressed : %d.\n", key);
+		//std::cout << std::bitset<32>(key) << '\n';
+		//printf("key pressed : %d.\n", std::bitset<32>(key));
 
 		/* Player cardinal movement */
-		if (key == 79 || key == 7 ) player->Move(1, 0);
-		if (key == 80 || key == 4 ) player->Move(-1, 0);
-		if (key == 81 || key == 22) player->Move(0, 1);
-		if (key == 82 || key == 26) player->Move(0, -1);
+		if (key == KEY_W) w = true;
+		if (key == KEY_A) a = true;
+		if (key == KEY_S) s = true;
+		if (key == KEY_D) d = true;
+	}
+
+	void Game::KeyUp(int key) 
+	{
+		if (key == KEY_W) w = false;
+		if (key == KEY_A) a = false;
+		if (key == KEY_S) s = false;
+		if (key == KEY_D) d = false;
 	}
 
 	void Game::MouseMove(int dx, int dy) 

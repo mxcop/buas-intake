@@ -39,7 +39,7 @@ namespace Tmpl8 {
 		void MouseUp(int button) { /* implement if you want to detect mouse button presses */ }
 		void MouseDown(int button) { /* implement if you want to detect mouse button presses */ }
 		void MouseMove(int dx, int dy);
-		void KeyUp(int key) { /* implement if you want to handle keys */ }
+		void KeyUp(int key);
 		void KeyDown(int key);
 
 		/* objects */

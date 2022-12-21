@@ -50,6 +50,21 @@ void mat3x3::multiply(const mat3x3& matrix)
 	}
 }
 
+mat3x3 mat3x3::multiply(const mat3x3& matrix_a, const mat3x3& matrix_b)
+{
+	mat3x3 result = mat3x3();
+	for (size_t c = 0; c < 3; c++) {
+		for (size_t r = 0; r < 3; r++) {
+			result.set(c, r,
+				matrix_a.get(0, r) * matrix_b.get(c, 0) +
+				matrix_a.get(1, r) * matrix_b.get(c, 1) +
+				matrix_a.get(2, r) * matrix_b.get(c, 2)
+			);
+		}
+	}
+	return result;
+}
+
 void mat3x3::translate(float ox, float oy) 
 {
 	// 1 | 0 | ox
@@ -62,6 +77,15 @@ void mat3x3::translate(float ox, float oy)
 	}));
 }
 
+mat3x3 mat3x3::translation(float x, float y)
+{
+	return mat3x3({
+		1, 0, x,
+		0, 1, y,
+		0, 0, 1
+	});
+}
+
 void mat3x3::rotate(float theta)
 {
 	// cos(t)  | -sin(t) | 0
@@ -72,6 +96,15 @@ void mat3x3::rotate(float theta)
 	   -sinf(theta), cosf(theta), 0,
 	    0         ,  0         , 1
 	}));
+}
+
+mat3x3 mat3x3::rotation(const float theta)
+{
+	return mat3x3({
+		cosf(theta), sinf(theta), 0,
+	   -sinf(theta), cosf(theta), 0,
+		0          , 0          , 1
+	});
 }
 
 void mat3x3::scale(float x, float y)
