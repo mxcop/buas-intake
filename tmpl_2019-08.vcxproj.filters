@@ -17,6 +17,7 @@
     <ClCompile Include="src\game\entity.cpp" />
     <ClCompile Include="src\game\arena\arena.cpp" />
     <ClCompile Include="src\graphics\map\map.cpp" />
+    <ClCompile Include="src\game\astar\astar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game.h" />
@@ -39,6 +40,7 @@
     <ClInclude Include="src\game\entity.h" />
     <ClInclude Include="src\utils\types.h" />
     <ClInclude Include="src\game\arena\arena.h" />
+    <ClInclude Include="src\game\astar\astar.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="template code">

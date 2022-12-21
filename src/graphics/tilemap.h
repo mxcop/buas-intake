@@ -7,10 +7,10 @@
 
 class Tilemap: public Map<u8> {
 public:
-	Tilemap(const u32 width, const u32 height, std::shared_ptr<Tmpl8::Sprite> tileset) : Map(width, height), tileset(tileset) {}
-	Tilemap(const u32 width, const u32 height, const u8 def, std::shared_ptr<Tmpl8::Sprite> tileset) : Map(width, height, def), tileset(tileset) {}
-	Tilemap(const u32 width, const u32 height, const std::initializer_list<u8> def, std::shared_ptr<Tmpl8::Sprite> tileset) : Map(width, height, def), tileset(tileset) {}
-	Tilemap(const u32 width, const u32 height, const std::vector<u8> def, std::shared_ptr<Tmpl8::Sprite> tileset) : Map(width, height, def), tileset(tileset) {}
+	Tilemap(const u32 width, const u32 height, std::shared_ptr<Tmpl8::Sprite> tileset) : Map(width, height), tileset(tileset), width(width), height(height) {}
+	Tilemap(const u32 width, const u32 height, const u8 def, std::shared_ptr<Tmpl8::Sprite> tileset) : Map(width, height, def), tileset(tileset), width(width), height(height) {}
+	Tilemap(const u32 width, const u32 height, const std::initializer_list<u8> def, std::shared_ptr<Tmpl8::Sprite> tileset) : Map(width, height, def), tileset(tileset), width(width), height(height) {}
+	Tilemap(const u32 width, const u32 height, const std::vector<u8> def, std::shared_ptr<Tmpl8::Sprite> tileset) : Map(width, height, def), tileset(tileset), width(width), height(height) {}
 
 	/// <summary>
 	/// Draw the tilemap to the screen.
@@ -23,6 +23,10 @@ public:
 
 	/// <returns>True if the given position is within walkable.</returns>
 	bool IsWalkable(const u16 x, const u16 y) const;
+
+	/* dimensions */
+	u32 width = 0;
+	u32 height = 0;
 
 private:
 	std::shared_ptr<Tmpl8::Sprite> tileset;

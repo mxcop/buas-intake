@@ -49,8 +49,8 @@ bool Entity::Move(const i16 dx, const i16 dy)
 
 	if (Game::instance()->tilemap->IsWalkable(x + dx, y + dy)) {
 		x += dx; y += dy;
-		ox = dx * -8;
-		oy = dy * -8;
+		ox += dx * -8;
+		oy += dy * -8;
 		return true;
 	}
 
