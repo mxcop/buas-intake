@@ -1,17 +1,10 @@
 #include "game.h"
 #include "engine/surface.h"
-#include "physics/bone.h"
 #include <memory>
 #include <cstdio> // printf
 #include <string>
 #include <sstream>
-#include "game/enemy.h"
-#include "utils/files/csv.cpp"
 #include "engine/template.h"
-
-// The game is inspired by Pork-like & Deep Rock Galactic
-// https://krystman.itch.io/porklike
-// https://store.steampowered.com/app/548430/Deep_Rock_Galactic/
 
 namespace Tmpl8
 {
@@ -28,14 +21,8 @@ namespace Tmpl8
 		window = win;
 
 		// Initialize the enemies, player, & tilemap:
-		enemies = std::make_shared<EnemyArena>();
-
-		player.reset(new Player(s_player, 1, 1));
-		tilemap = std::make_unique<Tilemap>(16, 16, ldcsv("assets/maps/test.csv"), s_tileset);
-
-		// Temp: add an enemy.
-		Enemy::New(s_ghost, 6, 8);
-		Enemy::New(s_ghost, 7, 8);
+		player = std::make_unique<Player>(s_player, 80, 80);
+		//enemies = std::make_shared<EnemyArena>();
 	}
 	
 	// -----------------------------------------------------------
@@ -61,17 +48,11 @@ namespace Tmpl8
 
 		// Draw the cursor.
 		screen->Circle(mouse.x, mouse.y, 2, 0xffffff);
-
-		// Draw the tilemap.
-		tilemap->Draw(screen, int2(0, 0));
-
-		// Draw the player character.
-		player->Update(frame);
 		player->Draw(screen);
 
 		// Draw the enemies.
-		enemies->UpdateAll(frame);
-		enemies->DrawAll(screen);
+		//enemies->UpdateAll(frame);
+		//enemies->DrawAll(screen);
 
 		// Increment the frame counter.
 		frame++;
@@ -82,10 +63,10 @@ namespace Tmpl8
 		//printf("key pressed : %d.\n", key);
 
 		/* Player cardinal movement */
-		if (key == 79 || key == 7 ) player->Move(cdir::right);
-		if (key == 80 || key == 4 ) player->Move(cdir::left);
-		if (key == 81 || key == 22) player->Move(cdir::down);
-		if (key == 82 || key == 26) player->Move(cdir::up);
+		if (key == 79 || key == 7 ) player->Move(1, 0);
+		if (key == 80 || key == 4 ) player->Move(-1, 0);
+		if (key == 81 || key == 22) player->Move(0, 1);
+		if (key == 82 || key == 26) player->Move(0, -1);
 	}
 
 	void Game::MouseMove(int dx, int dy) 

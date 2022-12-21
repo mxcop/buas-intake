@@ -4,10 +4,7 @@
 #include <SDL.h>
 #include "int2.hpp"
 #include "float2.hpp"
-
 #include "game/player.h"
-#include "game/arena/arena.h"
-#include "graphics/tilemap.h"
 
 using std::shared_ptr;
 using std::unique_ptr;
@@ -46,8 +43,7 @@ namespace Tmpl8 {
 		void KeyDown(int key);
 
 		/* objects */
-		unique_ptr<Tilemap> tilemap = nullptr;
-		shared_ptr<EnemyArena> enemies = nullptr;
+		//shared_ptr<EnemyArena> enemies = nullptr;
 
 	private:
 		Game() {}

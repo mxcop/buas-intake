@@ -1,32 +1,20 @@
-#pragma once
+#include <memory>
 #include "../engine/surface.h"
-#include "../utils/int2.hpp"
-#include "../graphics/tilemap.h"
-#include "entity.h"
 
-class Player : public Entity {
+class Player {
 public:
-	Player(std::shared_ptr<Tmpl8::Sprite> sprite, u16 x, u16 y) : Entity(sprite, x, y) { }
+	Player(std::shared_ptr<Tmpl8::Sprite> sprite, float x, float y);
+
+	/// <param name="dx">Delta X</param>
+	/// <param name="dy">Delta Y</param>
+	void Move(float dx, float dy);
 
 	/// <summary>
-	/// Update the player's animation.
+	/// Draw the player to the screen.
 	/// </summary>
-	/// <param name="frame"></param>
-	void Update(const unsigned long frame);
-
-	/// <summary>
-	/// Move the player one tile into the given direction.
-	/// </summary>
-	void Move(const cdir dir);
+	void Draw(Tmpl8::Surface* screen);
 
 private:
-	/// Abstraction for moving the player with an animation.
-	void MoveWithAnimation(const i16 dx, const i16 dy);
-
-	/// Animation function pointer.
-	void (Player::*anim)() = &Player::anim_move;
-
-	// Animation functions :
-	void anim_move();
-	void anim_bump();
+	std::shared_ptr<Tmpl8::Sprite> sprite = nullptr;
+	float x, y;
 };

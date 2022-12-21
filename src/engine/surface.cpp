@@ -495,8 +495,6 @@ void Sprite::DrawScaled( int a_X, int a_Y, int a_Width, int a_Height, Surface* a
 
 void Sprite::DrawWithMatrix(Surface* a_Target, mat3x3 matrix)
 {
-	// TODO: Add support for sprite animations !
-	
 	// Load the correct part of the texture.
 	Pixel* src = GetBuffer() + m_CurrentFrame * m_Width;
 

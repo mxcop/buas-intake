@@ -64,13 +64,13 @@ void mat3x3::translate(float ox, float oy)
 
 void mat3x3::rotate(float theta)
 {
-	// cos(t)  | sin(t) | 0
-	// -sin(t) | cos(t) | 0
-	// 0       | 0      | 1
+	// cos(t)  | -sin(t) | 0
+	// sin(t)  |  cos(t) | 0
+	// 0       |  0      | 1
 	multiply(mat3x3({
-		cos(theta), sin(theta), 0,
-	   -sin(theta), cos(theta), 0,
-		0         , 0         , 1
+	    cosf(theta), sinf(theta), 0,
+	   -sinf(theta), cosf(theta), 0,
+	    0         ,  0         , 1
 	}));
 }
 
