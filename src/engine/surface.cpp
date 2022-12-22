@@ -513,12 +513,12 @@ void Sprite::DrawWithMatrix(Surface* a_Target, mat3x3 matrix)
 	matrix.bounds(m_Width, m_Height, min, max);
 
 	// Loop through each pixel within the transformed bounding box:
-	for (size_t x = min.x; x < max.x; x++)
+	for (long x = min.x; x < max.x; x++)
 	{
 		// Check if this X axis is onscreen.
 		if (x < 0 || x >= target_w) continue;
 
-		for (size_t y = min.y; y < max.y; y++)
+		for (long y = min.y; y < max.y; y++)
 		{
 			// Check if this Y axis is onscreen.
 			if (y < 0 || y >= target_h) continue;
