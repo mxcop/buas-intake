@@ -6,13 +6,16 @@
 #include <sstream>
 #include "engine/template.h"
 #include "engine/keys.h"
+#include "game/enemy/turret.h"
 
 namespace Tmpl8
 {
 	/* sprites */
 	shared_ptr<Sprite> s_tileset(new Sprite(new Surface("assets/tiles.png"), 6));
-	shared_ptr<Sprite> s_ghost(new Sprite(new Surface("assets/ghost.png"), 4));
-	shared_ptr<Sprite> s_player(new Sprite(new Surface("assets/player.png"), 1));
+	shared_ptr<Sprite> s_turret(new Sprite(new Surface("assets/turret.png"), 1));
+	shared_ptr<Sprite> s_player(new Sprite(new Surface("assets/player-plane.png"), 4));
+
+	unique_ptr<Turret> turret = nullptr;
 
 	// -----------------------------------------------------------
 	// Initialize the application
@@ -22,7 +25,8 @@ namespace Tmpl8
 		window = win;
 
 		// Initialize the enemies, player, & tilemap:
-		player = std::make_unique<Player>(s_player, 80, 80);
+		player = std::make_shared<Player>(s_player, 80, 80);
+		turret = std::make_unique<Turret>(40, 40, s_turret, player);
 		//enemies = std::make_shared<EnemyArena>();
 	}
 	
@@ -54,7 +58,11 @@ namespace Tmpl8
 		if (a == true) player->Move(-1,  0);
 		if (s == true) player->Move( 0,  1);
 		if (d == true) player->Move( 1,  0);
+		player->Tick(frame);
 		player->Draw(screen);
+
+		turret->Tick(frame);
+		turret->Draw(screen);
 
 		// Draw the enemies.
 		//enemies->UpdateAll(frame);
