@@ -7,15 +7,21 @@
 #include "engine/template.h"
 #include "engine/keys.h"
 #include "game/enemy/turret.h"
+#include "game/pool/pool.h"
+#include "game/projectile.h"
 
 namespace Tmpl8
 {
 	/* sprites */
 	shared_ptr<Sprite> s_tileset(new Sprite(new Surface("assets/tiles.png"), 6));
 	shared_ptr<Sprite> s_turret(new Sprite(new Surface("assets/turret.png"), 1));
+	shared_ptr<Sprite> s_bullet(new Sprite(new Surface("assets/bullet.png"), 1));
 	shared_ptr<Sprite> s_player(new Sprite(new Surface("assets/player-plane.png"), 4));
 
 	unique_ptr<Turret> turret = nullptr;
+	unique_ptr<Turret> turret2 = nullptr;
+	unique_ptr<Turret> turret3 = nullptr;
+	shared_ptr<Pool<Projectile>> projectiles = nullptr;
 
 	// -----------------------------------------------------------
 	// Initialize the application
@@ -26,7 +32,11 @@ namespace Tmpl8
 
 		// Initialize the enemies, player, & tilemap:
 		player = std::make_shared<Player>(s_player, 80, 80);
-		turret = std::make_unique<Turret>(40, 40, s_turret, player);
+		projectiles = std::make_shared<Pool<Projectile>>();
+		turret = std::make_unique<Turret>(40, 40, s_turret, s_bullet, player, projectiles);
+		turret2 = std::make_unique<Turret>(80, 60, s_turret, s_bullet, player, projectiles);
+		turret3 = std::make_unique<Turret>(60, 160, s_turret, s_bullet, player, projectiles);
+		
 		//enemies = std::make_shared<EnemyArena>();
 	}
 	
@@ -43,14 +53,14 @@ namespace Tmpl8
 	// -----------------------------------------------------------
 	// Main application tick function
 	// -----------------------------------------------------------
-	void Game::Tick(float deltaTime)
+	void Game::Tick(float deltatime)
 	{
 		// Clear the graphics window.
 		screen->Clear(0);
 
 		// Update the window title with the frame count:
 		std::ostringstream oss;
-		oss << " Delta : " << deltaTime << " Mouse : " << mouse.x << ", " << mouse.y;
+		oss << " Delta : " << deltatime << " Mouse : " << mouse.x << ", " << mouse.y;
 		SDL_SetWindowTitle(window, oss.str().c_str());
 
 		// Player:
@@ -63,6 +73,13 @@ namespace Tmpl8
 
 		turret->Tick(frame);
 		turret->Draw(screen);
+		turret2->Tick(frame);
+		turret2->Draw(screen);
+		turret3->Tick(frame);
+		turret3->Draw(screen);
+
+		projectiles->Tick(frame, deltatime);
+		projectiles->Draw(screen);
 
 		// Draw the enemies.
 		//enemies->UpdateAll(frame);

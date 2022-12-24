@@ -1,6 +1,6 @@
 #include "player.h"
 
-Player::Player(std::shared_ptr<Tmpl8::Sprite> sprite, float x, float y)
+Player::Player(shared_ptr<Sprite> sprite, float x, float y)
 {
 	this->sprite = sprite;
 	this->x = x;

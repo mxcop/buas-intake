@@ -2,6 +2,8 @@
 #include <memory>
 #include "./enemy.h"
 #include "../../engine/surface.h"
+#include "../pool/pool.h"
+#include "../projectile.h"
 
 using std::shared_ptr;
 using Tmpl8::Sprite;
@@ -14,14 +16,16 @@ class Player;
 */
 class Turret : public Enemy {
 public:
-	Turret(float x, float y, shared_ptr<Sprite> sprite, shared_ptr<Player> target);
+	Turret(float x, float y, shared_ptr<Sprite> sprite, shared_ptr<Sprite> bullet_sprite, shared_ptr<Player> target, shared_ptr<Pool<Projectile>> projectiles);
 
 	void Draw(Tmpl8::Surface* screen) const override;
 	void Tick(const u64 frame) override;
 
 private:
 	shared_ptr<Sprite> sprite = nullptr;
+	shared_ptr<Sprite> bullet_sprite = nullptr;
 	shared_ptr<Player> target = nullptr;
+	shared_ptr<Pool<Projectile>> projectiles = nullptr;
 
 	float angle = 0;
 	u16 w, h;
