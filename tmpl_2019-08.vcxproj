@@ -228,6 +228,7 @@
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\engine\surface.cpp" />
     <ClCompile Include="src\engine\template.cpp" />
+    <ClCompile Include="src\game\collider.cpp" />
     <ClCompile Include="src\game\enemy\enemy.cpp" />
     <ClCompile Include="src\game\enemy\turret.cpp" />
     <ClCompile Include="src\game\player.cpp" />
@@ -240,6 +241,7 @@
     <ClInclude Include="src\engine\camera.h" />
     <ClInclude Include="src\engine\keys.h" />
     <ClInclude Include="src\game.h" />
+    <ClInclude Include="src\game\collider.h" />
     <ClInclude Include="src\game\enemy\enemy.h" />
     <ClInclude Include="src\game\enemy\turret.h" />
     <ClInclude Include="src\game\player.h" />

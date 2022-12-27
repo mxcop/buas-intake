@@ -44,9 +44,12 @@ public:
 	/// <summary> 
 	/// Get a member from the arena by their id.
 	/// </summary>
-	const T* Get(const u16 id) const;
+	T* Get(const u16 id);
+
+	/// <returns>The pool contents as const vector.</returns>
+	const std::vector<T>& Pool<T>::Vec() const;
 private:
 	/* Unique ID counter */
 	u16 uid = 0;
-	std::vector<T> arena;
+	std::vector<T> pool;
 };

@@ -30,12 +30,14 @@ namespace Tmpl8
 	{
 		window = win;
 
+		colliders = std::make_shared<Pool<Collider>>(128);
+
 		// Initialize the enemies, player, & tilemap:
 		player = std::make_shared<Player>(s_player, 80, 80);
-		projectiles = std::make_shared<Pool<Projectile>>();
+		projectiles = std::make_shared<Pool<Projectile>>(512);
 		turret = std::make_unique<Turret>(40, 40, s_turret, s_bullet, player, projectiles);
-		turret2 = std::make_unique<Turret>(80, 60, s_turret, s_bullet, player, projectiles);
-		turret3 = std::make_unique<Turret>(60, 160, s_turret, s_bullet, player, projectiles);
+		turret2 = std::make_unique<Turret>(120, 80, s_turret, s_bullet, player, projectiles);
+		//turret3 = std::make_unique<Turret>(60, 160, s_turret, s_bullet, player, projectiles);
 		
 		//enemies = std::make_shared<EnemyArena>();
 	}
@@ -75,8 +77,8 @@ namespace Tmpl8
 		turret->Draw(screen);
 		turret2->Tick(frame);
 		turret2->Draw(screen);
-		turret3->Tick(frame);
-		turret3->Draw(screen);
+		//turret3->Tick(frame);
+		//turret3->Draw(screen);
 
 		projectiles->Tick(frame, deltatime);
 		projectiles->Draw(screen);

@@ -5,6 +5,7 @@
 #include "int2.hpp"
 #include "float2.hpp"
 #include "game/player.h"
+#include "game/collider.h"
 
 using std::shared_ptr;
 using std::unique_ptr;
@@ -42,6 +43,7 @@ namespace Tmpl8 {
 		void KeyDown(int key);
 
 		/* objects */
+		shared_ptr<Pool<Collider>> colliders = nullptr;
 		//shared_ptr<EnemyArena> enemies = nullptr;
 
 	private:
