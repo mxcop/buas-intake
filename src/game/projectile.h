@@ -15,8 +15,6 @@ public:
 	void Tick(const u64 frame, const float deltatime) override;
 	void Draw(Tmpl8::Surface* screen) override;
 
-	~Projectile();
-
 private:
 	shared_ptr<Pool<Projectile>> pool = nullptr;
 	shared_ptr<Sprite> sprite = nullptr;

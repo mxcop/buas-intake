@@ -9,7 +9,7 @@ Projectile::Projectile(shared_ptr<Sprite> sprite, float x, float y, float2 dir, 
 	this->dir = dir;
 
 	/* The collider isn't owned by the projectile so it's fine to be a raw pointer */
-	collider = Collider::New(x, y, 8, 8);
+	collider = Collider::New(x, y, 8, 8, CollisionTags::EnemyProj);
 }
 
 void Projectile::Tick(const u64 frame, const float deltatime)
@@ -19,7 +19,8 @@ void Projectile::Tick(const u64 frame, const float deltatime)
 
 	collider->SetPos(x, y);
 
-	if (collider->IsColliding()) {
+	if (collider->IsCollidingWithMask(CollisionTags::Player)) {
+		collider->Deactivate();
 		pool->Deactivate(id);
 		return;
 	}
@@ -30,11 +31,9 @@ constexpr float HALF_PI = 1.5707;
 
 void Projectile::Draw(Tmpl8::Surface* screen)
 {
-	/* Call the base draw function for debugging... */
-	collider->Draw(screen);
-
 	/* Check if we're offscreen (cannot be done within tick because screen isn't available) */
 	if (x < -5 || y < -5 || x > screen->GetWidth() + 5 || y > screen->GetHeight() + 5) {
+		collider->Deactivate();
 		pool->Deactivate(id);
 		return;
 	}
@@ -51,10 +50,4 @@ void Projectile::Draw(Tmpl8::Surface* screen)
 	mat3x3 final = mat3x3::multiply(translation, mat_a);
 
 	sprite->DrawWithMatrix(screen, final);
-}
-
-Projectile::~Projectile()
-{
-	/* Deactivate our collider for recycling */
-	collider->Deactivate();
 }

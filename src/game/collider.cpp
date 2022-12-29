@@ -1,32 +1,23 @@
 #include "collider.h"
 #include "../game.h"
 
-Collider::Collider(float x, float y, float w, float h)
+Collider::Collider(float x, float y, float w, float h, CollisionTags tags)
 {
 	pool = Tmpl8::Game::instance()->colliders;
 	this->x = x;
 	this->y = y;
 	this->w = w;
 	this->h = h;
+	this->tags = tags;
 }
 
-Collider* Collider::New(float x, float y, float w, float h)
+Collider* Collider::New(float x, float y, float w, float h, CollisionTags tags)
 {
 	shared_ptr<Pool<Collider>> pool = Tmpl8::Game::instance()->colliders;
 
-	u16 id = pool->Add(Collider(x, y, w, h));
+	u16 id = pool->Add(Collider(x, y, w, h, tags));
 
 	return pool->Get(id);
-}
-
-void Collider::Draw(Tmpl8::Surface* screen)
-{
-	if (IsColliding()) {
-		screen->Box(x, y, x + w, y + h, 0x00ff00);
-	}
-	else {
-		screen->Box(x, y, x + w, y + h, 0xffffff);
-	}
 }
 
 void Collider::SetPos(const float x, const float y)
@@ -55,6 +46,21 @@ bool Collider::IsColliding()
 	auto vec = pool->Vec();
 	for (const Collider& e : vec) {
 		if (e.id != id && e.active && AABB(x, e.x, y, e.y, w, e.w, h, e.h)) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool Collider::IsCollidingWithMask(CollisionTags mask)
+{
+	auto vec = pool->Vec();
+	for (const Collider& e : vec) {
+		if (e.id != id && e.active && 
+			e.tags & mask && 
+			AABB(x, e.x, y, e.y, w, e.w, h, e.h)
+		) {
 			return true;
 		}
 	}

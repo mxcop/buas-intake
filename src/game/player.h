@@ -1,6 +1,7 @@
 #include <memory>
 #include "../engine/surface.h"
 #include <types.h>
+#include "collider.h"
 
 using std::shared_ptr;
 using Tmpl8::Sprite;
@@ -28,6 +29,7 @@ public:
 
 private:
 	shared_ptr<Sprite> sprite = nullptr;
+	Collider* collider = nullptr;
 	float x, y;
 	u16 w, h;
 };

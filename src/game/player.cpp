@@ -7,12 +7,21 @@ Player::Player(shared_ptr<Sprite> sprite, float x, float y)
 	this->y = y;
 	w = sprite->GetWidth();
 	h = sprite->GetHeight();
+
+	/* The collider isn't owned by the player so it's fine to be a raw pointer */
+	collider = Collider::New(
+		x - static_cast<float>(w >> 1), 
+		y - static_cast<float>(h >> 1), 
+		w, h, CollisionTags::Player
+	);
 }
 
 void Player::Move(float dx, float dy)
 {
 	x += dx;
 	y += dy;
+
+	collider->SetPos(x, y);
 }
 
 void Player::Draw(Tmpl8::Surface* screen) const
