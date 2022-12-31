@@ -26,7 +26,12 @@ Collider* Collider::New(float x, float y, float w, float h, CollisionTags tags)
 
 	u16 id = pool->Add(Collider(x, y, w, h, tags));
 
-	return pool->Get(id);
+	Collider* res = pool->Get(id);
+	if (res == nullptr) {
+		printf("not good");
+	}
+
+	return res;
 }
 
 void Collider::SetPos(const float x, const float y)
@@ -64,6 +69,10 @@ bool Collider::IsColliding() const
 
 bool Collider::IsCollidingWithMask(CollisionTags mask) const
 {
+	if (pool == nullptr) {
+		printf("danger!");
+	}
+
 	auto vec = pool->Vec();
 	for (const Collider& e : vec) {
 		if (e.id != id && e.active && 

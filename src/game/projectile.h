@@ -21,4 +21,5 @@ private:
 	Collider* collider = nullptr;
 	float x, y;
 	float2 dir;
+	bool deflected = false;
 };
