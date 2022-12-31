@@ -246,12 +246,36 @@ void Surface::Plot( int x, int y, Pixel c )
 	if ((x >= 0) && (y >= 0) && (x < m_Width) && (y < m_Height)) m_Buffer[x + y * m_Pitch] = c;
 }
 
+/// Rewrote this because it was giving me errors if drawn offscreen.
 void Surface::Box( int x1, int y1, int x2, int y2, Pixel c )
 {
-	Line( (float)x1, (float)y1, (float)x2, (float)y1, c );
+	/*Line( (float)x1, (float)y1, (float)x2, (float)y1, c );
 	Line( (float)x2, (float)y1, (float)x2, (float)y2, c );
 	Line( (float)x1, (float)y2, (float)x2, (float)y2, c );
-	Line( (float)x1, (float)y1, (float)x1, (float)y2, c );
+	Line( (float)x1, (float)y1, (float)x1, (float)y2, c );*/
+
+	int target_w = this->GetWidth();
+	int target_h = this->GetHeight();
+
+	int minX = std::max(0, std::min(target_w - 1, std::min(x1, x2)));
+	int minY = std::max(0, std::min(target_h - 1, std::min(y1, y2)));
+
+	int maxX = std::min(target_w - 1, std::max(0, std::max(x1, x2)));
+	int maxY = std::min(target_h - 1, std::max(0, std::max(y1, y2)));
+
+	for (size_t x = minX; x < maxX; x++)
+	{
+		*(m_Buffer + x + minY * m_Pitch) = c;
+		*(m_Buffer + x + maxY * m_Pitch) = c;
+	}
+
+	for (size_t y = minY; y < maxY; y++)
+	{
+		*(m_Buffer + minX + y * m_Pitch) = c;
+		*(m_Buffer + maxX + y * m_Pitch) = c;
+	}
+
+	*(m_Buffer + maxX + maxY * m_Pitch) = c;
 }
 
 void Surface::Bar( int x1, int y1, int x2, int y2, Pixel c )

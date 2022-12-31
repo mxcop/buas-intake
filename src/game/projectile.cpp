@@ -30,8 +30,8 @@ void Projectile::Tick(const u64 frame, const float deltatime)
 	}
 
 	if (!deflected && collider->IsCollidingWithMask(CollisionTags::PlayerAtck) && Tmpl8::Game::instance()->deflecting) {
-		dir.x = -dir.x;
-		dir.y = -dir.y;
+		dir.x = -dir.x * 2;
+		dir.y = -dir.y * 2;
 		deflected = true;
 		return;
 	}
