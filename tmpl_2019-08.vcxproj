@@ -235,7 +235,6 @@
     <ClCompile Include="src\game\projectile.cpp" />
     <ClCompile Include="src\utils\math\mat3x3.cpp" />
     <ClCompile Include="src\game\pool\pool.cpp" />
-    <ClCompile Include="src\utils\test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\engine\camera.h" />
@@ -252,7 +251,6 @@
     <ClInclude Include="src\engine\template.h" />
     <ClInclude Include="src\utils\math\mat3x3.h" />
     <ClInclude Include="src\game\pool\pool.h" />
-    <ClInclude Include="src\utils\test.h" />
     <ClInclude Include="src\utils\types.h" />
   </ItemGroup>
   <ItemGroup>

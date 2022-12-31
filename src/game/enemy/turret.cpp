@@ -43,12 +43,12 @@ void Turret::Tick(u64 frame)
 
 	angle = atan2f(-dir.y, dir.x) + HALF_PI;
 
-	if (frame % 120 == 0) {
-		//float2 dir_right = float2(sinf(angle - HALF_PI / 4), cosf(angle - HALF_PI / 4));
-		//float2 dir_left = float2(sinf(angle + HALF_PI / 4), cosf(angle + HALF_PI / 4));
+	if (frame % 10 == 0) {
+		float2 dir_right = float2(sinf(angle - HALF_PI / 4), cosf(angle - HALF_PI / 4));
+		float2 dir_left = float2(sinf(angle + HALF_PI / 4), cosf(angle + HALF_PI / 4));
 
 		projectiles->Add(Projectile(bullet_sprite, x + dir.x * 16, y + dir.y * 16, dir * 0.08, projectiles));
-		//projectiles->Add(Projectile(bullet_sprite, x + dir_left.x * 16, y + dir_left.y * 16, dir_left * 0.08, projectiles));
-		//projectiles->Add(Projectile(bullet_sprite, x + dir_right.x * 16, y + dir_right.y * 16, dir_right * 0.08, projectiles));
+		projectiles->Add(Projectile(bullet_sprite, x + dir_left.x * 16, y + dir_left.y * 16, dir_left * 0.08, projectiles));
+		projectiles->Add(Projectile(bullet_sprite, x + dir_right.x * 16, y + dir_right.y * 16, dir_right * 0.08, projectiles));
 	}
 }

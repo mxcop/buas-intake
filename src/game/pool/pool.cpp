@@ -9,6 +9,16 @@ Pool<T>::Pool(const u16 capacity)
 }
 
 template<class T>
+u16 Pool<T>::Active() const
+{
+	u16 num = 0;
+	for (const T& e : pool) {
+		if (e.active) num++;
+	}
+	return num;
+}
+
+template<class T>
 void Pool<T>::Tick(const u64 frame, const float deltatime)
 {
 	for (T& e : pool) {

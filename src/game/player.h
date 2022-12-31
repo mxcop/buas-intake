@@ -30,6 +30,7 @@ public:
 private:
 	shared_ptr<Sprite> sprite = nullptr;
 	Collider* collider = nullptr;
+	Collider* areaOfAttack = nullptr;
 	float x, y;
 	u16 w, h;
 };

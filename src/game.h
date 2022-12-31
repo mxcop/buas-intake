@@ -42,6 +42,9 @@ namespace Tmpl8 {
 		void KeyUp(int key);
 		void KeyDown(int key);
 
+		/* inputs */
+		bool deflecting = false;
+
 		/* objects */
 		shared_ptr<Pool<Collider>> colliders = nullptr;
 		//shared_ptr<EnemyArena> enemies = nullptr;

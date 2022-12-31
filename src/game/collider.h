@@ -15,7 +15,9 @@ enum class CollisionTags
 	/* Enemy Projectile Tag */
 	EnemyProj  = 0b00000100,
 	/* Player Bounced Projectile Tag */
-	PlayerProj = 0b00001000
+	PlayerProj = 0b00001000,
+	/* Player Attack Tag */
+	PlayerAtck = 0b00010000,
 };
 
 inline CollisionTags operator|(CollisionTags a, CollisionTags b)
@@ -39,6 +41,12 @@ public:
 	void Draw(Tmpl8::Surface* screen) override { /* Colliders are not visible (unreachable) */ }
 
 	/// <summary>
+	/// Used for debbuging, will draw the bounds of the collider.
+	/// And it will change color if it's colliding.
+	/// </summary>
+	void Debug(Tmpl8::Surface* screen) const;
+
+	/// <summary>
 	/// Static function for creating a new collider.
 	/// </summary>
 	/// <returns>A raw pointer to the collider. (because I'm uncertain about smart pointer behaviour)</returns>
@@ -50,12 +58,12 @@ public:
 	void SetPos(const float x, const float y);
 
 	/// <returns>If this collider is currently intersecting with another collider.</returns>
-	bool IsColliding();
+	bool IsColliding() const;
 
 	/// <summary>
 	/// Check if collider is colliding with respect to the given mask (e.g. `CollisionTags::Player | CollisionTags::Enemy`)
 	/// </summary>
-	bool IsCollidingWithMask(CollisionTags mask);
+	bool IsCollidingWithMask(CollisionTags mask) const;
 
 	/// <summary>
 	/// Deactivate this collider.

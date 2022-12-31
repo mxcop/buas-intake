@@ -11,6 +11,15 @@ Collider::Collider(float x, float y, float w, float h, CollisionTags tags)
 	this->tags = tags;
 }
 
+void Collider::Debug(Tmpl8::Surface* screen) const
+{
+	if (IsColliding()) {
+		screen->Box(x, y, x + w, y + h, 0x00ff00);
+	} else {
+		screen->Box(x, y, x + w, y + h, 0xffffff);
+	}
+}
+
 Collider* Collider::New(float x, float y, float w, float h, CollisionTags tags)
 {
 	shared_ptr<Pool<Collider>> pool = Tmpl8::Game::instance()->colliders;
@@ -41,7 +50,7 @@ bool AABB(
 		   y1 + h1 > y2;
 }
 
-bool Collider::IsColliding()
+bool Collider::IsColliding() const
 {
 	auto vec = pool->Vec();
 	for (const Collider& e : vec) {
@@ -53,7 +62,7 @@ bool Collider::IsColliding()
 	return false;
 }
 
-bool Collider::IsCollidingWithMask(CollisionTags mask)
+bool Collider::IsCollidingWithMask(CollisionTags mask) const
 {
 	auto vec = pool->Vec();
 	for (const Collider& e : vec) {

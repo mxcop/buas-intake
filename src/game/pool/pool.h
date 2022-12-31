@@ -23,6 +23,11 @@ class Pool {
 public:
 	Pool(const u16 capacity = 32);
 
+	/// <summary>
+	/// (Debug Function) Get the number of active poolables.
+	/// </summary>
+	u16 Active() const;
+
 	/// <summary> 
 	/// Execute Tick() on all members of the arena. 
 	/// </summary>

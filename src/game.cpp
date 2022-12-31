@@ -9,6 +9,8 @@
 #include "game/enemy/turret.h"
 #include "game/pool/pool.h"
 #include "game/projectile.h"
+#include <bitset>
+#include <iostream>
 
 namespace Tmpl8
 {
@@ -51,6 +53,7 @@ namespace Tmpl8
 	}
 
 	bool w, a, s, d;
+	float deflectTimer = 0;
 
 	// -----------------------------------------------------------
 	// Main application tick function
@@ -62,7 +65,7 @@ namespace Tmpl8
 
 		// Update the window title with the frame count:
 		std::ostringstream oss;
-		oss << " Delta : " << deltatime << " Mouse : " << mouse.x << ", " << mouse.y;
+		oss << " Delta : " << deltatime << " Mouse : " << mouse.x << ", " << mouse.y << " Colliders : " << colliders->Active();
 		SDL_SetWindowTitle(window, oss.str().c_str());
 
 		// Player:
@@ -92,11 +95,14 @@ namespace Tmpl8
 
 		// Increment the frame counter.
 		frame++;
+
+		deflectTimer -= deltatime / 1000;
+		if (deflectTimer < 1) deflecting = false;
 	}
 
 	void Game::KeyDown(int key) 
 	{
-		//std::cout << std::bitset<32>(key) << '\n';
+		std::cout << std::bitset<32>(key) << '\n';
 		//printf("key pressed : %d.\n", std::bitset<32>(key));
 
 		/* Player cardinal movement */
@@ -104,6 +110,11 @@ namespace Tmpl8
 		if (key == KEY_A) a = true;
 		if (key == KEY_S) s = true;
 		if (key == KEY_D) d = true;
+
+		if (key == KEY_SPACE && deflectTimer <= 0) {
+			deflecting = true;
+			deflectTimer = 2;
+		}
 	}
 
 	void Game::KeyUp(int key) 
