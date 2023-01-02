@@ -41,11 +41,21 @@ public:
 	void multiply(const mat3x3& matrix);
 
 	/// <summary>
+	/// Multiply two matrices and return the result.
+	/// </summary>
+	static mat3x3 multiply(const mat3x3& matrix_a, const mat3x3& matrix_b);
+
+	/// <summary>
 	/// Translate the matrix by (ox, oy)
 	/// </summary>
 	/// <param name="ox">Offset on the X axis.</param>
 	/// <param name="oy">Offset on the Y axis.</param>
 	void translate(float ox, float oy);
+
+	/// <summary>
+	/// Create a new translation matrix.
+	/// </summary>
+	static mat3x3 translation(float x, float y);
 
 	/// <summary>
 	/// Rotate the matrix by theta.
@@ -54,9 +64,20 @@ public:
 	void rotate(float theta);
 
 	/// <summary>
+	/// Create a new rotation matrix.
+	/// </summary>
+	/// <param name="theta">The Z angle in radians.</param>
+	static mat3x3 rotation(float theta);
+
+	/// <summary>
 	/// Scale the matrix by (x, y)
 	/// </summary>
 	void scale(float x, float y);
+
+	/// <summary>
+	/// Create a new scaled matrix
+	/// </summary>
+	static mat3x3 scaled(float x, float y);
 
 	/// <summary>
 	/// Shear the matrix by (sx, sy)

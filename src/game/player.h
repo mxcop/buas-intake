@@ -1,32 +1,59 @@
 #pragma once
+
+#include <memory>
 #include "../engine/surface.h"
-#include "../utils/int2.hpp"
-#include "../graphics/tilemap.h"
-#include "entity.h"
+#include <types.h>
+#include "collider.h"
 
-class Player : public Entity {
+using std::shared_ptr;
+using Tmpl8::Sprite;
+
+/* Size of a full health bar */
+constexpr int FULL_HEALTH = 5;
+/* Time of immunity after being hit in seconds */
+constexpr float IMMUNITY_TIME = 1.5;
+
+class Player : public Collidable {
 public:
-	Player(std::shared_ptr<Tmpl8::Sprite> sprite, u16 x, u16 y) : Entity(sprite, x, y) { }
+	Player(shared_ptr<Sprite> sprite, shared_ptr<Sprite> attack, float x, float y);
+
+	/// <param name="dx">Delta X</param>
+	/// <param name="dy">Delta Y</param>
+	void Move(const float dx, const float dy);
+
+	void Attack();
 
 	/// <summary>
-	/// Update the player's animation.
+	/// Draw the player to the screen.
 	/// </summary>
-	/// <param name="frame"></param>
-	void Update(const unsigned long frame);
+	void Draw(Tmpl8::Surface* screen) const;
 
 	/// <summary>
-	/// Move the player one tile into the given direction.
+	/// Should be called every tick.
 	/// </summary>
-	void Move(const cdir dir);
+	void Tick(const u64 frame, const float deltatime);
+
+	/// <summary>
+	/// Called on collision.
+	/// </summary>
+	void onCollision(u16 emitter, CollisionTags tags) override;
+
+	/// <returns>Get the current position of the player.</returns>
+	float2 GetPosition() const;
+
+	/// <returns>The number of hearts left.</returns>
+	int GetHealth() const { return health; }
+
+	bool shrink = false;
 
 private:
-	/// Abstraction for moving the player with an animation.
-	void MoveWithAnimation(const i16 dx, const i16 dy);
-
-	/// Animation function pointer.
-	void (Player::*anim)() = &Player::anim_move;
-
-	// Animation functions :
-	void anim_move();
-	void anim_bump();
+	shared_ptr<Sprite> sprite = nullptr;
+	shared_ptr<Sprite> attackSprite = nullptr;
+	Collider* collider = nullptr;
+	Collider* areaOfAttack = nullptr;
+	float x, y;
+	u16 w, h;
+	int health = FULL_HEALTH;
+	float immunityTimer = IMMUNITY_TIME;
+	float attackTimer = 0;
 };

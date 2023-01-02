@@ -1,51 +1,120 @@
 #include "player.h"
-#include "../game.h"
 
-using Tmpl8::Game;
+/* Half Width  */ #define HALF_W static_cast<float>(w >> 1)
+/* Half Height */ #define HALF_H static_cast<float>(h >> 1)
 
-void Player::Update(const unsigned long frame) {
-	(this->*anim)();
+Player::Player(shared_ptr<Sprite> sprite, shared_ptr<Sprite> attack, float x, float y)
+{
+	this->sprite = sprite;
+	attackSprite = attack;
+	this->x = x;
+	this->y = y;
+	w = sprite->GetWidth();
+	h = sprite->GetHeight();
+
+	/* The colliders aren't owned by the player so it's fine to be a raw pointer */
+	collider = Collider::New(
+		x - HALF_W + 4,
+		y - HALF_H + 4,
+		w - 8, h - 8, CollisionTags::Player,
+		&Collidable::onCollision
+	);
+	areaOfAttack = Collider::New(
+		x - HALF_W * 1.5,
+		y - h,
+		w * 1.5, HALF_H, CollisionTags::PlayerAtck,
+		&Collidable::onCollision
+	);
 }
 
-void Player::MoveWithAnimation(const i16 dx, const i16 dy) {
-	if (Entity::Move(dx, dy)) {
-		anim = &Player::anim_move;
+void Player::Move(float dx, float dy)
+{
+	if (shrink) {
+		x += dx * 1.5;
+		y += dy * 1.5;
 	} else {
-		ox = dx * 2;
-		oy = dy * 2;
-		anim = &Player::anim_bump;
+		x += dx;
+		y += dy;
+	}
+
+	if (shrink) collider->SetPos(x - HALF_W * 0.4 + 3, y - HALF_H * 0.4 + 3);
+	else collider->SetPos(x - HALF_W + 4, y - HALF_H + 4);
+
+	areaOfAttack->SetPos(x - HALF_W * 1.5, y - h);
+}
+
+void Player::Attack()
+{
+	attackTimer = 2.5;
+}
+
+void Player::Draw(Tmpl8::Surface* screen) const
+{
+	/* Use the center position */
+	mat3x3 translation = mat3x3::translation(
+		x - HALF_W,
+		y - HALF_H
+	);
+
+	/* Scale the sprite if the player has shrunk */
+	if (shrink) {
+		translation = mat3x3::translation(
+			x - HALF_W * 0.4,
+			y - HALF_H * 0.4
+		);
+		translation = mat3x3::multiply(translation, mat3x3::scaled(0.4, 0.4));
+	}
+
+	sprite->DrawWithMatrix(screen, translation);
+
+	translation = mat3x3::translation(
+		x - HALF_W - 4,
+		y - HALF_H - 11
+	);
+
+	/* Draw the attack animation */
+	if (attackTimer > 0) {
+		attackSprite->SetFlags(Sprite::FLARE);
+		attackSprite->DrawWithMatrix(screen, translation);
+	}
+
+	//areaOfAttack->Debug(screen);
+	//collider->Debug(screen);
+}
+
+void Player::Tick(const u64 frame, const float deltatime)
+{
+	sprite->SetFrame(frame % 8 / 2);
+
+	/* Briefly enable the area of attack collider */
+	areaOfAttack->enabled = attackTimer >= 2;
+	/* Play the attack animation */
+	attackSprite->SetFrame(3 - std::ceilf(attackTimer));
+
+	if (shrink) collider->SetSize(3, 3);
+	else collider->SetSize(w - 8, h - 8);
+
+	collider->Tick(this);
+	areaOfAttack->Tick(this);
+
+	/* Decrement the timers */
+	if (immunityTimer > 0) immunityTimer -= deltatime / 1000;
+	if (attackTimer > 0) attackTimer -= deltatime / 100;
+}
+
+void Player::onCollision(u16 emitter, CollisionTags tags)
+{
+	/* Only listen for collisions to the player's hitbox */
+	if (emitter != collider->id) return;
+
+	/* If we're hit while not immune take damage */
+	if (immunityTimer <= 0 && tags & CollisionTags::EnemyProj) {
+		health--;
+		immunityTimer = IMMUNITY_TIME;
 	}
 }
 
-void Player::Move(const cdir dir) {
-	// Don't move if we're still animating.
-	if (ox != 0 || oy != 0) return;
-
-	Game::instance()->enemies->StepAll();
-
-	switch (dir)
-	{
-	case cdir::up: MoveWithAnimation   ( 0, -1); break;
-	case cdir::right: MoveWithAnimation( 1,  0); break;
-	case cdir::down: MoveWithAnimation ( 0,  1); break;
-	case cdir::left: MoveWithAnimation (-1,  0); break;
-	}
-}
-
-void Player::anim_move() {
-	// Remove a bit of the offset each frame:
-	// Idea was Sourced from the Pork-like game.
-	if (ox > 0) ox--;
-	if (ox < 0) ox++;
-	if (oy > 0) oy--;
-	if (oy < 0) oy++;
-}
-
-void Player::anim_bump() {
-	// Remove a bit of the offset each frame:
-	// Idea was Sourced from the Pork-like game.
-	if (ox > 0) ox -= 0.25;
-	if (ox < 0) ox += 0.25;
-	if (oy > 0) oy -= 0.25;
-	if (oy < 0) oy += 0.25;
+float2 Player::GetPosition() const
+{
+	return float2(x, y);
 }

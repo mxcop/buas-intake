@@ -246,12 +246,36 @@ void Surface::Plot( int x, int y, Pixel c )
 	if ((x >= 0) && (y >= 0) && (x < m_Width) && (y < m_Height)) m_Buffer[x + y * m_Pitch] = c;
 }
 
+/// Rewrote this because it was giving me errors if drawn offscreen.
 void Surface::Box( int x1, int y1, int x2, int y2, Pixel c )
 {
-	Line( (float)x1, (float)y1, (float)x2, (float)y1, c );
+	/*Line( (float)x1, (float)y1, (float)x2, (float)y1, c );
 	Line( (float)x2, (float)y1, (float)x2, (float)y2, c );
 	Line( (float)x1, (float)y2, (float)x2, (float)y2, c );
-	Line( (float)x1, (float)y1, (float)x1, (float)y2, c );
+	Line( (float)x1, (float)y1, (float)x1, (float)y2, c );*/
+
+	int target_w = this->GetWidth();
+	int target_h = this->GetHeight();
+
+	int minX = std::max(0, std::min(target_w - 1, std::min(x1, x2)));
+	int minY = std::max(0, std::min(target_h - 1, std::min(y1, y2)));
+
+	int maxX = std::min(target_w - 1, std::max(0, std::max(x1, x2)));
+	int maxY = std::min(target_h - 1, std::max(0, std::max(y1, y2)));
+
+	for (size_t x = minX; x < maxX; x++)
+	{
+		*(m_Buffer + x + minY * m_Pitch) = c;
+		*(m_Buffer + x + maxY * m_Pitch) = c;
+	}
+
+	for (size_t y = minY; y < maxY; y++)
+	{
+		*(m_Buffer + minX + y * m_Pitch) = c;
+		*(m_Buffer + maxX + y * m_Pitch) = c;
+	}
+
+	*(m_Buffer + maxX + maxY * m_Pitch) = c;
 }
 
 void Surface::Bar( int x1, int y1, int x2, int y2, Pixel c )
@@ -495,8 +519,6 @@ void Sprite::DrawScaled( int a_X, int a_Y, int a_Width, int a_Height, Surface* a
 
 void Sprite::DrawWithMatrix(Surface* a_Target, mat3x3 matrix)
 {
-	// TODO: Add support for sprite animations !
-	
 	// Load the correct part of the texture.
 	Pixel* src = GetBuffer() + m_CurrentFrame * m_Width;
 
@@ -515,12 +537,12 @@ void Sprite::DrawWithMatrix(Surface* a_Target, mat3x3 matrix)
 	matrix.bounds(m_Width, m_Height, min, max);
 
 	// Loop through each pixel within the transformed bounding box:
-	for (size_t x = min.x; x < max.x; x++)
+	for (long x = min.x; x < max.x; x++)
 	{
 		// Check if this X axis is onscreen.
 		if (x < 0 || x >= target_w) continue;
 
-		for (size_t y = min.y; y < max.y; y++)
+		for (long y = min.y; y < max.y; y++)
 		{
 			// Check if this Y axis is onscreen.
 			if (y < 0 || y >= target_h) continue;
@@ -534,6 +556,8 @@ void Sprite::DrawWithMatrix(Surface* a_Target, mat3x3 matrix)
 			// Sample the texture.
 			const Pixel pixel = *(src + static_cast<int>(pixel_pos.y) * m_Pitch + static_cast<int>(pixel_pos.x));
 		
+			if (pixel == 0x000000) continue;
+
 			if (m_Flags & FLARE) // Alpha blending :
 			{
 				// Get the pixel in the position we're writing too.

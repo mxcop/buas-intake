@@ -4,19 +4,16 @@
 #include <SDL.h>
 #include "int2.hpp"
 #include "float2.hpp"
-
 #include "game/player.h"
-#include "game/arena/arena.h"
-#include "graphics/tilemap.h"
+#include "game/collider.h"
 
 using std::shared_ptr;
 using std::unique_ptr;
 
 namespace Tmpl8 {
 	/* constants */
-	constexpr int ScreenScalingFactor = 4;
-	constexpr int TilemapWidth = 16;
-	constexpr int TilemapHeight = 16;
+	constexpr int TilemapWidth = 32;
+	constexpr int TilemapHeight = 32;
 	constexpr int TileSize = 8;
 
 	class Surface;
@@ -42,12 +39,15 @@ namespace Tmpl8 {
 		void MouseUp(int button) { /* implement if you want to detect mouse button presses */ }
 		void MouseDown(int button) { /* implement if you want to detect mouse button presses */ }
 		void MouseMove(int dx, int dy);
-		void KeyUp(int key) { /* implement if you want to handle keys */ }
+		void KeyUp(int key);
 		void KeyDown(int key);
 
+		/* inputs */
+		bool deflecting = false;
+
 		/* objects */
-		unique_ptr<Tilemap> tilemap = nullptr;
-		shared_ptr<EnemyArena> enemies = nullptr;
+		shared_ptr<Pool<Collider>> colliders = nullptr;
+		//shared_ptr<EnemyArena> enemies = nullptr;
 
 	private:
 		Game() {}
@@ -62,6 +62,6 @@ namespace Tmpl8 {
 		float2 f_mouse = float2();
 
 		/* objects */
-		unique_ptr<Player> player = nullptr;
+		shared_ptr<Player> player = nullptr;
 	};
 }; // namespace Tmpl8

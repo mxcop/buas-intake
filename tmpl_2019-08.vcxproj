@@ -226,35 +226,33 @@
   <ItemGroup>
     <ClCompile Include="src\engine\camera.cpp" />
     <ClCompile Include="src\game.cpp" />
-    <ClCompile Include="src\game\astar\astar.cpp" />
-    <ClCompile Include="src\game\enemy.cpp" />
-    <ClCompile Include="src\game\entity.cpp" />
-    <ClCompile Include="src\game\player.cpp" />
-    <ClCompile Include="src\graphics\map\map.cpp" />
-    <ClCompile Include="src\graphics\tilemap.cpp" />
-    <ClCompile Include="src\physics\bone.cpp" />
     <ClCompile Include="src\engine\surface.cpp" />
     <ClCompile Include="src\engine\template.cpp" />
+    <ClCompile Include="src\game\collider.cpp" />
+    <ClCompile Include="src\game\enemy\enemy.cpp" />
+    <ClCompile Include="src\game\enemy\turret.cpp" />
+    <ClCompile Include="src\game\player.cpp" />
+    <ClCompile Include="src\game\projectile.cpp" />
+    <ClCompile Include="src\game\ui\healthbar.cpp" />
     <ClCompile Include="src\utils\math\mat3x3.cpp" />
-    <ClCompile Include="src\game\arena\arena.cpp" />
+    <ClCompile Include="src\game\pool\pool.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\engine\camera.h" />
+    <ClInclude Include="src\engine\keys.h" />
     <ClInclude Include="src\game.h" />
-    <ClInclude Include="src\game\astar\astar.h" />
-    <ClInclude Include="src\game\enemy.h" />
-    <ClInclude Include="src\game\entity.h" />
+    <ClInclude Include="src\game\collider.h" />
+    <ClInclude Include="src\game\enemy\enemy.h" />
+    <ClInclude Include="src\game\enemy\turret.h" />
     <ClInclude Include="src\game\player.h" />
-    <ClInclude Include="src\graphics\tilemap.h" />
-    <ClInclude Include="src\graphics\map\map.h" />
-    <ClInclude Include="src\physics\bone.h" />
-    <ClInclude Include="src\utils\files\csv.cpp" />
+    <ClInclude Include="src\game\projectile.h" />
+    <ClInclude Include="src\game\ui\healthbar.h" />
     <ClInclude Include="src\utils\float2.hpp" />
     <ClInclude Include="src\utils\int2.hpp" />
     <ClInclude Include="src\engine\surface.h" />
     <ClInclude Include="src\engine\template.h" />
     <ClInclude Include="src\utils\math\mat3x3.h" />
-    <ClInclude Include="src\game\arena\arena.h" />
+    <ClInclude Include="src\game\pool\pool.h" />
     <ClInclude Include="src\utils\types.h" />
   </ItemGroup>
   <ItemGroup>
