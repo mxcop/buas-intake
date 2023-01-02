@@ -9,20 +9,26 @@
 #include "game/enemy/turret.h"
 #include "game/pool/pool.h"
 #include "game/projectile.h"
-#include <bitset>
-#include <iostream>
+#include "game/ui/healthbar.h"
 
 namespace Tmpl8
 {
 	/* sprites */
-	shared_ptr<Sprite> s_tileset(new Sprite(new Surface("assets/tiles.png"), 6));
+	//shared_ptr<Sprite> s_tileset(new Sprite(new Surface("assets/tiles.png"), 6));
 	shared_ptr<Sprite> s_turret(new Sprite(new Surface("assets/turret.png"), 1));
 	shared_ptr<Sprite> s_bullet(new Sprite(new Surface("assets/bullet.png"), 1));
 	shared_ptr<Sprite> s_player(new Sprite(new Surface("assets/player-plane.png"), 4));
+	shared_ptr<Sprite> s_player_attack(new Sprite(new Surface("assets/player-attack.png"), 3));
+	shared_ptr<Sprite> s_heart(new Sprite(new Surface("assets/heart.png"), 2));
+	shared_ptr<Sprite> s_tiles(new Sprite(new Surface("assets/testing-tiles.png"), 2));
 
+	/* objects */
+	unique_ptr<HealthBar> healthBar = nullptr;
 	unique_ptr<Turret> turret = nullptr;
 	unique_ptr<Turret> turret2 = nullptr;
 	unique_ptr<Turret> turret3 = nullptr;
+
+	/* pools */
 	shared_ptr<Pool<Projectile>> projectiles = nullptr;
 
 	// -----------------------------------------------------------
@@ -35,12 +41,14 @@ namespace Tmpl8
 		colliders = std::make_shared<Pool<Collider>>(128);
 
 		// Initialize the enemies, player, & tilemap:
-		player = std::make_shared<Player>(s_player, 80, 80);
+		player = std::make_shared<Player>(s_player, s_player_attack, 80, 80);
 		projectiles = std::make_shared<Pool<Projectile>>(512);
 		turret = std::make_unique<Turret>(40, 40, s_turret, s_bullet, player, projectiles);
 		turret2 = std::make_unique<Turret>(120, 80, s_turret, s_bullet, player, projectiles);
 		//turret3 = std::make_unique<Turret>(60, 160, s_turret, s_bullet, player, projectiles);
-		
+
+		healthBar = std::make_unique<HealthBar>(s_heart, player);
+
 		//enemies = std::make_shared<EnemyArena>();
 	}
 	
@@ -63,6 +71,15 @@ namespace Tmpl8
 		// Clear the graphics window.
 		screen->Clear(0);
 
+		for (size_t y = 0; y < ScreenHeight; y++)
+		{
+			for (size_t x = 0; x < ScreenWidth; x++)
+			{
+				s_tiles->SetFrame((x + y * ScreenWidth + y % 2) % 2);
+				s_tiles->Draw(screen, x * 8, y * 8);
+			}
+		}
+
 		// Update the window title with the frame count:
 		std::ostringstream oss;
 		oss << " Delta : " << deltatime << " Mouse : " << mouse.x << ", " << mouse.y << " Colliders : " << colliders->Active();
@@ -73,7 +90,7 @@ namespace Tmpl8
 		if (a == true) player->Move(-1,  0);
 		if (s == true) player->Move( 0,  1);
 		if (d == true) player->Move( 1,  0);
-		player->Tick(frame);
+		player->Tick(frame, deltatime);
 		player->Draw(screen);
 
 		turret->Tick(frame);
@@ -85,6 +102,8 @@ namespace Tmpl8
 
 		projectiles->Tick(frame, deltatime);
 		projectiles->Draw(screen);
+
+		healthBar->Draw(screen);
 
 		// Draw the enemies.
 		//enemies->UpdateAll(frame);
@@ -102,7 +121,7 @@ namespace Tmpl8
 
 	void Game::KeyDown(int key) 
 	{
-		std::cout << std::bitset<32>(key) << '\n';
+		//std::cout << std::bitset<32>(key) << '\n';
 		//printf("key pressed : %d.\n", std::bitset<32>(key));
 
 		/* Player cardinal movement */
@@ -113,7 +132,8 @@ namespace Tmpl8
 
 		if (key == KEY_SPACE && deflectTimer <= 0) {
 			deflecting = true;
-			deflectTimer = 2;
+			deflectTimer = 1;
+			player->Attack();
 		}
 	}
 

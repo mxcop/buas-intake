@@ -233,6 +233,7 @@
     <ClCompile Include="src\game\enemy\turret.cpp" />
     <ClCompile Include="src\game\player.cpp" />
     <ClCompile Include="src\game\projectile.cpp" />
+    <ClCompile Include="src\game\ui\healthbar.cpp" />
     <ClCompile Include="src\utils\math\mat3x3.cpp" />
     <ClCompile Include="src\game\pool\pool.cpp" />
   </ItemGroup>
@@ -245,6 +246,7 @@
     <ClInclude Include="src\game\enemy\turret.h" />
     <ClInclude Include="src\game\player.h" />
     <ClInclude Include="src\game\projectile.h" />
+    <ClInclude Include="src\game\ui\healthbar.h" />
     <ClInclude Include="src\utils\float2.hpp" />
     <ClInclude Include="src\utils\int2.hpp" />
     <ClInclude Include="src\engine\surface.h" />

@@ -30,12 +30,17 @@ inline u8 operator&(CollisionTags a, CollisionTags b)
 	return static_cast<u8>(static_cast<int>(a) & static_cast<int>(b));
 }
 
+class Collidable {
+public:
+	virtual void onCollision(u16 emitter, CollisionTags tags) = 0;
+};
+
 /// <summary>
 /// Rectangle Collider
 /// </summary>
 class Collider : public Poolable {
 public:
-	Collider(float x, float y, float w, float h, CollisionTags tags);
+	Collider(float x, float y, float w, float h, CollisionTags tags, void (Collidable::*onCollision)(u16, CollisionTags));
 
 	void Tick(const u64 frame, const float deltatime) override { /* Colliders don't tick (unreachable) */ }
 	void Draw(Tmpl8::Surface* screen) override { /* Colliders are not visible (unreachable) */ }
@@ -50,7 +55,12 @@ public:
 	/// Static function for creating a new collider.
 	/// </summary>
 	/// <returns>A raw pointer to the collider. (because I'm uncertain about smart pointer behaviour)</returns>
-	static Collider* New(float x, float y, float w, float h, CollisionTags tags = CollisionTags::None);
+	static Collider* New(float x, float y, float w, float h, CollisionTags tags, void (Collidable::*onCollision)(u16, CollisionTags));
+
+	/// <summary>
+	/// Perform collision checks.
+	/// </summary>
+	void Tick(Collidable* owner);
 
 	/// <summary>
 	/// Set the position of the collider.
@@ -63,7 +73,7 @@ public:
 	/// <summary>
 	/// Check if collider is colliding with respect to the given mask (e.g. `CollisionTags::Player | CollisionTags::Enemy`)
 	/// </summary>
-	bool IsCollidingWithMask(CollisionTags mask) const;
+	//bool IsCollidingWithMask(CollisionTags mask) const;
 
 	/// <summary>
 	/// Deactivate this collider.
@@ -71,8 +81,10 @@ public:
 	void Deactivate();
 
 	CollisionTags tags = CollisionTags::None;
+	bool enabled = true;
 
 private:
 	shared_ptr<Pool<Collider>> pool = nullptr;
 	float x, y, w, h;
+	void (Collidable::*onCollision)(u16, CollisionTags);
 };

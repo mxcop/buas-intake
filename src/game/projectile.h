@@ -8,12 +8,14 @@ using std::shared_ptr;
 using std::unique_ptr;
 using Tmpl8::Sprite;
 
-class Projectile : public Poolable {
+class Projectile : public Poolable, public Collidable {
 public:
 	Projectile(shared_ptr<Sprite> sprite, float x, float y, float2 dir, shared_ptr<Pool<Projectile>> pool);
 
 	void Tick(const u64 frame, const float deltatime) override;
 	void Draw(Tmpl8::Surface* screen) override;
+
+	void onCollision(u16 emitter, CollisionTags tags) override;
 
 private:
 	shared_ptr<Pool<Projectile>> pool = nullptr;

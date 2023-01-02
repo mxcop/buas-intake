@@ -1,6 +1,7 @@
 #include "pool.h"
 #include "../projectile.h"
 #include "../collider.h"
+#include "../player.h"
 
 template<class T>
 Pool<T>::Pool(const u16 capacity)

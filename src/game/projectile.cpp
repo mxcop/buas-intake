@@ -13,7 +13,7 @@ Projectile::Projectile(shared_ptr<Sprite> sprite, float x, float y, float2 dir, 
 	this->dir = dir;
 
 	/* The collider isn't owned by the projectile so it's fine to be a raw pointer */
-	collider = Collider::New(x, y, 4, 4, CollisionTags::EnemyProj);
+	collider = Collider::New(x, y, 4, 4, CollisionTags::EnemyProj, &Collidable::onCollision);
 }
 
 void Projectile::Tick(const u64 frame, const float deltatime)
@@ -22,8 +22,9 @@ void Projectile::Tick(const u64 frame, const float deltatime)
 	y += dir.y * deltatime;
 
 	collider->SetPos(x, y);
+	collider->Tick(this);
 
-	if (collider->IsCollidingWithMask(CollisionTags::Player)) {
+	/*if (collider->IsCollidingWithMask(CollisionTags::Player)) {
 		collider->Deactivate();
 		pool->Deactivate(id);
 		return;
@@ -34,7 +35,7 @@ void Projectile::Tick(const u64 frame, const float deltatime)
 		dir.y = -dir.y * 2;
 		deflected = true;
 		return;
-	}
+	}*/
 }
 
 /* Half of PI or 90 Degrees */
@@ -62,5 +63,13 @@ void Projectile::Draw(Tmpl8::Surface* screen)
 
 	sprite->DrawWithMatrix(screen, final);
 
-	collider->Debug(screen);
+	//collider->Debug(screen);
+}
+
+void Projectile::onCollision(u16 _, CollisionTags tags)
+{
+	if (!deflected && tags & CollisionTags::PlayerAtck) {
+		dir = float2(-dir.x, -dir.y);
+		deflected = true;
+	}
 }

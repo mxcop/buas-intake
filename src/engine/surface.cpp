@@ -556,6 +556,8 @@ void Sprite::DrawWithMatrix(Surface* a_Target, mat3x3 matrix)
 			// Sample the texture.
 			const Pixel pixel = *(src + static_cast<int>(pixel_pos.y) * m_Pitch + static_cast<int>(pixel_pos.x));
 		
+			if (pixel == 0x000000) continue;
+
 			if (m_Flags & FLARE) // Alpha blending :
 			{
 				// Get the pixel in the position we're writing too.
