@@ -67,6 +67,11 @@ public:
 	/// </summary>
 	void SetPos(const float x, const float y);
 
+	/// <summary>
+	/// Set the size of the collider.
+	/// </summary>
+	void SetSize(const float w, const float h);
+
 	/// <returns>If this collider is currently intersecting with another collider.</returns>
 	bool IsColliding() const;
 

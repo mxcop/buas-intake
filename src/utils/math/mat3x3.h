@@ -75,6 +75,11 @@ public:
 	void scale(float x, float y);
 
 	/// <summary>
+	/// Create a new scaled matrix
+	/// </summary>
+	static mat3x3 scaled(float x, float y);
+
+	/// <summary>
 	/// Shear the matrix by (sx, sy)
 	/// </summary>
 	void shear(float sx, float sy);

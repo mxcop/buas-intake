@@ -43,7 +43,7 @@ void Turret::Tick(u64 frame)
 
 	angle = atan2f(-dir.y, dir.x) + HALF_PI;
 
-	if (frame % 10 == 0) {
+	if (frame % 60 == 0) {
 		float2 dir_right = float2(sinf(angle - HALF_PI / 4), cosf(angle - HALF_PI / 4));
 		float2 dir_left = float2(sinf(angle + HALF_PI / 4), cosf(angle + HALF_PI / 4));
 

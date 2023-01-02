@@ -29,10 +29,17 @@ Player::Player(shared_ptr<Sprite> sprite, shared_ptr<Sprite> attack, float x, fl
 
 void Player::Move(float dx, float dy)
 {
-	x += dx;
-	y += dy;
+	if (shrink) {
+		x += dx * 1.5;
+		y += dy * 1.5;
+	} else {
+		x += dx;
+		y += dy;
+	}
 
-	collider->SetPos(x - HALF_W + 4, y - HALF_H + 4);
+	if (shrink) collider->SetPos(x - HALF_W * 0.4 + 3, y - HALF_H * 0.4 + 3);
+	else collider->SetPos(x - HALF_W + 4, y - HALF_H + 4);
+
 	areaOfAttack->SetPos(x - HALF_W * 1.5, y - h);
 }
 
@@ -49,6 +56,15 @@ void Player::Draw(Tmpl8::Surface* screen) const
 		y - HALF_H
 	);
 
+	/* Scale the sprite if the player has shrunk */
+	if (shrink) {
+		translation = mat3x3::translation(
+			x - HALF_W * 0.4,
+			y - HALF_H * 0.4
+		);
+		translation = mat3x3::multiply(translation, mat3x3::scaled(0.4, 0.4));
+	}
+
 	sprite->DrawWithMatrix(screen, translation);
 
 	translation = mat3x3::translation(
@@ -62,8 +78,8 @@ void Player::Draw(Tmpl8::Surface* screen) const
 		attackSprite->DrawWithMatrix(screen, translation);
 	}
 
-	areaOfAttack->Debug(screen);
-	collider->Debug(screen);
+	//areaOfAttack->Debug(screen);
+	//collider->Debug(screen);
 }
 
 void Player::Tick(const u64 frame, const float deltatime)
@@ -74,6 +90,9 @@ void Player::Tick(const u64 frame, const float deltatime)
 	areaOfAttack->enabled = attackTimer >= 2;
 	/* Play the attack animation */
 	attackSprite->SetFrame(3 - std::ceilf(attackTimer));
+
+	if (shrink) collider->SetSize(3, 3);
+	else collider->SetSize(w - 8, h - 8);
 
 	collider->Tick(this);
 	areaOfAttack->Tick(this);

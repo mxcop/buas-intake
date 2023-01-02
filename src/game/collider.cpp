@@ -68,6 +68,12 @@ void Collider::SetPos(const float x, const float y)
 	this->y = y;
 }
 
+void Collider::SetSize(const float w, const float h)
+{
+	this->w = w;
+	this->h = h;
+}
+
 bool Collider::IsColliding() const
 {
 	auto vec = pool->Vec();

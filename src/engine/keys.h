@@ -6,3 +6,4 @@ constexpr int KEY_S = 0b10110;
 constexpr int KEY_D = 0b00111;
 
 constexpr int KEY_SPACE = 0b101100;
+constexpr int KEY_SHIFT = 0b11100001;

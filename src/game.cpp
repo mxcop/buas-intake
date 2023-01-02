@@ -10,6 +10,8 @@
 #include "game/pool/pool.h"
 #include "game/projectile.h"
 #include "game/ui/healthbar.h"
+#include <bitset>
+#include <iostream>
 
 namespace Tmpl8
 {
@@ -121,7 +123,7 @@ namespace Tmpl8
 
 	void Game::KeyDown(int key) 
 	{
-		//std::cout << std::bitset<32>(key) << '\n';
+		std::cout << std::bitset<32>(key) << '\n';
 		//printf("key pressed : %d.\n", std::bitset<32>(key));
 
 		/* Player cardinal movement */
@@ -135,6 +137,10 @@ namespace Tmpl8
 			deflectTimer = 1;
 			player->Attack();
 		}
+
+		if (key == KEY_SHIFT) {
+			player->shrink = true;
+		}
 	}
 
 	void Game::KeyUp(int key) 
@@ -143,6 +149,10 @@ namespace Tmpl8
 		if (key == KEY_A) a = false;
 		if (key == KEY_S) s = false;
 		if (key == KEY_D) d = false;
+
+		if (key == KEY_SHIFT) {
+			player->shrink = false;
+		}
 	}
 
 	void Game::MouseMove(int dx, int dy) 

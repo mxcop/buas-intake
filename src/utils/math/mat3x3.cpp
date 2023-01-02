@@ -119,6 +119,15 @@ void mat3x3::scale(float x, float y)
 	}));
 }
 
+mat3x3 mat3x3::scaled(float x, float y)
+{
+	return mat3x3({
+		x, 0, 0,
+		0, y, 0,
+		0, 0, 1
+	});
+}
+
 void mat3x3::shear(float sx, float sy)
 {
 	// 1  | sx | 0

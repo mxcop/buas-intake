@@ -44,6 +44,8 @@ public:
 	/// <returns>The number of hearts left.</returns>
 	int GetHealth() const { return health; }
 
+	bool shrink = false;
+
 private:
 	shared_ptr<Sprite> sprite = nullptr;
 	shared_ptr<Sprite> attackSprite = nullptr;
