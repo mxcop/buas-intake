@@ -35,6 +35,17 @@ Collider* Collider::New(float x, float y, float w, float h, CollisionTags tags, 
 	return res;
 }
 
+Collider* Collider::New(Collider collider)
+{
+	shared_ptr<Pool<Collider>> pool = Tmpl8::Game::instance()->colliders;
+
+	u16 id = pool->Add(collider);
+
+	Collider* res = pool->Get(id);
+
+	return res;
+}
+
 /// <summary>
 /// Simple AABB Rect2Rect collision check.
 /// </summary>

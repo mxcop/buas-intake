@@ -12,12 +12,14 @@
 #include "game/ui/healthbar.h"
 #include <bitset>
 #include <iostream>
+#include "game/enemy/plane.h"
 
 namespace Tmpl8
 {
 	/* sprites */
 	//shared_ptr<Sprite> s_tileset(new Sprite(new Surface("assets/tiles.png"), 6));
 	shared_ptr<Sprite> s_turret(new Sprite(new Surface("assets/turret.png"), 1));
+	shared_ptr<Sprite> s_plane(new Sprite(new Surface("assets/enemy-plane.png"), 4));
 	shared_ptr<Sprite> s_bullet(new Sprite(new Surface("assets/bullet.png"), 1));
 	shared_ptr<Sprite> s_player(new Sprite(new Surface("assets/player-plane.png"), 4));
 	shared_ptr<Sprite> s_player_attack(new Sprite(new Surface("assets/player-attack.png"), 3));
@@ -28,7 +30,7 @@ namespace Tmpl8
 	unique_ptr<HealthBar> healthBar = nullptr;
 	unique_ptr<Turret> turret = nullptr;
 	unique_ptr<Turret> turret2 = nullptr;
-	unique_ptr<Turret> turret3 = nullptr;
+	unique_ptr<Plane> plane = nullptr;
 
 	/* pools */
 	shared_ptr<Pool<Projectile>> projectiles = nullptr;
@@ -47,7 +49,7 @@ namespace Tmpl8
 		projectiles = std::make_shared<Pool<Projectile>>(512);
 		turret = std::make_unique<Turret>(40, 40, s_turret, s_bullet, player, projectiles);
 		turret2 = std::make_unique<Turret>(120, 80, s_turret, s_bullet, player, projectiles);
-		//turret3 = std::make_unique<Turret>(60, 160, s_turret, s_bullet, player, projectiles);
+		plane = std::make_unique<Plane>(screen->GetWidth() / 2, 120, s_plane, s_bullet, player, projectiles);
 
 		healthBar = std::make_unique<HealthBar>(s_heart, player);
 
@@ -95,12 +97,12 @@ namespace Tmpl8
 		player->Tick(frame, deltatime);
 		player->Draw(screen);
 
-		turret->Tick(frame);
+		turret->Tick(frame, deltatime);
 		turret->Draw(screen);
-		turret2->Tick(frame);
+		turret2->Tick(frame, deltatime);
 		turret2->Draw(screen);
-		//turret3->Tick(frame);
-		//turret3->Draw(screen);
+		plane->Tick(frame, deltatime);
+		plane->Draw(screen);
 
 		projectiles->Tick(frame, deltatime);
 		projectiles->Draw(screen);

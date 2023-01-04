@@ -1,10 +1,15 @@
 #include "player.h"
+#include <stdexcept>
 
 /* Half Width  */ #define HALF_W static_cast<float>(w >> 1)
 /* Half Height */ #define HALF_H static_cast<float>(h >> 1)
 
 Player::Player(shared_ptr<Sprite> sprite, shared_ptr<Sprite> attack, float x, float y)
 {
+	if (sprite->Frames() != 4) {
+		throw std::invalid_argument("player plane sprite should have 4 frames");
+	}
+
 	this->sprite = sprite;
 	attackSprite = attack;
 	this->x = x;

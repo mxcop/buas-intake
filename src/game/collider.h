@@ -56,6 +56,7 @@ public:
 	/// </summary>
 	/// <returns>A raw pointer to the collider. (because I'm uncertain about smart pointer behaviour)</returns>
 	static Collider* New(float x, float y, float w, float h, CollisionTags tags, void (Collidable::*onCollision)(u16, CollisionTags));
+	static Collider* New(Collider collider);
 
 	/// <summary>
 	/// Perform collision checks.

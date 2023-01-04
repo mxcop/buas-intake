@@ -70,6 +70,7 @@ void Projectile::onCollision(u16 _, CollisionTags tags)
 {
 	if (!deflected && tags & CollisionTags::PlayerAtck) {
 		dir = float2(-dir.x, -dir.y);
+		collider->tags = CollisionTags::PlayerProj;
 		deflected = true;
 	}
 }
