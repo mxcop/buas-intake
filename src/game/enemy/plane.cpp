@@ -1,5 +1,6 @@
 #include "plane.h"
 #include <stdexcept>
+#include "../../game.h"
 
 Plane::Plane(
 	float x, float y, 
@@ -19,6 +20,7 @@ Plane::Plane(
 	w = sprite->GetWidth();
 	h = sprite->GetHeight();
 	collider->SetSize(w, h);
+	planes = Tmpl8::Game::instance()->planes;
 }
 
 constexpr float PI = 3.141592;
@@ -43,8 +45,6 @@ void Plane::Draw(Tmpl8::Surface* screen)
 	mat3x3 final = mat3x3::multiply(translation, mat_a);
 
 	sprite->DrawWithMatrix(screen, final);
-
-	collider->Debug(screen);
 }
 
 void Plane::Tick(u64 frame, float deltatime)
@@ -64,6 +64,8 @@ void Plane::Tick(u64 frame, float deltatime)
 void Plane::onCollision(u16 emitter, CollisionTags tags)
 {
 	if (tags & CollisionTags::PlayerProj) {
-		printf("enemy plane got hit!\n");
+		/* Deactivate this plane */
+		collider->Deactivate();
+		planes->Deactivate(id);
 	}
 }

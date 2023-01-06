@@ -6,6 +6,8 @@
 #include "float2.hpp"
 #include "game/player.h"
 #include "game/collider.h"
+#include "game/enemy/turret.h"
+#include "game/enemy/plane.h"
 
 using std::shared_ptr;
 using std::unique_ptr;
@@ -47,7 +49,8 @@ namespace Tmpl8 {
 
 		/* objects */
 		shared_ptr<Pool<Collider>> colliders = nullptr;
-		//shared_ptr<EnemyArena> enemies = nullptr;
+		shared_ptr<Pool<Turret>> turrets = nullptr;
+		shared_ptr<Pool<Plane>> planes = nullptr;
 
 	private:
 		Game() {}

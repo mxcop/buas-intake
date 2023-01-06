@@ -1,4 +1,5 @@
 #include "enemy.h"
+#include "../../game.h"
 
 Enemy::Enemy(float x, float y, int w, int h, CollisionTags tags)
 {

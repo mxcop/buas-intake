@@ -6,19 +6,19 @@
 using Tmpl8::Surface;
 
 /* Generic enemy class */
-class Enemy : public Collidable {
+class Enemy : public Poolable, public Collidable {
 public:
 	Enemy(float x, float y, int w, int h, CollisionTags tags);
 
 	/// <summary>
 	/// Draw the enemy to the screen.
 	/// </summary>
-	virtual void Draw(Surface* screen) = 0;
+	virtual void Draw(Surface* screen) override = 0;
 
 	/// <summary>
 	/// Execute one tick of enemy behaviour.
 	/// </summary>
-	virtual void Tick(const u64 frame, const float deltatime) = 0;
+	virtual void Tick(const u64 frame, const float deltatime) override = 0;
 
 	/// <summary>
 	/// Called on collision.

@@ -24,6 +24,7 @@ public:
 	void onCollision(u16 emitter, CollisionTags tags) override;
 
 private:
+	shared_ptr<Pool<Plane>> planes = nullptr;
 	shared_ptr<Sprite> sprite = nullptr;
 	shared_ptr<Sprite> bullet_sprite = nullptr;
 	shared_ptr<Player> target = nullptr;

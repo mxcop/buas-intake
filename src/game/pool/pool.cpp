@@ -2,6 +2,8 @@
 #include "../projectile.h"
 #include "../collider.h"
 #include "../player.h"
+#include "../enemy/plane.h"
+#include "../enemy/turret.h"
 
 template<class T>
 Pool<T>::Pool(const u16 capacity)
@@ -96,3 +98,5 @@ const std::vector<T>& Pool<T>::Vec() const
 
 template class Pool<Projectile>;
 template class Pool<Collider>;
+template class Pool<Plane>;
+template class Pool<Turret>;

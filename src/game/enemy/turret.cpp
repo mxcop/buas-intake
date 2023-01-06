@@ -1,5 +1,6 @@
 #include "turret.h"
 #include "../player.h"
+#include "../../game.h"
 
 Turret::Turret(
 	float x, float y, 
@@ -15,6 +16,7 @@ Turret::Turret(
 	w = sprite->GetWidth();
 	h = sprite->GetHeight();
 	collider->SetSize(6, 6);
+	turrets = Tmpl8::Game::instance()->turrets;
 }
 
 void Turret::Draw(Tmpl8::Surface* screen)
@@ -31,8 +33,6 @@ void Turret::Draw(Tmpl8::Surface* screen)
 	mat3x3 final = mat3x3::multiply(translation, mat_a);
 
 	sprite->DrawWithMatrix(screen, final);
-
-	collider->Debug(screen);
 }
 
 /* Half of PI or 90 Degrees */
@@ -44,6 +44,9 @@ void Turret::Tick(u64 frame, float deltatime)
 	float2 dir = (target_pos - float2(x, y)).normalized();
 
 	angle = atan2f(-dir.y, dir.x) + HALF_PI;
+
+	y += deltatime / 200;
+	collider->SetPos(x, y);
 
 	if (frame % 60 == 0) {
 		float2 dir_right = float2(sinf(angle - HALF_PI / 4), cosf(angle - HALF_PI / 4));
@@ -60,6 +63,8 @@ void Turret::Tick(u64 frame, float deltatime)
 void Turret::onCollision(u16 emitter, CollisionTags tags)
 {
 	if (tags & CollisionTags::PlayerProj) {
-		printf("enemy turret got hit!\n");
+		/* Deactivate this turret */
+		collider->Deactivate();
+		turrets->Deactivate(id);
 	}
 }

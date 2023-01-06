@@ -6,18 +6,13 @@
 #include <sstream>
 #include "engine/template.h"
 #include "engine/keys.h"
-#include "game/enemy/turret.h"
 #include "game/pool/pool.h"
 #include "game/projectile.h"
 #include "game/ui/healthbar.h"
-#include <bitset>
-#include <iostream>
-#include "game/enemy/plane.h"
 
 namespace Tmpl8
 {
 	/* sprites */
-	//shared_ptr<Sprite> s_tileset(new Sprite(new Surface("assets/tiles.png"), 6));
 	shared_ptr<Sprite> s_turret(new Sprite(new Surface("assets/turret.png"), 1));
 	shared_ptr<Sprite> s_plane(new Sprite(new Surface("assets/enemy-plane.png"), 4));
 	shared_ptr<Sprite> s_bullet(new Sprite(new Surface("assets/bullet.png"), 1));
@@ -28,9 +23,6 @@ namespace Tmpl8
 
 	/* objects */
 	unique_ptr<HealthBar> healthBar = nullptr;
-	unique_ptr<Turret> turret = nullptr;
-	unique_ptr<Turret> turret2 = nullptr;
-	unique_ptr<Plane> plane = nullptr;
 
 	/* pools */
 	shared_ptr<Pool<Projectile>> projectiles = nullptr;
@@ -42,18 +34,22 @@ namespace Tmpl8
 	{
 		window = win;
 
-		colliders = std::make_shared<Pool<Collider>>(128);
+		/* Initialize the object pools */
+		colliders   = std::make_shared<Pool<Collider>   >(128);
+		projectiles = std::make_shared<Pool<Projectile> >(512);
+		turrets     = std::make_shared<Pool<Turret>     >(16);
+		planes      = std::make_shared<Pool<Plane>      >(16);
 
-		// Initialize the enemies, player, & tilemap:
+		/* Initialize the player object */
 		player = std::make_shared<Player>(s_player, s_player_attack, 80, 80);
-		projectiles = std::make_shared<Pool<Projectile>>(512);
-		turret = std::make_unique<Turret>(40, 40, s_turret, s_bullet, player, projectiles);
-		turret2 = std::make_unique<Turret>(120, 80, s_turret, s_bullet, player, projectiles);
-		plane = std::make_unique<Plane>(screen->GetWidth() / 2, 120, s_plane, s_bullet, player, projectiles);
 
+		/* Initialize the HUD */
 		healthBar = std::make_unique<HealthBar>(s_heart, player);
 
-		//enemies = std::make_shared<EnemyArena>();
+		/* Initialize some enemies for testing */
+		turrets->Add(Turret(40, 40, s_turret, s_bullet, player, projectiles));
+		turrets->Add(Turret(120, 80, s_turret, s_bullet, player, projectiles));
+		planes ->Add(Plane(screen->GetWidth() / 2, 120, s_plane, s_bullet, player, projectiles));
 	}
 	
 	// -----------------------------------------------------------
@@ -75,9 +71,10 @@ namespace Tmpl8
 		// Clear the graphics window.
 		screen->Clear(0);
 
-		for (size_t y = 0; y < ScreenHeight; y++)
+		/* Draw a tile grid as background */
+		for (size_t y = 0; y < ScreenHeight / 8; y++)
 		{
-			for (size_t x = 0; x < ScreenWidth; x++)
+			for (size_t x = 0; x < ScreenWidth / 8; x++)
 			{
 				s_tiles->SetFrame((x + y * ScreenWidth + y % 2) % 2);
 				s_tiles->Draw(screen, x * 8, y * 8);
@@ -89,7 +86,7 @@ namespace Tmpl8
 		oss << " Delta : " << deltatime << " Mouse : " << mouse.x << ", " << mouse.y << " Colliders : " << colliders->Active();
 		SDL_SetWindowTitle(window, oss.str().c_str());
 
-		// Player:
+		/* Update and Draw the player */
 		if (w == true) player->Move( 0, -1);
 		if (a == true) player->Move(-1,  0);
 		if (s == true) player->Move( 0,  1);
@@ -97,26 +94,21 @@ namespace Tmpl8
 		player->Tick(frame, deltatime);
 		player->Draw(screen);
 
-		turret->Tick(frame, deltatime);
-		turret->Draw(screen);
-		turret2->Tick(frame, deltatime);
-		turret2->Draw(screen);
-		plane->Tick(frame, deltatime);
-		plane->Draw(screen);
-
+		/* Update and Draw the object pools */
 		projectiles->Tick(frame, deltatime);
 		projectiles->Draw(screen);
+		turrets->Tick(frame, deltatime);
+		turrets->Draw(screen);
+		planes->Tick(frame, deltatime);
+		planes->Draw(screen);
 
+		/* Draw the HUD */
 		healthBar->Draw(screen);
 
-		// Draw the enemies.
-		//enemies->UpdateAll(frame);
-		//enemies->DrawAll(screen);
-
-		// Draw the cursor.
+		/* Draw a cursor */
 		screen->Circle(mouse.x, mouse.y, 2, 0xffffff);
 
-		// Increment the frame counter.
+		/* Increment the frame counter */
 		frame++;
 
 		deflectTimer -= deltatime / 1000;
@@ -125,10 +117,9 @@ namespace Tmpl8
 
 	void Game::KeyDown(int key) 
 	{
-		std::cout << std::bitset<32>(key) << '\n';
-		//printf("key pressed : %d.\n", std::bitset<32>(key));
+		// std::cout << std::bitset<32>(key) << '\n';
 
-		/* Player cardinal movement */
+		/* WASD inputs */
 		if (key == KEY_W) w = true;
 		if (key == KEY_A) a = true;
 		if (key == KEY_S) s = true;
@@ -147,6 +138,7 @@ namespace Tmpl8
 
 	void Game::KeyUp(int key) 
 	{
+		/* WASD inputs */
 		if (key == KEY_W) w = false;
 		if (key == KEY_A) a = false;
 		if (key == KEY_S) s = false;
@@ -159,6 +151,7 @@ namespace Tmpl8
 
 	void Game::MouseMove(int dx, int dy) 
 	{
+		/* Store the updated mouse position */
 		float sx = static_cast<float>(ScreenWidth) / BufferWidth;
 		float sy = static_cast<float>(ScreenHeight) / BufferHeight;
 
