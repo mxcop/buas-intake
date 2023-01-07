@@ -16,6 +16,7 @@ using std::make_unique;
 
 namespace Tmpl8
 {
+	/* statics */
 	float Game::mouse_x = 0;
 	float Game::mouse_y = 0;
 	bool Game::mouse_down = false;
