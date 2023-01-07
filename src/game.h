@@ -20,6 +20,12 @@ namespace Tmpl8 {
 
 	class Surface;
 
+	enum class GameState {
+		MENU = 0b00,
+		GAME = 0b01,
+		DEAD = 0b10
+	};
+
 	class Game
 	{
 	public:
@@ -63,6 +69,7 @@ namespace Tmpl8 {
 		/* windowing */
 		Surface* screen = nullptr;
 		SDL_Window* window = nullptr;
+		GameState state = GameState::MENU;
 
 		/* globals */
 		unsigned long frame = 0u;

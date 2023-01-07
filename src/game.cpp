@@ -28,6 +28,7 @@ namespace Tmpl8
 	shared_ptr<Sprite> s_player_attack(new Sprite(new Surface("assets/player-attack.png"), 3));
 	shared_ptr<Sprite> s_heart(new Sprite(new Surface("assets/heart.png"), 2));
 	shared_ptr<Sprite> s_tiles(new Sprite(new Surface("assets/testing-tiles.png"), 2));
+	shared_ptr<Sprite> s_title(new Sprite(new Surface("assets/title.png"), 1));
 
 	/* objects */
 	unique_ptr<HealthBar> healthBar = nullptr;
@@ -59,8 +60,8 @@ namespace Tmpl8
 		planes    ->  Add(Plane(screen->GetWidth() / 2, 120, s_plane, s_bullet, player, projectiles));
 
 		/* Initialize the UI */
-		playButton  = make_unique<Button>(100, 100, 32, 16, "play");
-		quitButton  = make_unique<Button>(100, 200, 32, 16, "quit");
+		playButton  = make_unique<Button>((screen->GetWidth() - 32) / 2.0, 112, 32, 16, "play");
+		quitButton  = make_unique<Button>((screen->GetWidth() - 32) / 2.0, 144, 32, 16, "quit");
 	}
 	
 	// -----------------------------------------------------------
@@ -92,38 +93,59 @@ namespace Tmpl8
 			}
 		}
 
-		// Update the window title with the frame count:
+		// Update the window title with debug info:
 		std::ostringstream oss;
 		oss << " Delta : " << deltatime << " Mouse : " << mouse.x << ", " << mouse.y << " Colliders : " << colliders->Active();
 		SDL_SetWindowTitle(window, oss.str().c_str());
 
-		/* Update and Draw the object pools */
-		projectiles->Tick(frame, deltatime);
-		turrets->Tick(frame, deltatime);
-		planes->Tick(frame, deltatime);
+		switch (state)
+		{
+		/* Main Menu */
+		case Tmpl8::GameState::MENU:
+			/* Draw the play & quit buttons */
+			playButton->Tick();
+			playButton->Draw(screen);
+			quitButton->Tick();
+			quitButton->Draw(screen);
 
-		projectiles->Draw(screen);
-		turrets->Draw(screen);
-		planes->Draw(screen);
+			/* Draw the title of the game */
+			s_title->Draw(screen, (screen->GetWidth() - s_title->GetWidth()) / 2.0, 64);
 
-		/* Update and Draw the player */
-		if (w == true) player->Move(0, -1);
-		if (a == true) player->Move(-1, 0);
-		if (s == true) player->Move(0, 1);
-		if (d == true) player->Move(1, 0);
-		player->Tick(frame, deltatime);
-		player->Draw(screen);
+			/* Draw a cursor */
+			screen->Circle(mouse.x, mouse.y, 2, 0xffffff);
+			break;
 
-		/* Draw the HUD */
-		healthBar->Draw(screen);
+		/* Game Scene */
+		case Tmpl8::GameState::GAME:
+			/* Update and Draw the object pools */
+			projectiles->Tick(frame, deltatime);
+			turrets->Tick(frame, deltatime);
+			planes->Tick(frame, deltatime);
 
-		playButton->Tick();
-		playButton->Draw(screen);
-		quitButton->Tick();
-		quitButton->Draw(screen);
+			projectiles->Draw(screen);
+			turrets->Draw(screen);
+			planes->Draw(screen);
 
-		/* Draw a cursor */
-		screen->Circle(mouse.x, mouse.y, 2, 0xffffff);
+			/* Update and Draw the player */
+			if (w == true) player->Move(0, -1);
+			if (a == true) player->Move(-1, 0);
+			if (s == true) player->Move(0, 1);
+			if (d == true) player->Move(1, 0);
+			player->Tick(frame, deltatime);
+			player->Draw(screen);
+
+			/* Draw the HUD */
+			healthBar->Draw(screen);
+			break;
+
+		/* Game Over Screen */
+		case Tmpl8::GameState::DEAD:
+			break;
+
+		default:
+			/* This point should be unreachable */
+			break;
+		}
 
 		/* Increment the frame counter */
 		frame++;
@@ -134,8 +156,6 @@ namespace Tmpl8
 
 	void Game::KeyDown(int key) 
 	{
-		// std::cout << std::bitset<32>(key) << '\n';
-
 		/* WASD inputs */
 		if (key == KEY_W) w = true;
 		if (key == KEY_A) a = true;

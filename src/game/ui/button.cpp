@@ -33,16 +33,16 @@ bool AABB(
 
 void Button::Tick()
 {
-	mouse_over = AABB(MOUSE_X, x, MOUSE_Y, y, w + 1, h + 1);
+	mouse_over = AABB(MOUSE_X, x, MOUSE_Y, y, w, h);
 	mouse_down = MOUSE_DOWN && mouse_over;
 }
 
 void Button::Draw(Tmpl8::Surface* screen)
 {
-	screen->Box(x, y, x + w, y + h, mouse_down ? 0x0000ff : mouse_over ? 0x00ff00 : 0xffffff);
+	screen->Box(x, y, x + w - 1, y + h - 1, mouse_down ? 0x0000ff : mouse_over ? 0x00ff00 : 0xffffff);
 	
 	int tx = x + (w - 6 * strlen(label)) / 2.0 + 1;
-	int ty = y + (h - 6) / 2.0 + 1;
+	int ty = y + (h - 6) / 2.0;
 
 	screen->Print(label, tx, ty, 0xffffff);
 }
