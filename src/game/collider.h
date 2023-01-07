@@ -30,6 +30,9 @@ inline u8 operator&(CollisionTags a, CollisionTags b)
 	return static_cast<u8>(static_cast<int>(a) & static_cast<int>(b));
 }
 
+/// <summary>
+/// Abstract class for a collidable object
+/// </summary>
 class Collidable {
 public:
 	virtual void onCollision(u16 emitter, CollisionTags tags) = 0;
@@ -56,6 +59,7 @@ public:
 	/// </summary>
 	/// <returns>A raw pointer to the collider. (because I'm uncertain about smart pointer behaviour)</returns>
 	static Collider* New(float x, float y, float w, float h, CollisionTags tags, void (Collidable::*onCollision)(u16, CollisionTags));
+	static Collider* New(Collider collider);
 
 	/// <summary>
 	/// Perform collision checks.
@@ -74,11 +78,6 @@ public:
 
 	/// <returns>If this collider is currently intersecting with another collider.</returns>
 	bool IsColliding() const;
-
-	/// <summary>
-	/// Check if collider is colliding with respect to the given mask (e.g. `CollisionTags::Player | CollisionTags::Enemy`)
-	/// </summary>
-	//bool IsCollidingWithMask(CollisionTags mask) const;
 
 	/// <summary>
 	/// Deactivate this collider.

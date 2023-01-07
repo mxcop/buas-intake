@@ -328,7 +328,6 @@ int main( int argc, char **argv )
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
 	SDL_Texture* frameBuffer = SDL_CreateTexture( renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, BufferWidth, BufferHeight);
 #endif
-	int exitapp = 0;
 	game = Game::instance();
 	game->SetTarget( surface );
 	timer t;

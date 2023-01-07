@@ -123,7 +123,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>src\utils;lib;lib\OpenGL;lib\SDL2-2.0.3\include;lib\freeimage\inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>lib\Signals;src\utils;lib;lib\OpenGL;lib\SDL2-2.0.3\include;lib\freeimage\inc</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -135,7 +135,7 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <StructMemberAlignment>Default</StructMemberAlignment>
-      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalDependencies>winmm.lib;advapi32.lib;user32.lib;sdl2.lib;sdl2main.lib;opengl32.lib;freeimage.lib</AdditionalDependencies>
@@ -193,7 +193,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>src\utils;lib;lib\OpenGL;lib\SDL2-2.0.3\include;lib\freeimage\inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>lib\Signals;src\utils;lib;lib\OpenGL;lib\SDL2-2.0.3\include;lib\freeimage\inc</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN64;NDEBUG;_WINDOWS;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>Sync</ExceptionHandling>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
@@ -205,7 +205,7 @@
       </BrowseInformation>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalDependencies>winmm.lib;advapi32.lib;user32.lib;sdl2.lib;sdl2main.lib;opengl32.lib;freeimage.lib</AdditionalDependencies>
@@ -221,6 +221,7 @@
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -230,10 +231,13 @@
     <ClCompile Include="src\engine\template.cpp" />
     <ClCompile Include="src\game\collider.cpp" />
     <ClCompile Include="src\game\enemy\enemy.cpp" />
+    <ClCompile Include="src\game\enemy\plane.cpp" />
     <ClCompile Include="src\game\enemy\turret.cpp" />
     <ClCompile Include="src\game\player.cpp" />
     <ClCompile Include="src\game\projectile.cpp" />
+    <ClCompile Include="src\game\ui\button.cpp" />
     <ClCompile Include="src\game\ui\healthbar.cpp" />
+    <ClCompile Include="src\utils\aabb.hpp" />
     <ClCompile Include="src\utils\math\mat3x3.cpp" />
     <ClCompile Include="src\game\pool\pool.cpp" />
   </ItemGroup>
@@ -243,9 +247,11 @@
     <ClInclude Include="src\game.h" />
     <ClInclude Include="src\game\collider.h" />
     <ClInclude Include="src\game\enemy\enemy.h" />
+    <ClInclude Include="src\game\enemy\plane.h" />
     <ClInclude Include="src\game\enemy\turret.h" />
     <ClInclude Include="src\game\player.h" />
     <ClInclude Include="src\game\projectile.h" />
+    <ClInclude Include="src\game\ui\button.h" />
     <ClInclude Include="src\game\ui\healthbar.h" />
     <ClInclude Include="src\utils\float2.hpp" />
     <ClInclude Include="src\utils\int2.hpp" />
