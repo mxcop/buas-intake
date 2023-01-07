@@ -7,13 +7,14 @@ using Tmpl8::Game;
 /* Mouse Y    */ #define MOUSE_Y Game::mouse_y
 /* Mouse Down */ #define MOUSE_DOWN Game::mouse_down
 
-Button::Button(float x, float y, u16 w, u16 h, const char* label)
+Button::Button(float x, float y, u16 w, u16 h, const char* label, shared_ptr<Signal> onClick)
 {
 	this->x = x;
 	this->y = y;
 	this->w = w;
 	this->h = h;
 	this->label = label;
+	this->onClick = onClick;
 }
 
 /// <summary>
@@ -34,6 +35,11 @@ bool AABB(
 void Button::Tick()
 {
 	mouse_over = AABB(MOUSE_X, x, MOUSE_Y, y, w, h);
+
+	if (!mouse_down && MOUSE_DOWN && mouse_over && onClick != nullptr) {
+		(*onClick)();
+	}
+
 	mouse_down = MOUSE_DOWN && mouse_over;
 }
 

@@ -13,6 +13,7 @@
 
 using std::make_shared;
 using std::make_unique;
+using Signal = sig::signal<void()>;
 
 namespace Tmpl8
 {
@@ -30,11 +31,19 @@ namespace Tmpl8
 	shared_ptr<Sprite> s_heart(new Sprite(new Surface("assets/heart.png"), 2));
 	shared_ptr<Sprite> s_tiles(new Sprite(new Surface("assets/testing-tiles.png"), 2));
 	shared_ptr<Sprite> s_title(new Sprite(new Surface("assets/title.png"), 1));
+	shared_ptr<Sprite> s_gameover(new Sprite(new Surface("assets/game-over.png"), 1));
 
 	/* objects */
 	unique_ptr<HealthBar> healthBar = nullptr;
 	unique_ptr<Button> playButton = nullptr;
+	unique_ptr<Button> againButton = nullptr;
+	unique_ptr<Button> returnButton = nullptr;
 	unique_ptr<Button> quitButton = nullptr;
+
+	/* signals */
+	shared_ptr<Signal> playSignal = nullptr;
+	shared_ptr<Signal> returnSignal = nullptr;
+	shared_ptr<Signal> quitSignal = nullptr;
 
 	// -----------------------------------------------------------
 	// Initialize the application
@@ -60,9 +69,19 @@ namespace Tmpl8
 		turrets   ->  Add(Turret(240, 80, s_turret, s_bullet, player, projectiles));
 		planes    ->  Add(Plane(screen->GetWidth() / 2, 120, s_plane, s_bullet, player, projectiles));
 
+		/* Setup the button signals */
+		playSignal   = make_shared<Signal>();
+		returnSignal = make_shared<Signal>();
+		quitSignal   = make_shared<Signal>();
+		playSignal   -> connect(&Game::Play, this);
+		returnSignal -> connect(&Game::Return, this);
+		quitSignal   -> connect(&Game::Quit, this);
+
 		/* Initialize the UI */
-		playButton  = make_unique<Button>((screen->GetWidth() - 32) / 2.0, 112, 32, 16, "play");
-		quitButton  = make_unique<Button>((screen->GetWidth() - 32) / 2.0, 144, 32, 16, "quit");
+		playButton   = make_unique<Button>((screen->GetWidth() - 32) / 2.0, 112, 32, 16, "play", playSignal);
+		againButton  = make_unique<Button>((screen->GetWidth() - 64) / 2.0, 112, 64, 16, "try again", playSignal);
+		returnButton = make_unique<Button>((screen->GetWidth() - 48) / 2.0, 144, 48, 16, "return", returnSignal);
+		quitButton   = make_unique<Button>((screen->GetWidth() - 32) / 2.0, 176, 32, 16, "quit", quitSignal);
 	}
 	
 	// -----------------------------------------------------------
@@ -141,6 +160,22 @@ namespace Tmpl8
 
 		/* Game Over Screen */
 		case Tmpl8::GameState::DEAD:
+			/* Draw the object pools */
+			projectiles->Draw(screen);
+			turrets->Draw(screen);
+			planes->Draw(screen);
+
+			/* Draw the try again & return buttons */
+			againButton->Tick();
+			againButton->Draw(screen);
+			returnButton->Tick();
+			returnButton->Draw(screen);
+
+			/* Draw the title of the game */
+			s_gameover->Draw(screen, (screen->GetWidth() - s_gameover->GetWidth()) / 2.0, 64);
+
+			/* Draw a cursor */
+			screen->Circle(mouse.x, mouse.y, 2, 0xffffff);
 			break;
 
 		default:
@@ -172,6 +207,32 @@ namespace Tmpl8
 		if (key == KEY_SHIFT) {
 			player->shrink = true;
 		}
+	}
+
+	void Game::Gameover()
+	{
+		/* Update the game state */
+		state = GameState::DEAD;
+	}
+
+	void Game::Play()
+	{
+		/* Update the game state */
+		state = GameState::GAME;
+	}
+
+	void Game::Return()
+	{
+		/* Update the game state */
+		state = GameState::MENU;
+	}
+
+	void Game::Quit()
+	{
+		/* Invoke an event with the type SDL_QUIT */
+		SDL_Event user_event;
+		user_event.type = SDL_QUIT;
+		SDL_PushEvent(&user_event);
 	}
 
 	void Game::KeyUp(int key) 

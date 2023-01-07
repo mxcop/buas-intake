@@ -54,6 +54,7 @@ namespace Tmpl8 {
 		void MouseMove(int dx, int dy);
 		void KeyUp(int key);
 		void KeyDown(int key);
+		void Gameover();
 
 		/* inputs */
 		bool deflecting = false;
@@ -65,6 +66,10 @@ namespace Tmpl8 {
 
 	private:
 		Game() {}
+
+		void Play();
+		void Return();
+		void Quit();
 
 		/* windowing */
 		Surface* screen = nullptr;
