@@ -23,19 +23,6 @@ void Projectile::Tick(const u64 frame, const float deltatime)
 
 	collider->SetPos(x, y);
 	collider->Tick(this);
-
-	/*if (collider->IsCollidingWithMask(CollisionTags::Player)) {
-		collider->Deactivate();
-		pool->Deactivate(id);
-		return;
-	}
-
-	if (!deflected && collider->IsCollidingWithMask(CollisionTags::PlayerAtck) && Tmpl8::Game::instance()->deflecting) {
-		dir.x = -dir.x * 2;
-		dir.y = -dir.y * 2;
-		deflected = true;
-		return;
-	}*/
 }
 
 /* Half of PI or 90 Degrees */
@@ -44,7 +31,7 @@ constexpr float HALF_PI = 1.5707;
 void Projectile::Draw(Tmpl8::Surface* screen)
 {
 	/* Check if we're offscreen (cannot be done within tick because screen isn't available) */
-	if (x < -5 || y < -5 || x > screen->GetWidth() + 5 || y > screen->GetHeight() + 5) {
+	if (destroy || (x < -5 || y < -5 || x > screen->GetWidth() + 5 || y > screen->GetHeight() + 5)) {
 		collider->Deactivate();
 		pool->Deactivate(id);
 		return;
@@ -62,8 +49,6 @@ void Projectile::Draw(Tmpl8::Surface* screen)
 	mat3x3 final = mat3x3::multiply(translation, mat_a);
 
 	sprite->DrawWithMatrix(screen, final);
-
-	//collider->Debug(screen);
 }
 
 void Projectile::onCollision(u16 _, CollisionTags tags)
@@ -72,5 +57,10 @@ void Projectile::onCollision(u16 _, CollisionTags tags)
 		dir = float2(-dir.x, -dir.y);
 		collider->tags = CollisionTags::PlayerProj;
 		deflected = true;
+	}
+
+	if ((deflected && tags & CollisionTags::Enemy) || (!deflected && tags & CollisionTags::Player)) {
+		/* This bool ensures the projectile is destroyed the next frame */
+		destroy = true;
 	}
 }

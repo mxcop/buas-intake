@@ -24,9 +24,6 @@ namespace Tmpl8
 	/* objects */
 	unique_ptr<HealthBar> healthBar = nullptr;
 
-	/* pools */
-	shared_ptr<Pool<Projectile>> projectiles = nullptr;
-
 	// -----------------------------------------------------------
 	// Initialize the application
 	// -----------------------------------------------------------
@@ -86,21 +83,22 @@ namespace Tmpl8
 		oss << " Delta : " << deltatime << " Mouse : " << mouse.x << ", " << mouse.y << " Colliders : " << colliders->Active();
 		SDL_SetWindowTitle(window, oss.str().c_str());
 
-		/* Update and Draw the player */
-		if (w == true) player->Move( 0, -1);
-		if (a == true) player->Move(-1,  0);
-		if (s == true) player->Move( 0,  1);
-		if (d == true) player->Move( 1,  0);
-		player->Tick(frame, deltatime);
-		player->Draw(screen);
-
 		/* Update and Draw the object pools */
 		projectiles->Tick(frame, deltatime);
-		projectiles->Draw(screen);
 		turrets->Tick(frame, deltatime);
-		turrets->Draw(screen);
 		planes->Tick(frame, deltatime);
+
+		projectiles->Draw(screen);
+		turrets->Draw(screen);
 		planes->Draw(screen);
+
+		/* Update and Draw the player */
+		if (w == true) player->Move(0, -1);
+		if (a == true) player->Move(-1, 0);
+		if (s == true) player->Move(0, 1);
+		if (d == true) player->Move(1, 0);
+		player->Tick(frame, deltatime);
+		player->Draw(screen);
 
 		/* Draw the HUD */
 		healthBar->Draw(screen);

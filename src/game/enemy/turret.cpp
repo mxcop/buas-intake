@@ -8,7 +8,7 @@ Turret::Turret(
 	shared_ptr<Sprite> bullet_sprite,
 	shared_ptr<Player> target,
 	shared_ptr<Pool<Projectile>> projectiles
-) : Enemy(x, y, w, h, CollisionTags::Enemy) {
+) : Enemy(x, y, w, h, 3, CollisionTags::Enemy) {
 	this->sprite = sprite;
 	this->bullet_sprite = bullet_sprite;
 	this->target = target;
@@ -63,8 +63,12 @@ void Turret::Tick(u64 frame, float deltatime)
 void Turret::onCollision(u16 emitter, CollisionTags tags)
 {
 	if (tags & CollisionTags::PlayerProj) {
-		/* Deactivate this turret */
-		collider->Deactivate();
-		turrets->Deactivate(id);
+		hitpoints--;
+		printf("HIT");
+		if (hitpoints <= 0) {
+			/* Deactivate this turret */
+			collider->Deactivate();
+			turrets->Deactivate(id);
+		}
 	}
 }

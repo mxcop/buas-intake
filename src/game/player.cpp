@@ -61,16 +61,19 @@ void Player::Draw(Tmpl8::Surface* screen) const
 		y - HALF_H
 	);
 
-	/* Scale the sprite if the player has shrunk */
-	if (shrink) {
-		translation = mat3x3::translation(
-			x - HALF_W * 0.4,
-			y - HALF_H * 0.4
-		);
-		translation = mat3x3::multiply(translation, mat3x3::scaled(0.4, 0.4));
-	}
+	/* Flash the player sprite when immune */
+	if (immunityTimer <= 0 || static_cast<int>(ceilf(immunityTimer * 4)) % 2) {
+		/* Scale the sprite if the player has shrunk */
+		if (shrink) {
+			translation = mat3x3::translation(
+				x - HALF_W * 0.4,
+				y - HALF_H * 0.4
+			);
+			translation = mat3x3::multiply(translation, mat3x3::scaled(0.4, 0.4));
+		}
 
-	sprite->DrawWithMatrix(screen, translation);
+		sprite->DrawWithMatrix(screen, translation);
+	}
 
 	translation = mat3x3::translation(
 		x - HALF_W - 4,
@@ -82,9 +85,6 @@ void Player::Draw(Tmpl8::Surface* screen) const
 		attackSprite->SetFlags(Sprite::FLARE);
 		attackSprite->DrawWithMatrix(screen, translation);
 	}
-
-	//areaOfAttack->Debug(screen);
-	//collider->Debug(screen);
 }
 
 void Player::Tick(const u64 frame, const float deltatime)
@@ -94,7 +94,7 @@ void Player::Tick(const u64 frame, const float deltatime)
 	/* Briefly enable the area of attack collider */
 	areaOfAttack->enabled = attackTimer >= 2;
 	/* Play the attack animation */
-	attackSprite->SetFrame(3 - std::ceilf(attackTimer));
+	attackSprite->SetFrame(3 - ceilf(attackTimer));
 
 	if (shrink) collider->SetSize(3, 3);
 	else collider->SetSize(w - 8, h - 8);

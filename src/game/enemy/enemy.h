@@ -8,7 +8,7 @@ using Tmpl8::Surface;
 /* Generic enemy class */
 class Enemy : public Poolable, public Collidable {
 public:
-	Enemy(float x, float y, int w, int h, CollisionTags tags);
+	Enemy(float x, float y, int w, int h, int hitpoints, CollisionTags tags);
 
 	/// <summary>
 	/// Draw the enemy to the screen.
@@ -28,4 +28,5 @@ public:
 protected:
 	Collider* collider = nullptr;
 	float x, y;
+	int hitpoints = 0;
 };

@@ -8,7 +8,7 @@ Plane::Plane(
 	shared_ptr<Sprite> bullet_sprite, 
 	shared_ptr<Player> target, 
 	shared_ptr<Pool<Projectile>> projectiles
-) : Enemy(x, y, w, h, CollisionTags::Enemy) {
+) : Enemy(x, y, w, h, 2, CollisionTags::Enemy) {
 	if (sprite->Frames() != 4) {
 		throw std::invalid_argument("enemy plane sprite should have 4 frames");
 	}
@@ -64,8 +64,11 @@ void Plane::Tick(u64 frame, float deltatime)
 void Plane::onCollision(u16 emitter, CollisionTags tags)
 {
 	if (tags & CollisionTags::PlayerProj) {
-		/* Deactivate this plane */
-		collider->Deactivate();
-		planes->Deactivate(id);
+		hitpoints--;
+		if (hitpoints <= 0) {
+			/* Deactivate this plane */
+			collider->Deactivate();
+			planes->Deactivate(id);
+		}
 	}
 }

@@ -66,5 +66,6 @@ namespace Tmpl8 {
 
 		/* objects */
 		shared_ptr<Player> player = nullptr;
+		shared_ptr<Pool<Projectile>> projectiles = nullptr;
 	};
 }; // namespace Tmpl8
