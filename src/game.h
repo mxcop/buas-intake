@@ -33,13 +33,18 @@ namespace Tmpl8 {
 			return s;
 		}
 
+		/* static mouse position */
+		static float mouse_x;
+		static float mouse_y;
+		static bool mouse_down;
+
 		/* functions */
 		void SetTarget(Surface* surface) { screen = surface; }
 		void Init(SDL_Window* win);
 		void Shutdown();
 		void Tick(float deltaTime);
-		void MouseUp(int button) { /* implement if you want to detect mouse button presses */ }
-		void MouseDown(int button) { /* implement if you want to detect mouse button presses */ }
+		void MouseUp(int button);
+		void MouseDown(int button);
 		void MouseMove(int dx, int dy);
 		void KeyUp(int key);
 		void KeyDown(int key);

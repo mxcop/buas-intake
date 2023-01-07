@@ -9,9 +9,17 @@
 #include "game/pool/pool.h"
 #include "game/projectile.h"
 #include "game/ui/healthbar.h"
+#include "game/ui/button.h"
+
+using std::make_shared;
+using std::make_unique;
 
 namespace Tmpl8
 {
+	float Game::mouse_x = 0;
+	float Game::mouse_y = 0;
+	bool Game::mouse_down = false;
+
 	/* sprites */
 	shared_ptr<Sprite> s_turret(new Sprite(new Surface("assets/turret.png"), 1));
 	shared_ptr<Sprite> s_plane(new Sprite(new Surface("assets/enemy-plane.png"), 4));
@@ -23,6 +31,8 @@ namespace Tmpl8
 
 	/* objects */
 	unique_ptr<HealthBar> healthBar = nullptr;
+	unique_ptr<Button> playButton = nullptr;
+	unique_ptr<Button> quitButton = nullptr;
 
 	// -----------------------------------------------------------
 	// Initialize the application
@@ -32,21 +42,25 @@ namespace Tmpl8
 		window = win;
 
 		/* Initialize the object pools */
-		colliders   = std::make_shared<Pool<Collider>   >(128);
-		projectiles = std::make_shared<Pool<Projectile> >(512);
-		turrets     = std::make_shared<Pool<Turret>     >(16);
-		planes      = std::make_shared<Pool<Plane>      >(16);
+		colliders   = make_shared<Pool<Collider>   >(128);
+		projectiles = make_shared<Pool<Projectile> >(512);
+		turrets     = make_shared<Pool<Turret>     >(16);
+		planes      = make_shared<Pool<Plane>      >(16);
 
 		/* Initialize the player object */
-		player = std::make_shared<Player>(s_player, s_player_attack, 80, 80);
+		player      = make_shared<Player>(s_player, s_player_attack, 80, 80);
 
 		/* Initialize the HUD */
-		healthBar = std::make_unique<HealthBar>(s_heart, player);
+		healthBar   = make_unique<HealthBar>(s_heart, player);
 
 		/* Initialize some enemies for testing */
-		turrets->Add(Turret(40, 40, s_turret, s_bullet, player, projectiles));
-		turrets->Add(Turret(120, 80, s_turret, s_bullet, player, projectiles));
-		planes ->Add(Plane(screen->GetWidth() / 2, 120, s_plane, s_bullet, player, projectiles));
+		turrets   ->  Add(Turret(40, 40, s_turret, s_bullet, player, projectiles));
+		turrets   ->  Add(Turret(240, 80, s_turret, s_bullet, player, projectiles));
+		planes    ->  Add(Plane(screen->GetWidth() / 2, 120, s_plane, s_bullet, player, projectiles));
+
+		/* Initialize the UI */
+		playButton  = make_unique<Button>(100, 100, 32, 16, "play");
+		quitButton  = make_unique<Button>(100, 200, 32, 16, "quit");
 	}
 	
 	// -----------------------------------------------------------
@@ -103,6 +117,11 @@ namespace Tmpl8
 		/* Draw the HUD */
 		healthBar->Draw(screen);
 
+		playButton->Tick();
+		playButton->Draw(screen);
+		quitButton->Tick();
+		quitButton->Draw(screen);
+
 		/* Draw a cursor */
 		screen->Circle(mouse.x, mouse.y, 2, 0xffffff);
 
@@ -156,7 +175,18 @@ namespace Tmpl8
 		f_mouse.x += dx / sx;
 		f_mouse.y += dy / sy;
 
+		Game::mouse_x = f_mouse.x;
+		Game::mouse_y = f_mouse.y;
+
 		mouse.x = floor(f_mouse.x);
 		mouse.y = floor(f_mouse.y);
+	}
+
+	void Game::MouseDown(int button) {
+		if (button == 1) Game::mouse_down = true;
+	}
+
+	void Game::MouseUp(int button) {
+		if (button == 1) Game::mouse_down = false;
 	}
 };

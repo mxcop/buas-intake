@@ -97,21 +97,6 @@ bool Collider::IsColliding() const
 	return false;
 }
 
-//bool Collider::IsCollidingWithMask(CollisionTags mask) const
-//{
-//	auto vec = pool->Vec();
-//	for (const Collider& e : vec) {
-//		if (e.id != id && e.active && 
-//			e.tags & mask && 
-//			AABB(x, e.x, y, e.y, w, e.w, h, e.h)
-//		) {
-//			return true;
-//		}
-//	}
-//
-//	return false;
-//}
-
 void Collider::Deactivate()
 {
 	pool->Deactivate(id);
