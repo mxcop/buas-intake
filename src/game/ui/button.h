@@ -3,8 +3,10 @@
 #include "../../engine/surface.h"
 #include "signals.hpp"
 
-using Signal = sig::signal<void()>;
 using std::shared_ptr;
+
+// Made possible by jpvanoosten <https://github.com/jpvanoosten/signals>
+using Signal = sig::signal<void()>;
 
 class Button {
 public:

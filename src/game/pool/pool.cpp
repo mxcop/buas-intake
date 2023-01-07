@@ -76,6 +76,14 @@ void Pool<T>::Deactivate(const u16 id)
 }
 
 template<class T>
+void Pool<T>::Clear()
+{
+	for (T& e : pool) {
+		e.active = false;
+	}
+}
+
+template<class T>
 T* Pool<T>::Get(const u16 id)
 {
 	auto itr = std::find_if(

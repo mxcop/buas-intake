@@ -29,25 +29,29 @@ public:
 	u16 Active() const;
 
 	/// <summary> 
-	/// Execute Tick() on all members of the arena. 
+	/// Execute Tick() on all members of the pool. 
 	/// </summary>
 	void Tick(const u64 frame, const float deltatime);
 	/// <summary> 
-	/// Execute Draw() on all members of the arena. 
+	/// Execute Draw() on all members of the pool. 
 	/// </summary>
 	void Draw(Tmpl8::Surface* screen);
 
 	/// <summary> 
-	/// Add a new member to the arena unless there's one already unactive. 
+	/// Add a new member to the pool unless there's one already unactive. 
 	/// </summary>
 	u16 Add(T arenable);
 	/// <summary> 
-	/// Deactivate a member from the arena.
+	/// Deactivate a member from the pool.
 	/// </summary>
 	void Deactivate(const u16 id);
+	/// <summary>
+	/// Deactivate all members of the pool.
+	/// </summary>
+	void Clear();
 	
 	/// <summary> 
-	/// Get a member from the arena by their id.
+	/// Get a member from the pool by their id.
 	/// </summary>
 	T* Get(const u16 id);
 

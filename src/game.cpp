@@ -13,6 +13,8 @@
 
 using std::make_shared;
 using std::make_unique;
+
+// Made possible by jpvanoosten <https://github.com/jpvanoosten/signals>
 using Signal = sig::signal<void()>;
 
 namespace Tmpl8
@@ -58,17 +60,6 @@ namespace Tmpl8
 		turrets     = make_shared<Pool<Turret>     >(16);
 		planes      = make_shared<Pool<Plane>      >(16);
 
-		/* Initialize the player object */
-		player      = make_shared<Player>(s_player, s_player_attack, 80, 80);
-
-		/* Initialize the HUD */
-		healthBar   = make_unique<HealthBar>(s_heart, player);
-
-		/* Initialize some enemies for testing */
-		turrets   ->  Add(Turret(40, 40, s_turret, s_bullet, player, projectiles));
-		turrets   ->  Add(Turret(240, 80, s_turret, s_bullet, player, projectiles));
-		planes    ->  Add(Plane(screen->GetWidth() / 2, 120, s_plane, s_bullet, player, projectiles));
-
 		/* Setup the button signals */
 		playSignal   = make_shared<Signal>();
 		returnSignal = make_shared<Signal>();
@@ -82,6 +73,23 @@ namespace Tmpl8
 		againButton  = make_unique<Button>((screen->GetWidth() - 64) / 2.0, 112, 64, 16, "try again", playSignal);
 		returnButton = make_unique<Button>((screen->GetWidth() - 48) / 2.0, 144, 48, 16, "return", returnSignal);
 		quitButton   = make_unique<Button>((screen->GetWidth() - 32) / 2.0, 176, 32, 16, "quit", quitSignal);
+	}
+
+	// -----------------------------------------------------------
+	// Setup the game scene
+	// -----------------------------------------------------------
+	void Game::Setup() 
+	{
+		/* Initialize the player object */
+		player = make_shared<Player>(s_player, s_player_attack, 80, 80);
+
+		/* Initialize some enemies for testing */
+		turrets->Add(Turret(40, 40, s_turret, s_bullet, player, projectiles));
+		turrets->Add(Turret(240, 80, s_turret, s_bullet, player, projectiles));
+		planes->Add(Plane(screen->GetWidth() / 2, 120, s_plane, s_bullet, player, projectiles));
+
+		/* Initialize the HUD */
+		healthBar = make_unique<HealthBar>(s_heart, player);
 	}
 	
 	// -----------------------------------------------------------
@@ -219,12 +227,26 @@ namespace Tmpl8
 	{
 		/* Update the game state */
 		state = GameState::GAME;
+
+		/* Clear all the pools */
+		projectiles->Clear();
+		turrets->Clear();
+		planes->Clear();
+		colliders->Clear();
+
+		Setup();
 	}
 
 	void Game::Return()
 	{
 		/* Update the game state */
 		state = GameState::MENU;
+
+		/* Clear all the pools */
+		projectiles->Clear();
+		turrets->Clear();
+		planes->Clear();
+		colliders->Clear();
 	}
 
 	void Game::Quit()

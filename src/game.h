@@ -47,6 +47,7 @@ namespace Tmpl8 {
 		/* functions */
 		void SetTarget(Surface* surface) { screen = surface; }
 		void Init(SDL_Window* win);
+		void Setup();
 		void Shutdown();
 		void Tick(float deltaTime);
 		void MouseUp(int button);
