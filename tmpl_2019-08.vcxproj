@@ -237,6 +237,7 @@
     <ClCompile Include="src\game\projectile.cpp" />
     <ClCompile Include="src\game\ui\button.cpp" />
     <ClCompile Include="src\game\ui\healthbar.cpp" />
+    <ClCompile Include="src\game\ui\score.cpp" />
     <ClCompile Include="src\utils\aabb.hpp" />
     <ClCompile Include="src\utils\math\mat3x3.cpp" />
     <ClCompile Include="src\game\pool\pool.cpp" />
@@ -253,6 +254,7 @@
     <ClInclude Include="src\game\projectile.h" />
     <ClInclude Include="src\game\ui\button.h" />
     <ClInclude Include="src\game\ui\healthbar.h" />
+    <ClInclude Include="src\game\ui\score.h" />
     <ClInclude Include="src\utils\float2.hpp" />
     <ClInclude Include="src\utils\int2.hpp" />
     <ClInclude Include="src\engine\surface.h" />
