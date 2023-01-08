@@ -173,14 +173,15 @@ void Bone::Draw(Tmpl8::Surface* screen, float2 p, float w_angle, bool origin)
 
 ## Sources and Inspiration
 ### Art
-[Midnight Dungeon by PixelArtM & Bibiki](https://pixelartm.itch.io/midnight-dungeon)<br>
-[Pork-like Game by Krystman](https://krystman.itch.io/porklike)<br>
-[1 Bit Top Down Sprites (8x8) by Crystalwarrior](https://img.itch.zone/aW1hZ2UvMTI0NTYwMi83MjgzOTU0LnBuZw==/794x1000/llTZBK.png)
+[Midnight Dungeon by PixelArtM & Bibiki](https://pixelartm.itch.io/midnight-dungeon) *legacy*<br>
+[Pork-like Game by Krystman](https://krystman.itch.io/porklike) *legacy*<br>
+[1 Bit Top Down Sprites (8x8) by Crystalwarrior](https://img.itch.zone/aW1hZ2UvMTI0NTYwMi83MjgzOTU0LnBuZw==/794x1000/llTZBK.png) *legacy*
 
 ### Design
-[Pork-like Game by Krystman](https://krystman.itch.io/porklike)<br>
-[Deep Rock Galactic](https://www.deeprockgalactic.com/)
+[Pork-like Game by Krystman](https://krystman.itch.io/porklike) *legacy*<br>
+[Deep Rock Galactic](https://www.deeprockgalactic.com/) *legacy*
 
 ### Code
-[Lazy Devs](https://www.youtube.com/@LazyDevs)<br>
-[Javidx9](https://www.youtube.com/watch?v=zxwLN2blwbQ)
+[Lazy Devs](https://www.youtube.com/@LazyDevs) *game logic*<br>
+[Javidx9](https://www.youtube.com/watch?v=zxwLN2blwbQ) *matrix*<br>
+[Jeremiah](https://github.com/jpvanoosten) *3dgep discord & signals lib*
