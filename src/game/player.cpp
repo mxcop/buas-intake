@@ -50,7 +50,9 @@ void Player::Move(float dx, float dy)
 
 void Player::Attack()
 {
-	attackTimer = 2.5;
+	if (shrink == false) {
+		attackTimer = 2.5;
+	}
 }
 
 void Player::Draw(Tmpl8::Surface* screen) const
