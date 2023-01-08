@@ -10,6 +10,7 @@
 #include "game/projectile.h"
 #include "game/ui/healthbar.h"
 #include "game/ui/button.h"
+#include "game/ui/score.h"
 
 using std::make_shared;
 using std::make_unique;
@@ -23,6 +24,7 @@ namespace Tmpl8
 	float Game::mouse_x = 0;
 	float Game::mouse_y = 0;
 	bool Game::mouse_down = false;
+	u32 Game::score = 0;
 
 	/* sprites */
 	shared_ptr<Sprite> s_turret(new Sprite(new Surface("assets/turret.png"), 1));
@@ -37,6 +39,7 @@ namespace Tmpl8
 
 	/* objects */
 	unique_ptr<HealthBar> healthBar = nullptr;
+	unique_ptr<Score> scoreUI = nullptr;
 	unique_ptr<Button> playButton = nullptr;
 	unique_ptr<Button> againButton = nullptr;
 	unique_ptr<Button> returnButton = nullptr;
@@ -90,6 +93,7 @@ namespace Tmpl8
 
 		/* Initialize the HUD */
 		healthBar = make_unique<HealthBar>(s_heart, player);
+		scoreUI = make_unique<Score>();
 	}
 	
 	// -----------------------------------------------------------
@@ -164,6 +168,7 @@ namespace Tmpl8
 
 			/* Draw the HUD */
 			healthBar->Draw(screen);
+			scoreUI->Draw(screen);
 
 			/* Spawn new planes if they're defeated */
 			if (planes->Active() <= 0) {
@@ -202,6 +207,7 @@ namespace Tmpl8
 
 			/* Draw a cursor */
 			screen->Circle(mouse.x, mouse.y, 2, 0xffffff);
+			scoreUI->Draw(screen);
 			break;
 
 		default:

@@ -44,6 +44,9 @@ namespace Tmpl8 {
 		static float mouse_y;
 		static bool mouse_down;
 
+		/* static score */
+		static u32 score;
+
 		/* functions */
 		void SetTarget(Surface* surface) { screen = surface; }
 		void Init(SDL_Window* win);
