@@ -164,6 +164,24 @@ namespace Tmpl8
 
 			/* Draw the HUD */
 			healthBar->Draw(screen);
+
+			/* Spawn new planes if they're defeated */
+			if (planes->Active() <= 0) {
+				int min = s_plane->GetWidth();
+				int max = screen->GetWidth() - min;
+				float x = min + (std::rand() % (max - min + 1));
+				planes->Add(Plane(x, -s_plane->GetHeight(), s_plane, s_bullet, player, projectiles));
+			}
+
+			/* Spawn new turrets if they're defeated */
+			if (turrets->Active() <= 0) {
+				int min = s_turret->GetWidth() * 2;
+				int max = screen->GetWidth() - min;
+				float x = min + (std::rand() % (max - min + 1));
+				turrets->Add(Turret(x, -s_turret->GetHeight(), s_turret, s_bullet, player, projectiles));
+				x = min + (std::rand() % (max - min + 1));
+				turrets->Add(Turret(x, -s_turret->GetHeight(), s_turret, s_bullet, player, projectiles));
+			}
 			break;
 
 		/* Game Over Screen */
