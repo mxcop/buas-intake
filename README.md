@@ -12,11 +12,13 @@
 <br>
 
 <div align="center">
-    <a href="#inverse-kinematics-impl">Description</a>
+    <a href="#description">Description</a>
+    ·
+    <a href="#todo-list">Todo List</a>
     ·
     <a href="#matrix-affine-transformations-impl">Matrix Affine Transformations</a>
     ·
-    <a href="#inverse-kinematics-impl">Inverse Kinematics</a>
+    <a href="#inverse-kinematics-unused">Inverse Kinematics</a>
     ·
     <a href="#sources-and-inspiration">Sources & Inspiration</a>
 </div>
@@ -31,6 +33,22 @@ Unfortunately your ground team wasn't as competent and forgot to fill you up on 
 Guns aren't the only weapons you have on board, you've got your trusty broadsword.<br>
 With your broadsword you're able to bounce back enemy projectiles with force.<br>
 **Mission: Survive**
+
+<br>
+
+<h2>Todo List</h2>
+
+- [x] Player movement
+- [x] Projectile system
+- [x] Generic enemy
+- [x] Collision system
+- [x] Damage on hit system
+- [x] Player shrink ability
+- [x] More enemy types (plane & turret)
+- [x] Enemy spawning
+- [x] Score system
+- [x] Main menu UI 
+- [x] Game over UI 
 
 <br>
 
