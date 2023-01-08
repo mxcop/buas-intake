@@ -22,13 +22,13 @@ Player::Player(shared_ptr<Sprite> sprite, shared_ptr<Sprite> attack, float x, fl
 		x - HALF_W + 4,
 		y - HALF_H + 4,
 		w - 8, h - 8, CollisionTags::Player,
-		&Collidable::onCollision
+		this
 	);
 	areaOfAttack = Collider::New(
 		x - HALF_W * 1.5,
 		y - h,
 		w * 1.5, HALF_H, CollisionTags::PlayerAtck,
-		&Collidable::onCollision
+		this
 	);
 }
 

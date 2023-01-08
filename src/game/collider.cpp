@@ -2,15 +2,23 @@
 #include "../game.h"
 #include "projectile.h"
 
-Collider::Collider(float x, float y, float w, float h, CollisionTags tags, void (Collidable::*onCollision)(u16, CollisionTags))
+Collider::Collider(float x, float y, float w, float h, CollisionTags tags, Collidable* owner)
 {
 	pool = Tmpl8::Game::instance()->colliders;
+
+	/* Setup the pos, size, & tags */
 	this->x = x;
 	this->y = y;
 	this->w = w;
 	this->h = h;
 	this->tags = tags;
-	this->onCollision = onCollision;
+
+	/* Use two placeholder arguments */
+	using std::placeholders::_1;
+	using std::placeholders::_2;
+
+	/* Bind the owner to the on collision function and store it */
+	onCollision = std::bind(&Collidable::onCollision, owner, _1, _2);
 }
 
 void Collider::Debug(Tmpl8::Surface* screen) const
@@ -24,11 +32,11 @@ void Collider::Debug(Tmpl8::Surface* screen) const
 	}
 }
 
-Collider* Collider::New(float x, float y, float w, float h, CollisionTags tags, void (Collidable::*onCollision)(u16, CollisionTags))
+Collider* Collider::New(float x, float y, float w, float h, CollisionTags tags, Collidable* owner)
 {
 	shared_ptr<Pool<Collider>> pool = Tmpl8::Game::instance()->colliders;
 
-	u16 id = pool->Add(Collider(x, y, w, h, tags, onCollision));
+	u16 id = pool->Add(Collider(x, y, w, h, tags, owner));
 
 	Collider* res = pool->Get(id);
 
@@ -68,7 +76,8 @@ void Collider::Tick(Collidable* owner)
 		if (e.id != id && e.active && e.enabled &&
 			AABB(x, e.x, y, e.y, w, e.w, h, e.h)
 			) {
-			(*owner.*onCollision)(id, e.tags);
+			//e.onCollision(e.id, tags);
+			onCollision(id, e.tags);
 		}
 	}
 }

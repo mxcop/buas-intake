@@ -13,7 +13,7 @@ Projectile::Projectile(shared_ptr<Sprite> sprite, float x, float y, float2 dir, 
 	this->dir = dir;
 
 	/* The collider isn't owned by the projectile so it's fine to be a raw pointer */
-	collider = Collider::New(x, y, 4, 4, CollisionTags::EnemyProj, &Collidable::onCollision);
+	collider = Collider::New(x, y, 4, 4, CollisionTags::EnemyProj, this);
 }
 
 void Projectile::Tick(const u64 frame, const float deltatime)
@@ -31,7 +31,7 @@ constexpr float HALF_PI = 1.5707;
 void Projectile::Draw(Tmpl8::Surface* screen)
 {
 	/* Check if we're offscreen (cannot be done within tick because screen isn't available) */
-	if (destroy || (x < -5 || y < -5 || x > screen->GetWidth() + 5 || y > screen->GetHeight() + 5)) {
+	if (x < -5 || y < -5 || x > screen->GetWidth() + 5 || y > screen->GetHeight() + 5) {
 		collider->Deactivate();
 		pool->Deactivate(id);
 		return;
@@ -60,7 +60,7 @@ void Projectile::onCollision(u16 _, CollisionTags tags)
 	}
 
 	if ((deflected && tags & CollisionTags::Enemy) || (!deflected && tags & CollisionTags::Player)) {
-		/* This bool ensures the projectile is destroyed the next frame */
-		destroy = true;
+		collider->Deactivate();
+		pool->Deactivate(id);
 	}
 }

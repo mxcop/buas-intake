@@ -8,5 +8,5 @@ Enemy::Enemy(float x, float y, int w, int h, int hitpoints, CollisionTags tags)
 	this->hitpoints = hitpoints;
 
 	/* The colliders aren't owned by the enemy so it's fine to be a raw pointer */
-	collider = Collider::New(x, y, w, h, tags, &Collidable::onCollision);
+	collider = Collider::New(x, y, w, h, tags, this);
 }

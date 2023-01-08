@@ -24,5 +24,4 @@ private:
 	float x, y;
 	float2 dir;
 	bool deflected = false;
-	bool destroy = false;
 };
