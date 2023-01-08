@@ -257,6 +257,7 @@ namespace Tmpl8
 		turrets->Clear();
 		planes->Clear();
 		colliders->Clear();
+		score = 0;
 
 		Setup();
 	}
@@ -271,6 +272,7 @@ namespace Tmpl8
 		turrets->Clear();
 		planes->Clear();
 		colliders->Clear();
+		score = 0;
 	}
 
 	void Game::Quit()

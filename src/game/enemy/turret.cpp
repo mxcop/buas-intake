@@ -1,6 +1,7 @@
 #include "turret.h"
 #include "../player.h"
 #include "../../game.h"
+#include "../ui/score.h"
 
 Turret::Turret(
 	float x, float y, 
@@ -21,6 +22,14 @@ Turret::Turret(
 
 void Turret::Draw(Tmpl8::Surface* screen)
 {
+	if (y > screen->GetHeight() + h) {
+		/* Deactivate this turret */
+		collider->Deactivate();
+		turrets->Deactivate(id);
+		/* No score is gained here */
+		return;
+	}
+
 	mat3x3 rotation = mat3x3::rotation(angle);
 
 	float half_w = static_cast<float>(w >> 1);
@@ -69,6 +78,7 @@ void Turret::onCollision(u16 emitter, CollisionTags tags)
 			/* Deactivate this turret */
 			collider->Deactivate();
 			turrets->Deactivate(id);
+			Score::Add(1200);
 		}
 	}
 }

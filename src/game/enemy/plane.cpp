@@ -1,6 +1,7 @@
 #include "plane.h"
 #include <stdexcept>
 #include "../../game.h"
+#include "../ui/score.h"
 
 Plane::Plane(
 	float x, float y, 
@@ -69,6 +70,7 @@ void Plane::onCollision(u16 emitter, CollisionTags tags)
 			/* Deactivate this plane */
 			collider->Deactivate();
 			planes->Deactivate(id);
+			Score::Add(400);
 		}
 	}
 }
