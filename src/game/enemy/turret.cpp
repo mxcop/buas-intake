@@ -73,7 +73,6 @@ void Turret::onCollision(u16 emitter, CollisionTags tags)
 {
 	if (tags & CollisionTags::PlayerProj) {
 		hitpoints--;
-		printf("HIT");
 		if (hitpoints <= 0) {
 			/* Deactivate this turret */
 			collider->Deactivate();
