@@ -117,7 +117,7 @@ for (long x = min.x; x < max.x; x++)
 
 <h2>Inverse Kinematics <sub><i>unused</i></sub></h2>
 <a href="https://codepen.io/davepvm/pen/gmgGdQ"><code>Inspired by Dave Pagurek's IK Demo</code></a><br>
-<a href="https://github.com/mxcop/buas-intake/blob/old/src/physics/bone.cpp"><code>~src/physics/bone.cpp</code></a><br><br>
+<a href="https://github.com/mxcop/buas-intake/blob/legacy/src/physics/bone.cpp"><code>~src/physics/bone.cpp</code></a><br><br>
 
 I implemented inverse kinematics by researching multiple existing implementations *(usually written in other languages)*<br>
 My current implementation uses recursion to simulate the bones, this is not the most optimal way of doing this.<br>
