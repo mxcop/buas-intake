@@ -14,6 +14,8 @@
 <div align="center">
     <a href="#description">Description</a>
     ·
+    <a href="#controls">Controls</a>
+    ·
     <a href="#todo-list">Todo List</a>
     ·
     <a href="#matrix-affine-transformations-impl">Matrix Affine Transformations</a>
@@ -33,6 +35,15 @@ Unfortunately your ground team wasn't as competent and forgot to fill you up on 
 Guns aren't the only weapons you have on board, you've got your trusty broadsword.<br>
 With your broadsword you're able to bounce back enemy projectiles with force.<br>
 **Mission: Survive**
+
+<br>
+
+<h2>Controls</h2>
+
+<kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> Moving your plane.<br>
+<kbd>Mouse</kbd> Navigating menus.<br>
+<kbd>SpaceBar</kbd> Deflecting projectiles.<br>
+<kbd>Shift</kbd> Shrink to more easily avoid projectiles.<br>
 
 <br>
 
